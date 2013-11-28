@@ -1,5 +1,6 @@
 package view.search;
 
+import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -30,6 +31,7 @@ public class KlantSearch extends JPanel implements Observer {
 
 		klantTable = new Tabel(dataModel);
 		klantScroll = new JScrollPane(klantTable);
+		klantScroll.setPreferredSize(new Dimension(1250, 610));
 
 		dataModel.addObserver(this);
 
