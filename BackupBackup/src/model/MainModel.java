@@ -2,10 +2,13 @@ package model;
 
 import java.util.Observable;
 
+import model.detailModel.KlantDetailModel;
+
 public class MainModel extends Observable{
 	private String activePage;
-	private Model autoModel, klantModel, reparatieModel, monteurModel,
+	private SearchModel autoModel, klantModel, reparatieModel, monteurModel,
 			roosterModel;
+	private KlantDetailModel klantDetail;
 	private String[] autoHeader, klantHeader, reparatieHeader, monteurHeader,
 			roosterHeader;
 
@@ -17,8 +20,8 @@ public class MainModel extends Observable{
 	}
 
 	public void setHeaders() {
-		autoHeader = new String[] { "AutoID", "PersoonID", "Merknaam",
-				"Kenteken", "Bouwjaar" };
+		autoHeader = new String[] { "AutoID", "Kenteken", "BouwJaar",
+				"PersoonID", "MerkID", "Model" };
 		klantHeader = new String[] { "PersoonID", "Voornaam", "Achternaam",
 				"Adres", "Woonplaats", "Postcode" };
 		reparatieHeader = new String[] { "ReparatieID", "AutoID",
@@ -33,11 +36,13 @@ public class MainModel extends Observable{
 		Object[][] data = new Object[][] { { "", "", "", "", "", "" },
 				{ "", "", "", "", "", "" }, { "", "", "", "", "", "" } };
 
-		autoModel = new Model(data, autoHeader);
-		klantModel = new Model(data, klantHeader);
-		reparatieModel = new Model(data, reparatieHeader);
-		monteurModel = new Model(data, monteurHeader);
-		roosterModel = new Model(data, roosterHeader);
+		autoModel = new SearchModel(data, autoHeader);
+		klantModel = new SearchModel(data, klantHeader);
+		reparatieModel = new SearchModel(data, reparatieHeader);
+		monteurModel = new SearchModel(data, monteurHeader);
+		roosterModel = new SearchModel(data, roosterHeader);
+
+		klantDetail = new KlantDetailModel(data, data);
 	}
 
 	public void setPage(String page) {
@@ -50,23 +55,27 @@ public class MainModel extends Observable{
 		return activePage;
 	}
 
-	public Model getAutoModel() {
+	public SearchModel getAutoModel() {
 		return autoModel;
 	}
 
-	public Model getKlantModel() {
+	public SearchModel getKlantModel() {
 		return klantModel;
 	}
 
-	public Model getReparatieModel() {
+	public SearchModel getReparatieModel() {
 		return reparatieModel;
 	}
 
-	public Model getMonteurModel() {
+	public SearchModel getMonteurModel() {
 		return monteurModel;
 	}
 
-	public Model getRoosterModel() {
+	public SearchModel getRoosterModel() {
 		return roosterModel;
+	}
+
+	public KlantDetailModel getKlantDetail() {
+		return klantDetail;
 	}
 }

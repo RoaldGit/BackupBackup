@@ -3,12 +3,12 @@ package control;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import model.Model;
+import model.SearchModel;
 
 public class TabelEvent extends MouseAdapter {
-	private Model dataModel;
+	private SearchModel dataModel;
 	
-	public TabelEvent(Model model) {
+	public TabelEvent(SearchModel model) {
 		dataModel = model;
 	}
 

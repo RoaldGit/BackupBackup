@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import model.MainModel;
-import model.Model;
+import model.SearchModel;
 import view.Tabel;
 import control.DOAs;
 import control.InvulVeld;
@@ -19,7 +19,7 @@ public class AutoSearch extends JPanel implements Observer {
 	private Tabel autoTable;
 	private JScrollPane autoScroll;
 	private MainModel mainModel;
-	private Model dataModel;
+	private SearchModel dataModel;
 
 	public AutoSearch(MainModel model, DOAs doa) {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));

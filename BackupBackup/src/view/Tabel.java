@@ -4,10 +4,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import model.Model;
+import model.SearchModel;
 
 public class Tabel extends JTable {
-	private Model dataModel;
+	private SearchModel dataModel;
 	private TableColumnModel tcm;
 
 	/**
@@ -23,7 +23,7 @@ public class Tabel extends JTable {
 	 * @param row
 	 * @param col
 	 */
-	public Tabel(Model model) {
+	public Tabel(SearchModel model) {
 		super(model.getData(), model.getHeader());
 		dataModel = model;
 		// TODO voeg TableEvent to aan tabel.
