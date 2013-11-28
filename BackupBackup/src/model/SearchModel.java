@@ -2,11 +2,11 @@ package model;
 
 import java.util.Observable;
 
-public class Model extends Observable {
+public class SearchModel extends Observable {
 	protected Object[][] tableData;
 	protected String[] tableHeader;
 
-	public Model(Object[][] data, String[] header) {
+	public SearchModel(Object[][] data, String[] header) {
 		tableData = data;
 		tableHeader = header;
 	}
