@@ -21,7 +21,7 @@ public class MainModel extends Observable{
 
 	public void setHeaders() {
 		autoHeader = new String[] { "Autonummer", "Kenteken", "BouwJaar",
-				"PersoonID", "MerkID", "Model" };
+				"Klantnummer", "Merknaam", "Model" };
 		klantHeader = new String[] { "Klantnummer", "Achternaam", "Voornaam",
 				"Adres", "Woonplaats", "Postcode" };
 		reparatieHeader = new String[] { "Reparatienummer", "Autonummer",
