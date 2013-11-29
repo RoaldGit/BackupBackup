@@ -25,7 +25,7 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select * from Auto where kenteken like ?");
+					.prepareStatement("select AutoID, Kenteken, Bouwjaar, PersoonID, Merknaam, Model from Auto inner join automerk on Auto.merkID = automerk.merkID where kenteken like ?");
 			pst.setString(1, "%" + param + "%");
 
 			ResultSet result = pst.executeQuery();
