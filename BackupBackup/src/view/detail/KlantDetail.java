@@ -73,13 +73,13 @@ public class KlantDetail extends JPanel implements Observer {
 		klantPostcodeT = new JTextField();
 		klantAantalAutosT = new JTextField();
 
-		klantNummerT.setBounds(120, 0, 100, 20);
-		klantVoorNaamT.setBounds(120, 25, 100, 20);
-		klantAchterNaamT.setBounds(120, 50, 100, 20);
-		klantAdresT.setBounds(120, 75, 100, 20);
-		klantWoonplaatsT.setBounds(120, 100, 100, 20);
-		klantPostcodeT.setBounds(120, 125, 100, 20);
-		klantAantalAutosT.setBounds(120, 150, 100, 20);
+		klantNummerT.setBounds(120, 0, 200, 20);
+		klantVoorNaamT.setBounds(120, 25, 200, 20);
+		klantAchterNaamT.setBounds(120, 50, 200, 20);
+		klantAdresT.setBounds(120, 75, 200, 20);
+		klantWoonplaatsT.setBounds(120, 100, 200, 20);
+		klantPostcodeT.setBounds(120, 125, 200, 20);
+		klantAantalAutosT.setBounds(120, 150, 200, 20);
 
 		klantNummerT.setEditable(false);
 		klantVoorNaamT.setEditable(false);

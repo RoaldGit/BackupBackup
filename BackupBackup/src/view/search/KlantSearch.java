@@ -13,6 +13,7 @@ import model.SearchModel;
 import view.Tabel;
 import control.DOAs;
 import control.InvulVeld;
+import control.TableEvent;
 
 public class KlantSearch extends JPanel implements Observer {
 	private InvulVeld klantVeld;
@@ -30,6 +31,9 @@ public class KlantSearch extends JPanel implements Observer {
 		klantVeld = new InvulVeld(40, "klant", mainModel, doa);
 
 		klantTable = new Tabel(dataModel);
+		klantTable.setName("klantTable");
+		klantTable.addMouseListener(new TableEvent(model, doa));
+
 		klantScroll = new JScrollPane(klantTable);
 		klantScroll.setPreferredSize(new Dimension(1250, 610));
 

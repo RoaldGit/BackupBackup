@@ -27,6 +27,11 @@ public class KlantDetailModel extends Observable {
 		persoonID = 1337;
 	}
 	
+	public void dataChanged() {
+		setChanged();
+		notifyObservers("dataChanged");
+	}
+
 	public void setVoorNaam(String voorNaam) {
 		this.voorNaam = voorNaam;
 	}

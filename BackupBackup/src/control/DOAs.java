@@ -9,6 +9,7 @@ import java.sql.Statement;
 
 import model.DBmanager;
 import model.MainModel;
+import model.detailModel.KlantDetailModel;
 
 
 public class DOAs {
@@ -261,6 +262,42 @@ public class DOAs {
 		}
 
 		return array;
+	}
+
+	public void retreiveKlantData(int klantNummer) {
+		KlantDetailModel model = mainModel.getKlantDetail();
+
+		model.setPersoonID(klantNummer);
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("select * from Persoon where PersoonID = ?");
+			pst.setInt(1, klantNummer);
+
+			ResultSet result = pst.executeQuery();
+
+			result.next();
+
+			model.setVoorNaam(result.getString("voornaam"));
+			model.setAchterNaam(result.getString("achternaam"));
+			model.setAdres(result.getString("adres"));
+			model.setWoonplaats(result.getString("woonplaats"));
+			model.setPostcode(result.getString("postcode"));
+
+			String aantalQuerry = "select count(*) from auto where persoonID = "
+					+ klantNummer;
+			
+			model.setAantalAutos(resultSize(aantalQuerry));
+
+			result.close();
+
+			model.dataChanged();
+			mainModel.setPage("klantDetail");
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("create2DArray");
+		} catch (Exception e) {
+			System.out.println("create2DArray");
+		}
 	}
 
 	public Object[][] create2DArray(ResultSet rs, int rows) {

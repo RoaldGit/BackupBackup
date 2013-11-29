@@ -13,6 +13,7 @@ import model.SearchModel;
 import view.Tabel;
 import control.DOAs;
 import control.InvulVeld;
+import control.TableEvent;
 
 public class AutoSearch extends JPanel implements Observer {
 	private InvulVeld autoVeld;
@@ -30,6 +31,8 @@ public class AutoSearch extends JPanel implements Observer {
 		autoVeld = new InvulVeld(40, "auto", mainModel, doa);
 
 		autoTable = new Tabel(dataModel);
+		autoTable.addMouseListener(new TableEvent(model, doa));
+
 		autoScroll = new JScrollPane(autoTable);
 		autoScroll.setPreferredSize(new Dimension(1250, 610));
 

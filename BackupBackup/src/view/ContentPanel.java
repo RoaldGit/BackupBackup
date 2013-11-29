@@ -55,14 +55,16 @@ public class ContentPanel extends JPanel implements Observer{
 
 		switch ((String) obj) {
 		case ("home"):
-			// home.setVisible(true);
-			klantDetail.setVisible(true);
+			home.setVisible(true);
 			break;
 		case("auto"):
 			autoSearch.setVisible(true);
 			break;
 		case ("klant"):
 			klantSearch.setVisible(true);
+			break;
+		case ("klantDetail"):
+			klantDetail.setVisible(true);
 			break;
 		case ("reparatie"):
 			reparatieSearch.setVisible(true);
@@ -84,6 +86,6 @@ public class ContentPanel extends JPanel implements Observer{
 		monteurSearch.setVisible(false);
 		roosterSearch.setVisible(false);
 
-		klantDetail.setVisible(true);
+		klantDetail.setVisible(false);
 	}
 }
