@@ -78,7 +78,7 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select * from Persoon where achternaam like ?");
+					.prepareStatement("select PersoonID, Achternaam, Voornaam, Adres, Woonplaats, Postcode from Persoon where achternaam like ?");
 			pst.setString(1, "%" + param + "%");
 
 			ResultSet result = pst.executeQuery();
@@ -103,7 +103,7 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select * from Persoon natural join Monteur where Achternaam like ?");
+					.prepareStatement("select PersoonID, Achternaam, Voornaam, Adres, Woonplaats, Postcode, Uurloon from Persoon natural join Monteur where Achternaam like ?");
 			 pst.setString(1, "%" + param + "%");
 
 			ResultSet result = pst.executeQuery();
@@ -198,7 +198,7 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select * from Persoon");
+					.prepareStatement("select PersoonID, Achternaam, Voornaam, Adres, Woonplaats, Postcode from Persoon");
 
 			ResultSet result = pst.executeQuery();
 
@@ -221,7 +221,7 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select * from Persoon natural join Monteur");
+					.prepareStatement("select PersoonID, Achternaam, Voornaam, Adres, Woonplaats, Postcode, Uurloon from Persoon natural join Monteur");
 
 			ResultSet result = pst.executeQuery();
 
