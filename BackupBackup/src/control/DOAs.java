@@ -153,7 +153,7 @@ public class DOAs {
 	public Object[][] alleAutos() {
 		Object[][] array = null;
 		try {
-			PreparedStatement pst = con.prepareStatement("select * from Auto");
+			PreparedStatement pst = con.prepareStatement("select select AutoID, Kenteken, Bouwjaar, PersoonID, Merknaam, Model from Auto inner join automerk on Auto.merkID = automerk.merkID");
 
 			ResultSet result = pst.executeQuery();
 
