@@ -13,6 +13,8 @@ import model.MainModel;
 import model.detailModel.KlantDetailModel;
 import view.Tabel;
 import control.Button;
+import control.DOAs;
+import control.TableEvent;
 
 public class KlantDetail extends JPanel implements Observer {
 	private KlantDetailModel detailModel;
@@ -25,11 +27,14 @@ public class KlantDetail extends JPanel implements Observer {
 	private Tabel afspraken, auto;
 	private JScrollPane afsprakenScroll, autoScroll;
 	private Button wijzigGegevens, voegAutoToe;
+	private DOAs doa;
 
-	public KlantDetail(MainModel model) {
+	public KlantDetail(MainModel model, DOAs doa) {
 		setLayout(null);
 
 		mainModel = model;
+		this.doa = doa;
+
 		detailModel = model.getKlantDetail();
 
 		detailModel.addObserver(this);
@@ -118,6 +123,9 @@ public class KlantDetail extends JPanel implements Observer {
 		afsprakenScroll.setBounds(400, 20, 500, 200);
 
 		auto = new Tabel(detailModel.getAutos(), detailModel.getAutoHeader());
+		auto.setName("klantDetailAuto");
+		auto.addMouseListener(new TableEvent(mainModel, doa));
+
 		autoScroll = new JScrollPane(auto);
 		autoScroll.setBounds(400, 320, 500, 200);
 

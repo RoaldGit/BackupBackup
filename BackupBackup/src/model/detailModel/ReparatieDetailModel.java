@@ -8,14 +8,18 @@ public class ReparatieDetailModel extends Observable {
 	private Object[][] geplandeAfspraken, onderdelen;
 	private String[] afsprakenHeader, onderdelenHeader;
 	
-	public ReparatieDetailModel(Object[][] dataOne, Object[][] dataTwo) {
+	public ReparatieDetailModel(Object[][] data) {
 		setAfsprakenHeader(new String[] { "Start Tijd", "Eind Tijd",
 				"Bezigheid", "ReparatieID", "Monteur" });
 		setOnderdelenHeader(new String[] { "Onderdeelnummer", "Onderdeelnaam", "Prijs",
 				"Leverancier", "Aantal" });
 
-		geplandeAfspraken = dataOne;
-		onderdelen = dataTwo;
+		geplandeAfspraken = data;
+		onderdelen = data;
+
+		autoKenteken = "kenteken";
+		status = "not implemented";
+		opmerking = "Auto ist kaput";
 	}
 	
 	public void dataChanged() {

@@ -25,6 +25,7 @@ public class TableEvent extends MouseAdapter {
 			case "klantTable":
 				doa.retreiveKlantData(selectedID);
 				break;
+			case "klantDetailAuto":
 			case "autoTable":
 				doa.retreiveAutoData(selectedID);
 				break;

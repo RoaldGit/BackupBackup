@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import model.MainModel;
 import view.detail.AutoDetail;
 import view.detail.KlantDetail;
+import view.detail.ReparatieDetail;
 import view.search.AutoSearch;
 import view.search.KlantSearch;
 import view.search.MonteurSearch;
@@ -20,7 +21,8 @@ import control.DOAs;
 public class ContentPanel extends JPanel implements Observer{
 	private MainModel mainModel;
 	private JPanel home, autoSearch, klantSearch, reparatieSearch,
-			monteurSearch, roosterSearch, klantDetail, autoDetail;
+			monteurSearch, roosterSearch, klantDetail, autoDetail,
+			reparatieDetail;
 
 	public ContentPanel(MainModel model){
 		mainModel = model;
@@ -37,8 +39,9 @@ public class ContentPanel extends JPanel implements Observer{
 		monteurSearch = new MonteurSearch(mainModel, doa);
 		roosterSearch = new RoosterSearch(mainModel, doa);
 
-		klantDetail = new KlantDetail(mainModel);
-		autoDetail = new AutoDetail(model);
+		klantDetail = new KlantDetail(mainModel, doa);
+		autoDetail = new AutoDetail(mainModel, doa);
+		reparatieDetail = new ReparatieDetail(mainModel);
 
 		add(home);
 		add(autoSearch);
@@ -49,6 +52,7 @@ public class ContentPanel extends JPanel implements Observer{
 
 		add(klantDetail);
 		add(autoDetail);
+		add(reparatieDetail);
 
 		allInvisible();
 	}
@@ -58,7 +62,8 @@ public class ContentPanel extends JPanel implements Observer{
 
 		switch ((String) obj) {
 		case ("home"):
-			home.setVisible(true);
+			home.setVisible(false);
+			reparatieDetail.setVisible(true);
 			break;
 		case("auto"):
 			autoSearch.setVisible(true);
@@ -74,6 +79,9 @@ public class ContentPanel extends JPanel implements Observer{
 			break;
 		case ("reparatie"):
 			reparatieSearch.setVisible(true);
+			break;
+		case ("reparatieDetail"):
+			reparatieDetail.setVisible(true);
 			break;
 		case ("monteur"):
 			monteurSearch.setVisible(true);
@@ -94,5 +102,6 @@ public class ContentPanel extends JPanel implements Observer{
 
 		klantDetail.setVisible(false);
 		autoDetail.setVisible(false);
+		reparatieDetail.setVisible(false);
 	}
 }

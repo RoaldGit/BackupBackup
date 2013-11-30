@@ -48,6 +48,7 @@ public class MainModel extends Observable{
 
 		klantDetail = new KlantDetailModel(data);
 		autoDetail = new AutoDetailModel(data);
+		reparatieDetail = new ReparatieDetailModel(data);
 	}
 
 	public void setPage(String page) {

@@ -13,6 +13,7 @@ import model.MainModel;
 import model.detailModel.AutoDetailModel;
 import view.Tabel;
 import control.Button;
+import control.DOAs;
 
 public class AutoDetail extends JPanel implements Observer {
 	private AutoDetailModel detailModel;
@@ -26,11 +27,14 @@ public class AutoDetail extends JPanel implements Observer {
 	private Tabel afspraken, reparaties;
 	private JScrollPane afsprakenScroll, reparatiesScroll;
 	private Button wijzigGegevens;
+	private DOAs doa;
 
-	public AutoDetail(MainModel model) {
+	public AutoDetail(MainModel model, DOAs doa) {
 		setLayout(null);
 
 		mainModel = model;
+		this.doa = doa;
+
 		detailModel = model.getAutoDetail();
 
 		detailModel.addObserver(this);

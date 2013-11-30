@@ -60,7 +60,7 @@ public class ReparatieDetail extends JPanel implements Observer {
 		statusL.setBounds(5, 100, 100, 20);
 		opmerkingenL.setBounds(5, 125, 100, 20);
 		planningL.setBounds(400, 0, 200, 20);
-		onderdeelL.setBounds(400, 300, 100, 20);
+		onderdeelL.setBounds(400, 300, 200, 20);
 		
 		add(reparatieNummerL);
 		add(klantNummerL);
@@ -114,11 +114,11 @@ public class ReparatieDetail extends JPanel implements Observer {
 		printFactuur.setName("printFactuur");
 		
 		planReparatie = new Button("Plan reparatie", mainModel);
-		planReparatie.setBounds(500, 0, 200, 20);
+		planReparatie.setBounds(550, 0, 200, 20);
 		planReparatie.setName("planReparatie");
 		
 		voegOnderdeelToe = new Button("Voeg onderdeel toe", mainModel);
-		voegOnderdeelToe.setBounds(500, 300, 200, 20);
+		voegOnderdeelToe.setBounds(550, 300, 200, 20);
 		voegOnderdeelToe.setName("voegOnderdeelToe");
 
 		add(wijzig);

@@ -10,7 +10,7 @@ public class DBmanager {
 
 	private DBmanager(String dbNaam) {
 		user = "root";
-		password = "a";
+		password = "b";
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
