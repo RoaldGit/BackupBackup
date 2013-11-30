@@ -51,17 +51,11 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select * from Reparatie");// where
-																	// kenteken
-																	// like ?");
-			// pst.setString(1, "%" + param + "%");
+					.prepareStatement("select ReparatieID, AutoID, Opmerkingen, Klaar, FactuurVerzonden, FactuurBetaald from Reparatie");
 
 			ResultSet result = pst.executeQuery();
 
-			int size = resultSize("select count(*) from Reparatie");// where
-																	// kenteken
-																	// like '%"
-//					+ param + "%'");
+			int size = resultSize("select count(*) from Reparatie");
 
 			array = create2DArray(result, size);
 
@@ -178,7 +172,7 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select * from Reparatie");
+					.prepareStatement("select ReparatieID, AutoID, Opmerkingen, Klaar, FactuurVerzonden, FactuurBetaald from Reparatie");
 
 			ResultSet result = pst.executeQuery();
 
