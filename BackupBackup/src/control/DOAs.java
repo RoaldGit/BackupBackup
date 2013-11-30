@@ -9,6 +9,7 @@ import java.sql.Statement;
 
 import model.DBmanager;
 import model.MainModel;
+import model.detailModel.AutoDetailModel;
 import model.detailModel.KlantDetailModel;
 
 
@@ -275,7 +276,6 @@ public class DOAs {
 			pst.setInt(1, klantNummer);
 
 			ResultSet result = pst.executeQuery();
-
 			result.next();
 
 			model.setVoorNaam(result.getString("voornaam"));
@@ -304,9 +304,56 @@ public class DOAs {
 			mainModel.setPage("klantDetail");
 		} catch (SQLException se) {
 			printSQLException(se);
-			System.out.println("create2DArray");
+			System.out.println("DOAs: retreiveKlantData");
 		} catch (Exception e) {
-			System.out.println("create2DArray");
+			System.out.println("DOAs: retreiveKlantData");
+		}
+	}
+
+
+	public void retreiveAutoData(int autoNummer) {
+		AutoDetailModel model = mainModel.getAutoDetail();
+
+		model.setAutoNummer(autoNummer);
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("select autoID, kenteken, bouwjaar, merknaam, model, persoonid, achternaam from auto natural join automerk natural join persoon where autoID = ?");
+			pst.setInt(1, autoNummer);
+
+			ResultSet result = pst.executeQuery();
+			result.next();
+
+			model.setAutoNummer(result.getInt("autoID"));
+			model.setKenteken(result.getString("kenteken"));
+			model.setBouwjaar(result.getInt("bouwjaar"));
+			model.setMerk(result.getString("merknaam"));
+			model.setModel(result.getString("model"));
+			model.setKlantNummer(result.getInt("persoonid"));
+			model.setKlantnaam(result.getString("achternaam"));
+
+			String aantalQuerry = "select count(*) from reparatie where autoID = "
+					+ autoNummer;
+
+			int aantalReparaties = resultSize(aantalQuerry);
+			// model.setAantalAutos(aantalAutos);
+
+			pst = con
+					.prepareStatement("select reparatieID, bezigheid, factuurverzonden, achternaam from reparatie natural join persoon natural join planning natural join bezigheid where autoID = ?");
+			pst.setInt(1, autoNummer);
+
+			result = pst.executeQuery();
+
+			model.setReparatieData(create2DArray(result, aantalReparaties));
+
+			result.close();
+
+			model.dataChanged();
+			mainModel.setPage("autoDetail");
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: retreiveAutoData");
+		} catch (Exception e) {
+			System.out.println("DOAs: retreiveAutoData");
 		}
 	}
 
@@ -381,4 +428,5 @@ public class DOAs {
             se = se.getNextException();
 		}
 	}
+
 }

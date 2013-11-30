@@ -6,6 +6,7 @@ import java.util.Observer;
 import javax.swing.JPanel;
 
 import model.MainModel;
+import view.detail.AutoDetail;
 import view.detail.KlantDetail;
 import view.search.AutoSearch;
 import view.search.KlantSearch;
@@ -19,7 +20,7 @@ import control.DOAs;
 public class ContentPanel extends JPanel implements Observer{
 	private MainModel mainModel;
 	private JPanel home, autoSearch, klantSearch, reparatieSearch,
-			monteurSearch, roosterSearch, klantDetail;
+			monteurSearch, roosterSearch, klantDetail, autoDetail;
 
 	public ContentPanel(MainModel model){
 		mainModel = model;
@@ -37,6 +38,7 @@ public class ContentPanel extends JPanel implements Observer{
 		roosterSearch = new RoosterSearch(mainModel, doa);
 
 		klantDetail = new KlantDetail(mainModel);
+		autoDetail = new AutoDetail(model);
 
 		add(home);
 		add(autoSearch);
@@ -46,6 +48,7 @@ public class ContentPanel extends JPanel implements Observer{
 		add(roosterSearch);
 
 		add(klantDetail);
+		add(autoDetail);
 
 		allInvisible();
 	}
@@ -59,6 +62,9 @@ public class ContentPanel extends JPanel implements Observer{
 			break;
 		case("auto"):
 			autoSearch.setVisible(true);
+			break;
+		case ("autoDetail"):
+			autoDetail.setVisible(true);
 			break;
 		case ("klant"):
 			klantSearch.setVisible(true);
@@ -87,5 +93,6 @@ public class ContentPanel extends JPanel implements Observer{
 		roosterSearch.setVisible(false);
 
 		klantDetail.setVisible(false);
+		autoDetail.setVisible(false);
 	}
 }

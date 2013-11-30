@@ -1,14 +1,20 @@
 package model.detailModel;
 
-public class AutoDetailModel {
+import java.util.Observable;
+
+public class AutoDetailModel extends Observable {
 	private int autoNummer, klantNummer, bouwjaar;
-	private String merk, model, klantnaam;
-	private String[] reparatieHeader;
-	private Object[][] reparatieData;
+	private String merk, model, klantnaam, kenteken;
+	private String[] reparatieHeader, afspraakHeader;
+	private Object[][] reparatieData, afspraakData;
 
 	public AutoDetailModel(Object[][] data) {
-		reparatieHeader = new String[] { "Reparatie nummer", "Opmerkingen",
-				"Factuur verzonden" };
+		setAfspraakHeader(new String[] { "Start Tijd", "Eind Tijd",
+				"Bezigheid", "ReparatieID", "Monteur" });
+		setReparatieHeader(new String[] { "Reparatie nummer", "Bezigheid",
+				"Factuur verzonden", "Monteur" });
+
+		afspraakData = data;
 		reparatieData = data;
 
 		autoNummer = 0;
@@ -17,6 +23,11 @@ public class AutoDetailModel {
 		merk = "Fiets";
 		model = "Driewieller";
 		klantnaam = "Sinterklaas";
+	}
+
+	public void dataChanged() {
+		setChanged();
+		notifyObservers("dataChanged");
 	}
 
 	/**
@@ -137,5 +148,49 @@ public class AutoDetailModel {
 	 */
 	public void setReparatieData(Object[][] reparatieData) {
 		this.reparatieData = reparatieData;
+	}
+
+	/**
+	 * @return the kenteken
+	 */
+	public String getKenteken() {
+		return kenteken;
+	}
+
+	/**
+	 * @param kenteken the kenteken to set
+	 */
+	public void setKenteken(String kenteken) {
+		this.kenteken = kenteken;
+	}
+
+	/**
+	 * @return the afspraakHeader
+	 */
+	public String[] getAfspraakHeader() {
+		return afspraakHeader;
+	}
+
+	/**
+	 * @param afspraakHeader
+	 *            the afspraakHeader to set
+	 */
+	public void setAfspraakHeader(String[] afspraakHeader) {
+		this.afspraakHeader = afspraakHeader;
+	}
+
+	/**
+	 * @return the afspraakData
+	 */
+	public Object[][] getAfspraakData() {
+		return afspraakData;
+	}
+
+	/**
+	 * @param afspraakData
+	 *            the afspraakData to set
+	 */
+	public void setAfspraakData(Object[][] afspraakData) {
+		this.afspraakData = afspraakData;
 	}
 }
