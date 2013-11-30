@@ -28,7 +28,7 @@ public class RoosterSearch extends JPanel implements Observer {
 		dataModel = mainModel.getRoosterModel();
 		DOAs doa = mainModel.getDoa();
 
-		roosterVeld = new InvulVeld(40, "auto", mainModel, doa);
+		roosterVeld = new InvulVeld(40, "rooster", mainModel, doa);
 
 		roosterTable = new Tabel(dataModel);
 		roosterScroll = new JScrollPane(roosterTable);

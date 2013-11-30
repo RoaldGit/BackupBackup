@@ -119,15 +119,15 @@ public class AutoDetail extends JPanel implements Observer {
 	}
 
 	private void setupTables() {
-		afspraken = new Tabel(detailModel.getReparatieData(),
-				detailModel.getReparatieHeader());
+		afspraken = new Tabel(detailModel.getAfspraakData(),
+				detailModel.getAfspraakHeader());
 		afsprakenScroll = new JScrollPane(afspraken);
-		afsprakenScroll.setBounds(400, 20, 500, 200);
+		afsprakenScroll.setBounds(400, 20, 700, 200);
 
 		reparaties = new Tabel(detailModel.getReparatieData(),
 				detailModel.getReparatieHeader());
 		reparatiesScroll = new JScrollPane(reparaties);
-		reparatiesScroll.setBounds(400, 320, 500, 200);
+		reparatiesScroll.setBounds(400, 320, 700, 200);
 
 		add(afsprakenScroll);
 		add(reparatiesScroll);
