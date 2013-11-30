@@ -2,6 +2,8 @@ package model.detailModel;
 
 import java.util.Observable;
 
+import javax.swing.JTextField;
+
 public class AutoDetailModel extends Observable {
 	private int autoNummer, klantNummer, bouwjaar;
 	private String merk, model, klantnaam, kenteken;

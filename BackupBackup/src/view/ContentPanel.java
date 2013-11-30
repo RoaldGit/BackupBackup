@@ -33,14 +33,14 @@ public class ContentPanel extends JPanel implements Observer{
 		
 		DOAs doa = new DOAs(mainModel);
 		
-		autoSearch = new AutoSearch(mainModel, doa);
-		klantSearch = new KlantSearch(mainModel, doa);
-		reparatieSearch = new ReparatieSearch(mainModel, doa);
-		monteurSearch = new MonteurSearch(mainModel, doa);
-		roosterSearch = new RoosterSearch(mainModel, doa);
+		autoSearch = new AutoSearch(mainModel);
+		klantSearch = new KlantSearch(mainModel);
+		reparatieSearch = new ReparatieSearch(mainModel);
+		monteurSearch = new MonteurSearch(mainModel);
+		roosterSearch = new RoosterSearch(mainModel);
 
-		klantDetail = new KlantDetail(mainModel, doa);
-		autoDetail = new AutoDetail(mainModel, doa);
+		klantDetail = new KlantDetail(mainModel);
+		autoDetail = new AutoDetail(mainModel);
 		reparatieDetail = new ReparatieDetail(mainModel);
 
 		add(home);

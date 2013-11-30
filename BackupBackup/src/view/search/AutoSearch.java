@@ -22,11 +22,12 @@ public class AutoSearch extends JPanel implements Observer {
 	private MainModel mainModel;
 	private SearchModel dataModel;
 
-	public AutoSearch(MainModel model, DOAs doa) {
+	public AutoSearch(MainModel model) {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 		mainModel = model;
 		dataModel = mainModel.getAutoModel();
+		DOAs doa = mainModel.getDoa();
 
 		autoVeld = new InvulVeld(40, "auto", mainModel, doa);
 

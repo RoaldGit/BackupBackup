@@ -4,9 +4,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
-import control.Button;
-
 import model.MainModel;
+import control.Button;
+import control.DOAs;
 
 public class ButtonPanel extends JPanel {
 	private Button homeButton, autoButton, reparatieButton, monteurButton,
@@ -19,6 +19,7 @@ public class ButtonPanel extends JPanel {
 		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 
 		mainModel = model;
+		DOAs doa = mainModel.getDoa();
 
 		homeButton = new Button("Home", mainModel, 10, 5);
 		autoButton = new Button("Auto", mainModel, 120, 5);

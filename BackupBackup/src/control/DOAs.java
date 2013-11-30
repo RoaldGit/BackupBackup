@@ -357,6 +357,31 @@ public class DOAs {
 		}
 	}
 
+	public void changeKlantData() {
+		KlantDetailModel detailModel = mainModel.getKlantDetail();
+		int klantNummer = detailModel.getPersoonID();
+		String[] data = detailModel.getTextFieldData();
+
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("update persoon set voornaam = ?, achternaam = ?, adres = ?, woonplaats = ?, postcode = ? where persoonid = ?");
+			pst.setString(1, data[0]);
+			pst.setString(2, data[1]);
+			pst.setString(3, data[2]);
+			pst.setString(4, data[3]);
+			pst.setString(5, data[4]);
+			pst.setInt(6, klantNummer);
+
+			pst.execute();
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: retreiveAutoData");
+		} catch (Exception e) {
+			System.out.println("DOAs: retreiveAutoData");
+		}
+
+	}
+
 	public Object[][] create2DArray(ResultSet rs, int rows) {
 		Object[][] array = null;
 		try {
@@ -428,5 +453,4 @@ public class DOAs {
             se = se.getNextException();
 		}
 	}
-
 }

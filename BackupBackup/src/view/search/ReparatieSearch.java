@@ -21,11 +21,12 @@ public class ReparatieSearch extends JPanel implements Observer {
 	private MainModel mainModel;
 	private SearchModel dataModel;
 
-	public ReparatieSearch(MainModel model, DOAs doa) {
+	public ReparatieSearch(MainModel model) {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 		mainModel = model;
 		dataModel = mainModel.getReparatieModel();
+		DOAs doa = mainModel.getDoa();
 
 		reparatieVeld = new InvulVeld(40, "reparatie", mainModel, doa);
 

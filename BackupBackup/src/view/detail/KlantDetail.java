@@ -29,11 +29,11 @@ public class KlantDetail extends JPanel implements Observer {
 	private Button wijzigGegevens, voegAutoToe;
 	private DOAs doa;
 
-	public KlantDetail(MainModel model, DOAs doa) {
+	public KlantDetail(MainModel model) {
 		setLayout(null);
 
 		mainModel = model;
-		this.doa = doa;
+		doa = mainModel.getDoa();
 
 		detailModel = model.getKlantDetail();
 
@@ -114,6 +114,14 @@ public class KlantDetail extends JPanel implements Observer {
 		add(klantWoonplaatsT);
 		add(klantPostcodeT);
 		add(klantAantalAutosT);
+
+		detailModel.setKlantNummerT(klantNummerT);
+		detailModel.setKlantVoorNaamT(klantVoorNaamT);
+		detailModel.setKlantAchterNaamT(klantAchterNaamT);
+		detailModel.setKlantAdresT(klantAdresT);
+		detailModel.setKlantWoonplaatsT(klantWoonplaatsT);
+		detailModel.setKlantPostcodeT(klantPostcodeT);
+		detailModel.setKlantAantalAutosT(klantAantalAutosT);
 	}
 
 	public void setupTables() {
@@ -162,7 +170,24 @@ public class KlantDetail extends JPanel implements Observer {
 
 	public void update(Observable obs, Object obj) {
 		if (obs == detailModel) {
-			updateGegevens();
+			if (obj.equals("wijzigData")) {
+				if (detailModel.isWijzigInfo()) {
+					enableTextFields(true);
+					wijzigGegevens.setText("Sla wijzigingen op");
+				} else {
+					enableTextFields(false);
+					wijzigGegevens.setText("Wijzig gegevens");
+				}
+			} else
+				updateGegevens();
 		}
+	}
+
+	public void enableTextFields(boolean state) {
+		klantVoorNaamT.setEditable(state);
+		klantAchterNaamT.setEditable(state);
+		klantAdresT.setEditable(state);
+		klantWoonplaatsT.setEditable(state);
+		klantPostcodeT.setEditable(state);
 	}
 }

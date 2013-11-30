@@ -29,11 +29,11 @@ public class AutoDetail extends JPanel implements Observer {
 	private Button wijzigGegevens;
 	private DOAs doa;
 
-	public AutoDetail(MainModel model, DOAs doa) {
+	public AutoDetail(MainModel model) {
 		setLayout(null);
 
 		mainModel = model;
-		this.doa = doa;
+		doa = mainModel.getDoa();
 
 		detailModel = model.getAutoDetail();
 

@@ -6,13 +6,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import model.MainModel;
+import model.detailModel.KlantDetailModel;
 
 public class Button extends JButton{
 	private MainModel mainModel;
+	private DOAs doa;
 
 	public Button(String title, MainModel model, int x, int y) {
 		super(title);
 		mainModel = model;
+		doa = mainModel.getDoa();
 		setBounds(x,y,100,30);
 		addActionListener(new Action());
 	}
@@ -20,6 +23,7 @@ public class Button extends JButton{
 	public Button(String title, MainModel model) {
 		super(title);
 		mainModel = model;
+		doa = mainModel.getDoa();
 		addActionListener(new Action());
 	}
 
@@ -33,6 +37,7 @@ public class Button extends JButton{
 				break;
 			case ("auto"):
 				mainModel.setPage("auto");
+				mainModel.getAutoModel().setData(doa.alleAutos());
 				break;
 			case ("reparatie"):
 				mainModel.setPage("reparatie");
@@ -41,8 +46,7 @@ public class Button extends JButton{
 				mainModel.setPage("klant");
 				break;
 			case ("wijzigKlant"):
-				// TODO enable klantVelden, misschien toggle (Wijzig/Save
-				// changes)
+				changeKlantData();
 				break;
 			case ("voegAutoToe"):
 				// TODO open formulier of sorts
@@ -54,6 +58,16 @@ public class Button extends JButton{
 				mainModel.setPage("rooster");
 				break;
 			}
+		}
+	}
+
+	public void changeKlantData() {
+		KlantDetailModel detailModel = mainModel.getKlantDetail();
+		if (detailModel.isWijzigInfo()) {
+			detailModel.wijzigInfo();
+			doa.changeKlantData();
+		} else {
+			detailModel.wijzigInfo();
 		}
 	}
 }
