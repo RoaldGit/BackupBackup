@@ -28,7 +28,7 @@ public class MainModel extends Observable{
 				"Opmerkingen", "Klaar", "Factuur Verzonden", "Factuur Betaald" };
 		monteurHeader = new String[] { "Personeelnummer", "Achternaam",
 				 "Voornaam","Adres", "Woonplaats", "Postcode", "Uurloon" };
-		roosterHeader = new String[] { "Autonummer", "Klantnummer", "Merknaam",
+		roosterHeader = new String[] { "Autonummer", "Klantnummer", "Merk",
 			 "Kenteken", "Bouwjaar" };
 	}
 	

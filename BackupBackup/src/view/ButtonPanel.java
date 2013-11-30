@@ -27,6 +27,13 @@ public class ButtonPanel extends JPanel {
 		monteurButton = new Button("Monteur", mainModel, 450, 5);
 		roosterButton = new Button("Rooster", mainModel, 560, 5);
 
+		homeButton.setName("home");
+		autoButton.setName("auto");
+		reparatieButton.setName("reparatie");
+		klantButton.setName("klant");
+		monteurButton.setName("monteur");
+		roosterButton.setName("rooster");
+
 		add(homeButton);
 		add(autoButton);
 		add(reparatieButton);

@@ -11,22 +11,26 @@ public class Tabel extends JTable {
 	private TableColumnModel tcm;
 
 	/**
-	 * De default constructor voor de class Tabel.
+	 * Constructor voor de class table
+	 * 
+	 * @param data
+	 *            Data voor de tabel
+	 * @param header
+	 *            Headers voor de tabel
 	 */
-	public Tabel() {
-		super();
+	public Tabel(Object[][] data, String[] header) {
+		super(data, header);
 	}
 
 	/**
 	 * De constructor voor de class Tabel
 	 * 
-	 * @param row
-	 * @param col
+	 * @param model
+	 *            Model met de data en header voor de table
 	 */
 	public Tabel(SearchModel model) {
 		super(model.getData(), model.getHeader());
 		dataModel = model;
-		// TODO voeg TableEvent to aan tabel.
 	}
 
 	/*
@@ -40,13 +44,25 @@ public class Tabel extends JTable {
 
 	/**
 	 * Met deze methode wordt de data in de tabel aangepast door het TableModel
-	 * te wijzigen.
-	 * 
-	 * @param data
+	 * te wijzigen. *
 	 */
 	public void changeData() {
 		DefaultTableModel dtm = new DefaultTableModel(dataModel.getData(),
 				dataModel.getHeader());
+		setModel(dtm);
+	}
+
+	/**
+	 * Met deze methode wordt de data in de tabel aangepast door het TableModel
+	 * te wijzigen.
+	 * 
+	 * @param data
+	 *            Data voor de tabel
+	 * @param header
+	 *            header van de tabel
+	 */
+	public void changeData(Object[][] data, String[] header) {
+		DefaultTableModel dtm = new DefaultTableModel(data, header);
 		setModel(dtm);
 	}
 }

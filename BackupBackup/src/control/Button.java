@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import model.MainModel;
 
 public class Button extends JButton{
-	MainModel mainModel;
+	private MainModel mainModel;
 
 	public Button(String title, MainModel model, int x, int y) {
 		super(title);
@@ -17,27 +17,40 @@ public class Button extends JButton{
 		addActionListener(new Action());
 	}
 
+	public Button(String title, MainModel model) {
+		super(title);
+		mainModel = model;
+		addActionListener(new Action());
+	}
+
 	class Action implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			JButton button = (JButton) e.getSource();
-			String name = button.getText();
+			String name = button.getName();
 			switch (name) {
-			case ("Home"):
+			case ("home"):
 				mainModel.setPage("home");
 				break;
-			case ("Auto"):
+			case ("auto"):
 				mainModel.setPage("auto");
 				break;
-			case ("Reparatie"):
+			case ("reparatie"):
 				mainModel.setPage("reparatie");
 				break;
-			case ("Klant"):
+			case ("klant"):
 				mainModel.setPage("klant");
 				break;
-			case ("Monteur"):
+			case ("wijzigKlant"):
+				// TODO enable klantVelden, misschien toggle (Wijzig/Save
+				// changes)
+				break;
+			case ("voegAutoToe"):
+				// TODO open formulier of sorts
+				break;
+			case ("monteur"):
 				mainModel.setPage("monteur");
 				break;
-			case ("Rooster"):
+			case ("rooster"):
 				mainModel.setPage("rooster");
 				break;
 			}

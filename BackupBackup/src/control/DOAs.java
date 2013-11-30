@@ -25,7 +25,7 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select AutoID, Kenteken, Bouwjaar, PersoonID, Merknaam, Model from Auto inner join automerk on Auto.merkID = automerk.merkID where kenteken like ?");
+					.prepareStatement("select AutoID, Kenteken, Bouwjaar, PersoonID, Merknaam, Model from Auto natural join automerk where kenteken like ? group by autoID");
 			pst.setString(1, "%" + param + "%");
 
 			ResultSet result = pst.executeQuery();
@@ -153,7 +153,8 @@ public class DOAs {
 	public Object[][] alleAutos() {
 		Object[][] array = null;
 		try {
-			PreparedStatement pst = con.prepareStatement("select select AutoID, Kenteken, Bouwjaar, PersoonID, Merknaam, Model from Auto inner join automerk on Auto.merkID = automerk.merkID");
+			PreparedStatement pst = con
+					.prepareStatement("select AutoID, Kenteken, Bouwjaar, PersoonID, Merknaam, Model from Auto natural join automerk group by AutoID");
 
 			ResultSet result = pst.executeQuery();
 
@@ -286,7 +287,16 @@ public class DOAs {
 			String aantalQuerry = "select count(*) from auto where persoonID = "
 					+ klantNummer;
 			
-			model.setAantalAutos(resultSize(aantalQuerry));
+			int aantalAutos = resultSize(aantalQuerry);
+			model.setAantalAutos(aantalAutos);
+
+			pst = con
+					.prepareStatement("select AutoID, Kenteken, Bouwjaar, Merknaam, Model from Auto natural join automerk where persoonID = ?");
+			pst.setInt(1, klantNummer);
+
+			result = pst.executeQuery();
+
+			model.setAutos(create2DArray(result, aantalAutos));
 
 			result.close();
 

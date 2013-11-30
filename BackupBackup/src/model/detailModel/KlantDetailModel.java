@@ -11,8 +11,8 @@ public class KlantDetailModel extends Observable {
 	public KlantDetailModel(Object[][] dataOne, Object[][] dataTwo) {
 		setAfsprakenHeader(new String[] { "Start Tijd", "Eind Tijd",
 				"Bezigheid", "ReparatieID", "Monteur" });
-		setAutoHeader(new String[] { "AutoID", "Kenteken", "BouwJaar",
-				"PersoonID", "MerkID", "Model" });
+		setAutoHeader(new String[] { "Auto nummer", "Kenteken", "BouwJaar",
+				"Merk", "Model" });
 
 		geplandeAfspraken = dataOne;
 		autos = dataTwo;
