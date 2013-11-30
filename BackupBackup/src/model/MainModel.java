@@ -5,6 +5,7 @@ import java.util.Observable;
 import model.detailModel.AutoDetailModel;
 import model.detailModel.KlantDetailModel;
 import model.detailModel.ReparatieDetailModel;
+import control.DOAs;
 
 public class MainModel extends Observable{
 	private String activePage;
@@ -15,9 +16,12 @@ public class MainModel extends Observable{
 	private AutoDetailModel autoDetail;
 	private String[] autoHeader, klantHeader, reparatieHeader, monteurHeader,
 			roosterHeader;
+	private DOAs doa;
 
 	public MainModel(){
 		activePage = "home";
+
+		doa = new DOAs(this);
 
 		setHeaders();
 		setModels();
@@ -59,6 +63,10 @@ public class MainModel extends Observable{
 
 	public String getActivePage() {
 		return activePage;
+	}
+
+	public DOAs getDoa() {
+		return doa;
 	}
 
 	public SearchModel getAutoModel() {

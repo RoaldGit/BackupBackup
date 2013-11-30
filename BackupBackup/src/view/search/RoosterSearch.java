@@ -21,11 +21,12 @@ public class RoosterSearch extends JPanel implements Observer {
 	private MainModel mainModel;
 	private SearchModel dataModel;
 
-	public RoosterSearch(MainModel model, DOAs doa) {
+	public RoosterSearch(MainModel model) {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 		mainModel = model;
 		dataModel = mainModel.getRoosterModel();
+		DOAs doa = mainModel.getDoa();
 
 		roosterVeld = new InvulVeld(40, "auto", mainModel, doa);
 

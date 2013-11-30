@@ -22,11 +22,12 @@ public class KlantSearch extends JPanel implements Observer {
 	private MainModel mainModel;
 	private SearchModel dataModel;
 
-	public KlantSearch(MainModel model, DOAs doa) {
+	public KlantSearch(MainModel model) {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 		mainModel = model;
 		dataModel = mainModel.getKlantModel();
+		DOAs doa = mainModel.getDoa();
 
 		klantVeld = new InvulVeld(40, "klant", mainModel, doa);
 

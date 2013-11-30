@@ -21,11 +21,12 @@ public class MonteurSearch extends JPanel implements Observer {
 	private MainModel mainModel;
 	private SearchModel dataModel;
 
-	public MonteurSearch(MainModel model, DOAs doa) {
+	public MonteurSearch(MainModel model) {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 		mainModel = model;
 		dataModel = mainModel.getMonteurModel();
+		DOAs doa = mainModel.getDoa();
 
 		monteurVeld = new InvulVeld(40, "monteur", mainModel, doa);
 

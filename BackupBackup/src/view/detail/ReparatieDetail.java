@@ -9,12 +9,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import control.Button;
-
-import view.Tabel;
-
 import model.MainModel;
 import model.detailModel.ReparatieDetailModel;
+import view.Tabel;
+import control.Button;
+import control.DOAs;
 
 public class ReparatieDetail extends JPanel implements Observer {
 	private ReparatieDetailModel detailModel;
@@ -24,11 +23,14 @@ public class ReparatieDetail extends JPanel implements Observer {
 	private Tabel planning, onderdelen;
 	private JScrollPane planningScroll, onderdelenScroll;
 	private Button wijzig, printFactuur, planReparatie, voegOnderdeelToe;
+	private DOAs doa;
 	
 	public ReparatieDetail(MainModel model) {
 		setLayout(null);
 		
 		mainModel = model;
+		doa = mainModel.getDoa();
+
 		detailModel = model.getReparatieDetail();
 		
 		detailModel.addObserver(this);

@@ -6,13 +6,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import model.MainModel;
+import model.detailModel.KlantDetailModel;
 
 public class Button extends JButton{
 	private MainModel mainModel;
+	private DOAs doa;
 
 	public Button(String title, MainModel model, int x, int y) {
 		super(title);
 		mainModel = model;
+		doa = mainModel.getDoa();
 		setBounds(x,y,100,30);
 		addActionListener(new Action());
 	}
@@ -20,6 +23,7 @@ public class Button extends JButton{
 	public Button(String title, MainModel model) {
 		super(title);
 		mainModel = model;
+		doa = mainModel.getDoa();
 		addActionListener(new Action());
 	}
 
@@ -33,27 +37,41 @@ public class Button extends JButton{
 				break;
 			case ("auto"):
 				mainModel.setPage("auto");
+				mainModel.getAutoModel().setData(doa.alleAutos());
 				break;
 			case ("reparatie"):
 				mainModel.setPage("reparatie");
+				mainModel.getReparatieModel().setData(doa.alleReparaties());
 				break;
 			case ("klant"):
 				mainModel.setPage("klant");
+				mainModel.getKlantModel().setData(doa.alleKlanten());
 				break;
 			case ("wijzigKlant"):
-				// TODO enable klantVelden, misschien toggle (Wijzig/Save
-				// changes)
+				changeKlantData();
 				break;
 			case ("voegAutoToe"):
 				// TODO open formulier of sorts
 				break;
 			case ("monteur"):
 				mainModel.setPage("monteur");
+				mainModel.getMonteurModel().setData(doa.alleMonteurs());
 				break;
 			case ("rooster"):
 				mainModel.setPage("rooster");
+				mainModel.getRoosterModel().setData(doa.alleRoosters());
 				break;
 			}
+		}
+	}
+
+	public void changeKlantData() {
+		KlantDetailModel detailModel = mainModel.getKlantDetail();
+		if (detailModel.isWijzigInfo()) {
+			detailModel.wijzigInfo();
+			doa.changeKlantData();
+		} else {
+			detailModel.wijzigInfo();
 		}
 	}
 }
