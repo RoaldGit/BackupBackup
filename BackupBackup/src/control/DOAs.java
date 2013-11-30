@@ -241,11 +241,11 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select * from Persoon");
+					.prepareStatement("select starttijd,eindtijd,bezigheid, reparatieid, achternaam from Planning natural join bezigheid natural join persoon");
 
 			ResultSet result = pst.executeQuery();
 
-			int size = resultSize("select count(*) from Persoon");
+			int size = resultSize("select count(*) from Planning");
 
 			array = create2DArray(result, size);
 
@@ -304,6 +304,23 @@ public class DOAs {
 		}
 	}
 
+	public void retreiveReparatiesAuto(int autoNummer) {
+		KlantDetailModel model = mainModel.getKlantDetail();
+
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("select reparatieid, opmerkingen, autoid, klaar, factuurverzonden, factuur betaald from reparatie natural join auto natural join persoon where persoonid = ?");
+			pst.setInt(1, autoNummer);
+
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: retreiveAutoData");
+		} catch (Exception e) {
+			System.out.println("DOAs: retreiveAutoData");
+		}
+	}
+	
+	// public void retreive
 
 	public void retreiveAutoData(int autoNummer) {
 		AutoDetailModel model = mainModel.getAutoDetail();
@@ -329,10 +346,9 @@ public class DOAs {
 					+ autoNummer;
 
 			int aantalReparaties = resultSize(aantalQuerry);
-			// model.setAantalAutos(aantalAutos);
 
 			pst = con
-					.prepareStatement("select reparatieID, bezigheid, factuurverzonden, achternaam from reparatie natural join persoon natural join planning natural join bezigheid where autoID = ?");
+					.prepareStatement("select reparatieID, klaar, factuurverzonden, factuurbetaald from reparatie where autoID = ?");
 			pst.setInt(1, autoNummer);
 
 			result = pst.executeQuery();

@@ -13,8 +13,8 @@ public class AutoDetailModel extends Observable {
 	public AutoDetailModel(Object[][] data) {
 		setAfspraakHeader(new String[] { "Start Tijd", "Eind Tijd",
 				"Bezigheid", "ReparatieID", "Monteur" });
-		setReparatieHeader(new String[] { "Reparatie nummer", "Bezigheid",
-				"Factuur verzonden", "Monteur" });
+		setReparatieHeader(new String[] { "Reparatie nummer", "Afgerond",
+				"Factuur verzonden", "Factuur betaald" });
 
 		afspraakData = data;
 		reparatieData = data;
