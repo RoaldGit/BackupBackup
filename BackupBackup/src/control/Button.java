@@ -41,9 +41,11 @@ public class Button extends JButton{
 				break;
 			case ("reparatie"):
 				mainModel.setPage("reparatie");
+				mainModel.getReparatieModel().setData(doa.alleReparaties());
 				break;
 			case ("klant"):
 				mainModel.setPage("klant");
+				mainModel.getKlantModel().setData(doa.alleKlanten());
 				break;
 			case ("wijzigKlant"):
 				changeKlantData();
@@ -53,9 +55,11 @@ public class Button extends JButton{
 				break;
 			case ("monteur"):
 				mainModel.setPage("monteur");
+				mainModel.getMonteurModel().setData(doa.alleMonteurs());
 				break;
 			case ("rooster"):
 				mainModel.setPage("rooster");
+				mainModel.getRoosterModel().setData(doa.alleRoosters());
 				break;
 			}
 		}
