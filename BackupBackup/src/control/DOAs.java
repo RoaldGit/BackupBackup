@@ -51,7 +51,7 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select * from Reparatie");// where
+					.prepareStatement("select ReparatieID, AutoID, Opmerkingen, Klaar, FactuurVerzonden, FactuurBetaald from Reparatie");// where
 																	// kenteken
 																	// like ?");
 			// pst.setString(1, "%" + param + "%");
@@ -178,7 +178,7 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select * from Reparatie");
+					.prepareStatement("select ReparatieID, AutoID, Opmerkingen, Klaar, FactuurVerzonden, FactuurBetaald from Reparatie");
 
 			ResultSet result = pst.executeQuery();
 
