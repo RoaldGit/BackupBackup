@@ -25,11 +25,16 @@ public class TableEvent extends MouseAdapter {
 			case "klantTable":
 				doa.retreiveKlantData(selectedID);
 				break;
+			case "autoTable":
+				break;
+			case "monteurTable":
+				break;
+			case "reparatieTable":
+				break;
 			default:
 				System.out.println("No name");
 				break;
 			}
-//			System.out.println(selectedID);
 		}
 	}
 }

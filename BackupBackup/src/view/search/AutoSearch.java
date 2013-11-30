@@ -31,6 +31,7 @@ public class AutoSearch extends JPanel implements Observer {
 		autoVeld = new InvulVeld(40, "auto", mainModel, doa);
 
 		autoTable = new Tabel(dataModel);
+		autoTable.setName("autoTable");
 		autoTable.addMouseListener(new TableEvent(model, doa));
 
 		autoScroll = new JScrollPane(autoTable);
