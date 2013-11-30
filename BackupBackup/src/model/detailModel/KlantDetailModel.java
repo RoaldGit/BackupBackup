@@ -8,14 +8,14 @@ public class KlantDetailModel extends Observable {
 	private Object[][] geplandeAfspraken, autos;
 	private String[] afsprakenHeader, autoHeader;
 
-	public KlantDetailModel(Object[][] dataOne, Object[][] dataTwo) {
+	public KlantDetailModel(Object[][] data) {
 		setAfsprakenHeader(new String[] { "Start Tijd", "Eind Tijd",
 				"Bezigheid", "ReparatieID", "Monteur" });
 		setAutoHeader(new String[] { "Auto nummer", "Kenteken", "BouwJaar",
 				"Merk", "Model" });
 
-		geplandeAfspraken = dataOne;
-		autos = dataTwo;
+		geplandeAfspraken = data;
+		autos = data;
 
 		voorNaam = "Voornaam";
 		achterNaam = "Achternaam";

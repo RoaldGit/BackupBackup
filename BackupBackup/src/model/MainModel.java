@@ -2,6 +2,7 @@ package model;
 
 import java.util.Observable;
 
+import model.detailModel.AutoDetailModel;
 import model.detailModel.KlantDetailModel;
 import model.detailModel.ReparatieDetailModel;
 
@@ -11,6 +12,7 @@ public class MainModel extends Observable{
 			roosterModel;
 	private KlantDetailModel klantDetail;
 	private ReparatieDetailModel reparatieDetail;
+	private AutoDetailModel autoDetail;
 	private String[] autoHeader, klantHeader, reparatieHeader, monteurHeader,
 			roosterHeader;
 
@@ -44,7 +46,8 @@ public class MainModel extends Observable{
 		monteurModel = new SearchModel(data, monteurHeader);
 		roosterModel = new SearchModel(data, roosterHeader);
 
-		klantDetail = new KlantDetailModel(data, data);
+		klantDetail = new KlantDetailModel(data);
+		autoDetail = new AutoDetailModel(data);
 	}
 
 	public void setPage(String page) {
@@ -83,5 +86,19 @@ public class MainModel extends Observable{
 	
 	public ReparatieDetailModel getReparatieDetail() {
 		return reparatieDetail;
+	}
+	
+	/**
+	 * @return the autoDetail
+	 */
+	public AutoDetailModel getAutoDetail() {
+		return autoDetail;
+	}
+
+	/**
+	 * @param autoDetail the autoDetail to set
+	 */
+	public void setAutoDetail(AutoDetailModel autoDetail) {
+		this.autoDetail = autoDetail;
 	}
 }

@@ -42,8 +42,7 @@ public class KlantDetail extends JPanel implements Observer {
 		setupButtons();
 
 		updateGegevens();
-		// TODO Afsprakentabel, add auto en wijzig gegevens
-		// knoppen.
+		// TODO Afsprakentabel, add auto en wijzig gegevens action events
 	}
 
 	public void setupLabels() {
