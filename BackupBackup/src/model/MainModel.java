@@ -3,12 +3,14 @@ package model;
 import java.util.Observable;
 
 import model.detailModel.KlantDetailModel;
+import model.detailModel.ReparatieDetailModel;
 
 public class MainModel extends Observable{
 	private String activePage;
 	private SearchModel autoModel, klantModel, reparatieModel, monteurModel,
 			roosterModel;
 	private KlantDetailModel klantDetail;
+	private ReparatieDetailModel reparatieDetail;
 	private String[] autoHeader, klantHeader, reparatieHeader, monteurHeader,
 			roosterHeader;
 
@@ -77,5 +79,9 @@ public class MainModel extends Observable{
 
 	public KlantDetailModel getKlantDetail() {
 		return klantDetail;
+	}
+	
+	public ReparatieDetailModel getReparatieDetail() {
+		return reparatieDetail;
 	}
 }
