@@ -135,7 +135,7 @@ public class AutoDetail extends JPanel implements Observer {
 		reparaties = new Tabel(detailModel.getReparatieData(),
 				detailModel.getReparatieHeader());
 		reparaties.setName("autoDetailReparaties");
-		reparaties.addMouseListener(new TableEvent(mainModel, doa));
+		reparaties.addMouseListener(new TableEvent(mainModel));
 
 		reparatiesScroll = new JScrollPane(reparaties);
 		reparatiesScroll.setBounds(400, 320, 700, 200);

@@ -1,6 +1,9 @@
 package view;
 
+import java.text.NumberFormat;
+
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -64,5 +67,26 @@ public class Tabel extends JTable {
 	public void changeData(Object[][] data, String[] header) {
 		DefaultTableModel dtm = new DefaultTableModel(data, header);
 		setModel(dtm);
+	}
+
+	public void setupRenderer(int column) {
+		tcm = this.getColumnModel();
+
+		tcm.getColumn(column).setCellRenderer(new NumberRenderer());
+	}
+
+	class NumberRenderer extends DefaultTableCellRenderer {
+		NumberFormat formatter;
+
+		public NumberRenderer() {
+			super();
+		}
+
+		public void setValue(Object value) {
+			Double number = 0.0;
+			if (value != null)
+				number = Double.parseDouble(value.toString());
+			setText((value == null) ? "" : String.format("€ %,.2f", number));
+		}
 	}
 }

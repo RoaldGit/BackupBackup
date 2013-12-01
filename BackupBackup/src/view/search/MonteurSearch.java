@@ -29,11 +29,11 @@ public class MonteurSearch extends JPanel implements Observer {
 		dataModel = mainModel.getMonteurModel();
 		DOAs doa = mainModel.getDoa();
 
-		monteurVeld = new InvulVeld(40, "monteur", mainModel, doa);
+		monteurVeld = new InvulVeld(40, "monteur", mainModel);
 
 		monteurTable = new Tabel(dataModel);
 		monteurTable.setName("monteurTable");
-		monteurTable.addMouseListener(new TableEvent(mainModel, doa));
+		monteurTable.addMouseListener(new TableEvent(mainModel));
 
 		monteurScroll = new JScrollPane(monteurTable);
 		monteurScroll.setPreferredSize(new Dimension(1250, 610));

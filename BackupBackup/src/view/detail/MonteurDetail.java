@@ -132,7 +132,7 @@ public class MonteurDetail extends JPanel implements Observer {
 
 		auto = new Tabel(detailModel.getAutos(), detailModel.getAutoHeader());
 		auto.setName("klantDetailAuto");
-		auto.addMouseListener(new TableEvent(mainModel, doa));
+		auto.addMouseListener(new TableEvent(mainModel));
 
 		autoScroll = new JScrollPane(auto);
 		autoScroll.setBounds(400, 320, 700, 200);
@@ -161,7 +161,7 @@ public class MonteurDetail extends JPanel implements Observer {
 		monteurAdresT.setText(detailModel.getAdres());
 		monteurWoonplaatsT.setText(detailModel.getWoonplaats());
 		monteurPostcodeT.setText(detailModel.getPostcode());
-		uurLoonT.setText("" + detailModel.getUurLoon());
+		uurLoonT.setText(String.format("€ %.2f", detailModel.getUurLoon()));
 
 		afspraken.changeData(detailModel.getGeplandeAfspraken(),
 				detailModel.getAfsprakenHeader());

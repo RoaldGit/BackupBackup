@@ -12,11 +12,11 @@ public class InvulVeld extends JTextField{
 	private MainModel mainModel;
 	private DOAs doa;
 
-	public InvulVeld(int x, String p, MainModel model, DOAs d) {
+	public InvulVeld(int x, String p, MainModel model) {
 		super(x);
 		page = p;
 		mainModel = model;
-		doa = d;
+		doa = mainModel.getDoa();
 
 		getDocument().addDocumentListener(new Search());
 
