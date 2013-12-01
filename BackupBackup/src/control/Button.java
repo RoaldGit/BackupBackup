@@ -58,6 +58,9 @@ public class Button extends JButton{
 			case "wijzigAuto":
 				changeAutoData();
 				break;
+			case "nieuweReparatie":
+				doa.nieuweReparatie();
+				break;
 			case "monteur":
 				mainModel.setPage("monteur");
 				mainModel.getMonteurModel().setData(doa.alleMonteurs());

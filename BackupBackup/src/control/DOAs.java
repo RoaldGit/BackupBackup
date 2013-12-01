@@ -523,6 +523,34 @@ public class DOAs {
 		}
 	}
 
+	public void nieuweReparatie() {
+		AutoDetailModel detailModel = mainModel.getAutoDetail();
+		ReparatieDetailModel reparatieDetailModel = mainModel
+				.getReparatieDetail();
+
+		int autoNummer = detailModel.getAutoNummer();
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("insert into reparatie(autoid) values(?)");
+			pst.setInt(1, autoNummer);
+
+			pst.execute();
+
+			pst = con
+					.prepareStatement("select reparatieid from reparatie where autoid = 3 order by reparatieid desc limit 1");
+			ResultSet result = pst.executeQuery();
+			result.next();
+
+			int nieuweReparatie = result.getInt("reparatieid");
+			retreiveReparatieData(nieuweReparatie);
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: voegAutoToe");
+		} catch (Exception e) {
+			System.out.println("DOAs: voegAutoToe");
+		}
+	}
+
 	public int getMerkID(String merkNaam) {
 		int id = 0;
 		try {

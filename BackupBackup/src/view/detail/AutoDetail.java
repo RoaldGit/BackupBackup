@@ -27,7 +27,7 @@ public class AutoDetail extends JPanel implements Observer {
 			autoMerkNaamT, autoModelT, klantNummerT, klantAchternaamT;
 	private Tabel afspraken, reparaties;
 	private JScrollPane afsprakenScroll, reparatiesScroll;
-	private Button wijzigGegevens;
+	private Button wijzigGegevens, nieuweReparatie;
 	private DOAs doa;
 
 	public AutoDetail(MainModel model) {
@@ -149,7 +149,12 @@ public class AutoDetail extends JPanel implements Observer {
 		wijzigGegevens.setBounds(120, 230, 200, 20);
 		wijzigGegevens.setName("wijzigAuto");
 
+		nieuweReparatie = new Button("Nieuwe reparatie", mainModel);
+		nieuweReparatie.setBounds(550, 300, 200, 20);
+		nieuweReparatie.setName("nieuweReparatie");
+
 		add(wijzigGegevens);
+		add(nieuweReparatie);
 	}
 
 	private void updateGegevens() {
