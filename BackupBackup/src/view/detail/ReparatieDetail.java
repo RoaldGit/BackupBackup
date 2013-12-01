@@ -19,10 +19,12 @@ import control.Button;
 public class ReparatieDetail extends JPanel implements Observer {
 	private ReparatieDetailModel detailModel;
 	private MainModel mainModel;
-	private JLabel reparatieNummerL, klantNummerL, autoNummerL, autoKentekenL, statusL, opmerkingenL, planningL, onderdeelL;
+	private JLabel reparatieNummerL, klantNummerL, autoNummerL, autoKentekenL,
+			statusL, opmerkingenL, planningL, onderdeelL, nieuwOnderdeelL,
+			nieuwOnderdeelNaamL, nieuwOnderdeelAantalL;
 	private JTextField reparatieNummerT, klantNummerT, autoNummerT,
-			autoKentekenT;
-	private JComboBox<Object> statusC;
+			autoKentekenT, nieuwOnderdeelAantalT;
+	private JComboBox<Object> statusC, onderdelenC;
 	private JTextArea opmerkingenA;
 	private Tabel planning, onderdelen;
 	private JScrollPane planningScroll, onderdelenScroll;
@@ -32,7 +34,6 @@ public class ReparatieDetail extends JPanel implements Observer {
 		setLayout(null);
 		
 		mainModel = model;
-
 		detailModel = model.getReparatieDetail();
 		
 		detailModel.addObserver(this);
@@ -57,6 +58,10 @@ public class ReparatieDetail extends JPanel implements Observer {
 		planningL = new JLabel("Ingeplande reparaties: ");
 		onderdeelL = new JLabel("Gebruikte onderdelen: ");
 		
+		nieuwOnderdeelL = new JLabel("Voeg een nieuw onderdeel toe:");
+		nieuwOnderdeelNaamL = new JLabel("Onderdeelnaam:");
+		nieuwOnderdeelAantalL = new JLabel("Aantal:");
+
 		reparatieNummerL.setBounds(5, 0, 100, 20);
 		klantNummerL.setBounds(5, 25, 100, 20);
 		autoNummerL.setBounds(5, 50, 100, 20);
@@ -66,6 +71,10 @@ public class ReparatieDetail extends JPanel implements Observer {
 		planningL.setBounds(400, 0, 200, 20);
 		onderdeelL.setBounds(400, 300, 200, 20);
 		
+		nieuwOnderdeelL.setBounds(5, 400, 200, 20);
+		nieuwOnderdeelNaamL.setBounds(5, 425, 100, 20);
+		nieuwOnderdeelAantalL.setBounds(5, 450, 100, 20);
+
 		add(reparatieNummerL);
 		add(klantNummerL);
 		add(autoNummerL);
@@ -75,6 +84,10 @@ public class ReparatieDetail extends JPanel implements Observer {
 		add(planningL);
 		add(onderdeelL);
 		
+		add(nieuwOnderdeelL);
+		add(nieuwOnderdeelNaamL);
+		add(nieuwOnderdeelAantalL);
+
 	}
 
 	private void setupTextFields() {
@@ -82,10 +95,13 @@ public class ReparatieDetail extends JPanel implements Observer {
 		klantNummerT = new JTextField();
 		autoNummerT = new JTextField();
 		autoKentekenT = new JTextField();
+		nieuwOnderdeelAantalT = new JTextField();
 		
 		Object[] status = new Object[] { "In behandeling", "Klaar",
 				"Factuur Verzonden", "Factuur Betaald" };
+
 		statusC = new JComboBox<Object>(status);
+		onderdelenC = new JComboBox<Object>(detailModel.getOnderdelen());
 
 		opmerkingenA = new JTextArea();
 
@@ -93,8 +109,10 @@ public class ReparatieDetail extends JPanel implements Observer {
 		klantNummerT.setBounds(120, 25, 200, 20);
 		autoNummerT.setBounds(120, 50, 200, 20);
 		autoKentekenT.setBounds(120, 75, 200, 20);
-		statusC.setBounds(120, 100, 200, 20);
+		nieuwOnderdeelAantalT.setBounds(120, 450, 200, 20);
 
+		statusC.setBounds(120, 100, 200, 20);
+		onderdelenC.setBounds(120, 425, 200, 20);
 		opmerkingenA.setBounds(120, 125, 200, 200);
 
 		reparatieNummerT.setEditable(false);
@@ -115,10 +133,11 @@ public class ReparatieDetail extends JPanel implements Observer {
 		add(klantNummerT);
 		add(autoNummerT);
 		add(autoKentekenT);
-		add(statusC);
-		
-		add(opmerkingenA);
+		add(nieuwOnderdeelAantalT);
 
+		add(statusC);
+		add(onderdelenC);
+		add(opmerkingenA);
 	}
 	
 	private void setupButtons() {
@@ -172,6 +191,9 @@ public class ReparatieDetail extends JPanel implements Observer {
 		
 		onderdelen.setupRenderer(3);
 		onderdelen.setupRenderer(5);
+
+		onderdelenC.setModel(new JComboBox<Object>(detailModel.getOnderdelen())
+				.getModel());
 	}
 
 	public void update(Observable obs, Object obj) {

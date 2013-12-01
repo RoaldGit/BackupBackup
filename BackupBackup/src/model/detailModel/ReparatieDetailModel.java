@@ -4,11 +4,13 @@ import java.util.Observable;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class ReparatieDetailModel extends Observable {
 	private String autoKenteken, opmerking;
 	private int reparatieID, persoonID, status, autoID;
 	private JComboBox<Object> statusC, onderdelenC;
+	private JTextField nieuwOnderdeelAantalT;
 	private JTextArea opmerkingenA;
 	private Object[][] geplandeAfspraken, gebruikteOnderdelen;
 	private String[] afsprakenHeader, onderdelenHeader, onderdelen;
@@ -197,5 +199,19 @@ public class ReparatieDetailModel extends Observable {
 	 */
 	public void setOnderdelenC(JComboBox<Object> onderdelenC) {
 		this.onderdelenC = onderdelenC;
+	}
+
+	/**
+	 * @return the nieuwOnderdeelAantalT
+	 */
+	public JTextField getNieuwOnderdeelAantalT() {
+		return nieuwOnderdeelAantalT;
+	}
+
+	/**
+	 * @param nieuwOnderdeelAantalT the nieuwOnderdeelAantalT to set
+	 */
+	public void setNieuwOnderdeelAantalT(JTextField nieuwOnderdeelAantalT) {
+		this.nieuwOnderdeelAantalT = nieuwOnderdeelAantalT;
 	}
 }
