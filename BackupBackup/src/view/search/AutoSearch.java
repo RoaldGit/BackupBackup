@@ -11,7 +11,6 @@ import javax.swing.JScrollPane;
 import model.MainModel;
 import model.SearchModel;
 import view.Tabel;
-import control.DOAs;
 import control.InvulVeld;
 import control.TableEvent;
 
@@ -27,7 +26,6 @@ public class AutoSearch extends JPanel implements Observer {
 
 		mainModel = model;
 		dataModel = mainModel.getAutoModel();
-		DOAs doa = mainModel.getDoa();
 
 		autoVeld = new InvulVeld(40, "auto", mainModel);
 

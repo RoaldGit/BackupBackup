@@ -11,7 +11,6 @@ import javax.swing.JScrollPane;
 import model.MainModel;
 import model.SearchModel;
 import view.Tabel;
-import control.DOAs;
 import control.InvulVeld;
 import control.TableEvent;
 
@@ -27,7 +26,6 @@ public class RoosterSearch extends JPanel implements Observer {
 
 		mainModel = model;
 		dataModel = mainModel.getRoosterModel();
-		DOAs doa = mainModel.getDoa();
 
 		roosterVeld = new InvulVeld(40, "rooster", mainModel);
 

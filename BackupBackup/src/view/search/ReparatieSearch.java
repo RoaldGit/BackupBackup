@@ -11,7 +11,6 @@ import javax.swing.JScrollPane;
 import model.MainModel;
 import model.SearchModel;
 import view.Tabel;
-import control.DOAs;
 import control.InvulVeld;
 import control.TableEvent;
 
@@ -27,7 +26,6 @@ public class ReparatieSearch extends JPanel implements Observer {
 
 		mainModel = model;
 		dataModel = mainModel.getReparatieModel();
-		DOAs doa = mainModel.getDoa();
 
 		reparatieVeld = new InvulVeld(40, "reparatie", mainModel);
 

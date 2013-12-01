@@ -15,7 +15,6 @@ import view.search.KlantSearch;
 import view.search.MonteurSearch;
 import view.search.ReparatieSearch;
 import view.search.RoosterSearch;
-import control.DOAs;
 
 
 
@@ -31,8 +30,6 @@ public class ContentPanel extends JPanel implements Observer{
 		mainModel.addObserver(this);
 
 		home = new JPanel();
-		
-		DOAs doa = new DOAs(mainModel);
 		
 		autoSearch = new AutoSearch(mainModel);
 		klantSearch = new KlantSearch(mainModel);
