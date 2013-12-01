@@ -10,7 +10,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import model.MainModel;
-import model.detailModel.KlantDetailModel;
 import model.detailModel.MonteurDetailModel;
 import view.Tabel;
 import control.Button;

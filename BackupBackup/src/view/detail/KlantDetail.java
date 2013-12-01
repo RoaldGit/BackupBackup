@@ -50,7 +50,6 @@ public class KlantDetail extends JPanel implements Observer {
 		setupButtons();
 
 		updateGegevens();
-		// TODO add auto action events
 	}
 
 	public void setupLabels() {

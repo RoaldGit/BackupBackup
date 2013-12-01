@@ -471,6 +471,30 @@ public class DOAs {
 		} catch (Exception e) {
 			System.out.println("DOAs: changeKlantData");
 		}
+	}
+
+	public void changeAutoData() {
+		AutoDetailModel detailModel = mainModel.getAutoDetail();
+		int autoNummer = detailModel.getAutoNummer();
+		String[] data = detailModel.getAutoData();
+		int merkid = getMerkID(data[2]);
+
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("update auto set kenteken = ?, bouwjaar = ?, merkid = ?, model = ? where autoid = ?");
+			pst.setString(1, data[0]);
+			pst.setString(2, data[1]);
+			pst.setInt(3, merkid);
+			pst.setString(4, data[3]);
+			pst.setInt(5, autoNummer);
+
+			pst.execute();
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: changeKlantData");
+		} catch (Exception e) {
+			System.out.println("DOAs: changeKlantData");
+		}
 
 	}
 

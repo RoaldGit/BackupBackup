@@ -7,7 +7,6 @@ import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.table.TableColumn;
 
 import model.MainModel;
 import model.SearchModel;
