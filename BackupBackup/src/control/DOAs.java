@@ -11,6 +11,7 @@ import model.DBmanager;
 import model.MainModel;
 import model.detailModel.AutoDetailModel;
 import model.detailModel.KlantDetailModel;
+import model.detailModel.ReparatieDetailModel;
 
 
 public class DOAs {
@@ -336,8 +337,6 @@ public class DOAs {
 			System.out.println("DOAs: retreiveAutoData");
 		}
 	}
-	
-	// public void retreive
 
 	public void retreiveAutoData(int autoNummer) {
 		AutoDetailModel model = mainModel.getAutoDetail();
@@ -359,23 +358,89 @@ public class DOAs {
 			model.setKlantNummer(result.getInt("persoonid"));
 			model.setKlantnaam(result.getString("achternaam"));
 
-			String aantalQuerry = "select count(*) from reparatie where autoID = "
+			String aantalQuery = "select count(*) from reparatie where autoID = "
 					+ autoNummer;
 
-			int aantalReparaties = resultSize(aantalQuerry);
+			int aantalReparaties = resultSize(aantalQuery);
 
 			pst = con
-					.prepareStatement("select reparatieID, klaar, factuurverzonden, factuurbetaald from reparatie where autoID = ?");
+					.prepareStatement("select reparatieID, klaar, factuurverzonden, factuurbetaald from reparatie where autoID = ? order by reparatieid desc");
 			pst.setInt(1, autoNummer);
 
 			result = pst.executeQuery();
 
 			model.setReparatieData(create2DArray(result, aantalReparaties));
+			
+			aantalQuery = "select count(*) from planning natural join reparatie where autoid = "
+					+ autoNummer
+					+ " and starttijd >= curdate() - interval 1 day";
+
+			int aantalPlanningen = resultSize(aantalQuery);
+
+			pst = con
+					.prepareStatement("select starttijd, eindtijd, bezigheid, reparatieid, achternaam from planning natural join bezigheid natural join reparatie natural join persoon where autoid = ? and starttijd >= curdate() - interval 1 day");
+			pst.setInt(1, autoNummer);
+
+			result = pst.executeQuery();
+
+			model.setAfspraakData(create2DArray(result, aantalPlanningen));
 
 			result.close();
 
 			model.dataChanged();
 			mainModel.setPage("autoDetail");
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: retreiveAutoData");
+		} catch (Exception e) {
+			System.out.println("DOAs: retreiveAutoData");
+		}
+	}
+
+	public void retreiveReparatieData(int reparatieNummer) {
+		ReparatieDetailModel model = mainModel.getReparatieDetail();
+
+		model.setReparatieID(reparatieNummer);
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("select persoonid, autoid, kenteken, opmerkingen from reparatie natural join auto where reparatieid = ?");
+			pst.setInt(1, reparatieNummer);
+
+			ResultSet result = pst.executeQuery();
+			result.next();
+
+			model.setKlantID(result.getInt("persoonid"));
+			model.setAutoID(result.getInt("autoid"));
+			model.setKenteken(result.getString("kenteken"));
+			model.setOpmerking(result.getString("opmerkingen"));
+			
+			String aantalQuery = "select count(*) from planning where reparatieid = "
+					+ reparatieNummer
+					+ " and starttijd >= curdate() - interval 1 day";
+			int aantalPlanningen = resultSize(aantalQuery);
+			
+			pst = con
+					.prepareStatement("select starttijd,eindtijd,bezigheid,achternaam from planning natural join bezigheid natural join persoon where reparatieid = ?");
+			pst.setInt(1, reparatieNummer);
+
+			result = pst.executeQuery();
+
+			model.setGeplandeAfspraken(create2DArray(result, aantalPlanningen));
+
+			aantalQuery = "select count(*) from factuurregel where reparatieid = "
+					+ reparatieNummer;
+			int aantalOnderdelen = resultSize(aantalQuery);
+
+			pst = con
+					.prepareStatement("select onderdeelid, onderdeelnaam, leverancier, prijs, aantal, prijs*aantal as totaal from onderdeel natural join factuurregel where reparatieid = ?");
+			pst.setInt(1, reparatieNummer);
+
+			result = pst.executeQuery();
+
+			model.setOnderdelen(create2DArray(result, aantalOnderdelen));
+
+			model.dataChanged();
+			mainModel.setPage("reparatieDetail");
 		} catch (SQLException se) {
 			printSQLException(se);
 			System.out.println("DOAs: retreiveAutoData");
@@ -455,19 +520,19 @@ public class DOAs {
 		return id;
 	}
 
-	public Object[][] create2DArray(ResultSet rs, int rows) {
+	public Object[][] create2DArray(ResultSet result, int rows) {
 		Object[][] array = null;
 		try {
-			ResultSetMetaData rsmd = rs.getMetaData();
+			ResultSetMetaData rsmd = result.getMetaData();
 			int cols = rsmd.getColumnCount();
 
 			array = new Object[rows][cols];
 
 			int currentRow = 0;
 			int columns = rsmd.getColumnCount();
-			while (rs.next()) {
+			while (result.next()) {
 				for (int i = 0; i < columns; i++)
-					array[currentRow][i] = rs.getObject(i + 1);
+					array[currentRow][i] = result.getObject(i + 1);
 				currentRow++;
 			}
 		} catch (SQLException se) {

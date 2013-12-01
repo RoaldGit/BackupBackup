@@ -10,9 +10,9 @@ public class ReparatieDetailModel extends Observable {
 	
 	public ReparatieDetailModel(Object[][] data) {
 		setAfsprakenHeader(new String[] { "Start Tijd", "Eind Tijd",
-				"Bezigheid", "ReparatieID", "Monteur" });
-		setOnderdelenHeader(new String[] { "Onderdeelnummer", "Onderdeelnaam", "Prijs",
-				"Leverancier", "Aantal" });
+				"Bezigheid", "Monteur" });
+		setOnderdelenHeader(new String[] { "Onderdeelnummer", "Onderdeelnaam",
+				"Leverancier", "Prijs", "Aantal", "Totaal prijs" });
 
 		geplandeAfspraken = data;
 		onderdelen = data;
@@ -40,7 +40,7 @@ public class ReparatieDetailModel extends Observable {
 		this.geplandeAfspraken = geplandeAfspraken;
 	}
 	
-	public void setAutos(Object[][] onderdelen) {
+	public void setOnderdelen(Object[][] onderdelen) {
 		this.onderdelen = onderdelen;
 	}
 

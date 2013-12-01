@@ -46,7 +46,7 @@ public class ReparatieDetail extends JPanel implements Observer {
 	}
 	
 	private void setupLabels() {
-		reparatieNummerL = new JLabel("Reparatienummer:");
+		reparatieNummerL = new JLabel("Reparatie nr.:");
 		klantNummerL = new JLabel("Klantnummer:");
 		autoNummerL = new JLabel("Autonummer:");
 		autoKentekenL = new JLabel("Kenteken");

@@ -7,12 +7,14 @@ import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.table.TableColumn;
 
 import model.MainModel;
 import model.SearchModel;
 import view.Tabel;
 import control.DOAs;
 import control.InvulVeld;
+import control.TableEvent;
 
 public class ReparatieSearch extends JPanel implements Observer {
 	private InvulVeld reparatieVeld;
@@ -31,6 +33,9 @@ public class ReparatieSearch extends JPanel implements Observer {
 		reparatieVeld = new InvulVeld(40, "reparatie", mainModel, doa);
 
 		reparatieTable = new Tabel(dataModel);
+		reparatieTable.setName("reparatieTable");
+		reparatieTable.addMouseListener(new TableEvent(mainModel, doa));
+
 		reparatieScroll = new JScrollPane(reparatieTable);
 		reparatieScroll.setPreferredSize(new Dimension(1250, 610));
 

@@ -14,6 +14,7 @@ import model.detailModel.AutoDetailModel;
 import view.Tabel;
 import control.Button;
 import control.DOAs;
+import control.TableEvent;
 
 public class AutoDetail extends JPanel implements Observer {
 	private AutoDetailModel detailModel;
@@ -126,6 +127,9 @@ public class AutoDetail extends JPanel implements Observer {
 
 		reparaties = new Tabel(detailModel.getReparatieData(),
 				detailModel.getReparatieHeader());
+		reparaties.setName("autoDetailReparaties");
+		reparaties.addMouseListener(new TableEvent(mainModel, doa));
+
 		reparatiesScroll = new JScrollPane(reparaties);
 		reparatiesScroll.setBounds(400, 320, 700, 200);
 
@@ -150,8 +154,8 @@ public class AutoDetail extends JPanel implements Observer {
 		klantNummerT.setText("" + detailModel.getKlantNummer());
 		klantAchternaamT.setText(detailModel.getKlantnaam());
 
-		afspraken.changeData(detailModel.getReparatieData(),
-				detailModel.getReparatieHeader());
+		afspraken.changeData(detailModel.getAfspraakData(),
+				detailModel.getAfspraakHeader());
 		reparaties.changeData(detailModel.getReparatieData(),
 				detailModel.getReparatieHeader());
 	}

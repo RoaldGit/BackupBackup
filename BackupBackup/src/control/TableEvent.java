@@ -31,7 +31,9 @@ public class TableEvent extends MouseAdapter {
 				break;
 			case "monteurTable":
 				break;
+			case "autoDetailReparaties":
 			case "reparatieTable":
+				doa.retreiveReparatieData(selectedID);
 				break;
 			default:
 				System.out.println("No name");
