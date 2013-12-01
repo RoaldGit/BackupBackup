@@ -7,6 +7,7 @@ public class ReparatieDetailModel extends Observable {
 	private int reparatieID, persoonID, autoID;
 	private Object[][] geplandeAfspraken, onderdelen;
 	private String[] afsprakenHeader, onderdelenHeader;
+	private boolean wijzigInfo;
 	
 	public ReparatieDetailModel(Object[][] data) {
 		setAfsprakenHeader(new String[] { "Start Tijd", "Eind Tijd",
@@ -106,5 +107,22 @@ public class ReparatieDetailModel extends Observable {
 	
 	public void setReparatieID(int ID){
 		reparatieID = ID;
+	}
+
+	/**
+	 * @return the wijzigInfo
+	 */
+	public boolean isWijzigInfo() {
+		return wijzigInfo;
+	}
+
+	/**
+	 * @param wijzigInfo the wijzigInfo to set
+	 */
+	public void wijzigInfo() {
+		wijzigInfo = !wijzigInfo;
+
+		setChanged();
+		notifyObservers("wijzigData");
 	}
 }

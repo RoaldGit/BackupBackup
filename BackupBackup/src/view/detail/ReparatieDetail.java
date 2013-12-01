@@ -7,6 +7,7 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import model.MainModel;
@@ -19,10 +20,12 @@ public class ReparatieDetail extends JPanel implements Observer {
 	private ReparatieDetailModel detailModel;
 	private MainModel mainModel;
 	private JLabel reparatieNummerL, klantNummerL, autoNummerL, autoKentekenL, statusL, opmerkingenL, planningL, onderdeelL;
-	private JTextField reparatieNummerT, klantNummerT, autoNummerT, autoKentekenT, statusT, opmerkingenT;
+	private JTextField reparatieNummerT, klantNummerT, autoNummerT,
+			autoKentekenT, statusT;
+	private JTextArea opmerkingenA;
 	private Tabel planning, onderdelen;
 	private JScrollPane planningScroll, onderdelenScroll;
-	private Button wijzig, printFactuur, planReparatie, voegOnderdeelToe;
+	private Button wijzigGegevens, printFactuur, planReparatie, voegOnderdeelToe;
 	private DOAs doa;
 	
 	public ReparatieDetail(MainModel model) {
@@ -81,38 +84,45 @@ public class ReparatieDetail extends JPanel implements Observer {
 		autoNummerT = new JTextField();
 		autoKentekenT = new JTextField();
 		statusT = new JTextField();
-		opmerkingenT = new JTextField();
+
+		opmerkingenA = new JTextArea();
 
 		reparatieNummerT.setBounds(120, 0, 200, 20);
 		klantNummerT.setBounds(120, 25, 200, 20);
 		autoNummerT.setBounds(120, 50, 200, 20);
 		autoKentekenT.setBounds(120, 75, 200, 20);
 		statusT.setBounds(120, 100, 200, 20);
-		opmerkingenT.setBounds(120, 125, 200, 20);
+
+		opmerkingenA.setBounds(120, 125, 200, 200);
 
 		reparatieNummerT.setEditable(false);
 		klantNummerT.setEditable(false);
 		autoNummerT.setEditable(false);
 		autoKentekenT.setEditable(false);
 		statusT.setEditable(false);
-		opmerkingenT.setEditable(false);
+
+		opmerkingenA.setEditable(false);
+
+		opmerkingenA.setLineWrap(true);
+		opmerkingenA.setWrapStyleWord(true);
 
 		add(reparatieNummerT);
 		add(klantNummerT);
 		add(autoNummerT);
 		add(autoKentekenT);
 		add(statusT);
-		add(opmerkingenT);
 		
+		add(opmerkingenA);
+
 	}
 	
 	private void setupButtons() {
-		wijzig = new Button("Wijzig gegevens", mainModel);
-		wijzig.setBounds(120, 150, 200, 20);
-		wijzig.setName("wijzigKlant");
+		wijzigGegevens = new Button("Wijzig gegevens", mainModel);
+		wijzigGegevens.setBounds(120, 330, 200, 20);
+		wijzigGegevens.setName("wijzigReparatie");
 		
 		printFactuur = new Button("Print Factuur", mainModel);
-		printFactuur.setBounds(120, 180, 200, 20);
+		printFactuur.setBounds(120, 355, 200, 20);
 		printFactuur.setName("printFactuur");
 		
 		planReparatie = new Button("Plan reparatie", mainModel);
@@ -123,11 +133,10 @@ public class ReparatieDetail extends JPanel implements Observer {
 		voegOnderdeelToe.setBounds(550, 300, 200, 20);
 		voegOnderdeelToe.setName("voegOnderdeelToe");
 
-		add(wijzig);
+		add(wijzigGegevens);
 		add(printFactuur);
 		add(planReparatie);
 		add(voegOnderdeelToe);
-		
 	}
 	
 	private void setupTables() {
@@ -151,7 +160,7 @@ public class ReparatieDetail extends JPanel implements Observer {
 		autoNummerT.setText("" + detailModel.getAutoID());
 		autoKentekenT.setText(detailModel.getKenteken());
 		statusT.setText(detailModel.getStatus());
-		opmerkingenT.setText(detailModel.getOpmerkingen());
+		opmerkingenA.setText(detailModel.getOpmerkingen());
 
 		planning.changeData(detailModel.getGeplandeAfspraken(),
 				detailModel.getAfsprakenHeader());
@@ -159,11 +168,24 @@ public class ReparatieDetail extends JPanel implements Observer {
 		
 	}
 
-	@Override
 	public void update(Observable obs, Object obj) {
 		if (obs == detailModel) {
-			updateGegevens();
+			if (obj.equals("wijzigData")) {
+				if (detailModel.isWijzigInfo()) {
+					enableTextFields(true);
+					wijzigGegevens.setText("Sla wijzigingen op");
+				} else {
+					enableTextFields(false);
+					wijzigGegevens.setText("Wijzig gegevens");
+				}
+			} else
+				updateGegevens();
 		}
 		
+	}
+
+	public void enableTextFields(boolean state) {
+		statusT.setEditable(state);
+		opmerkingenA.setEditable(state);
 	}
 }
