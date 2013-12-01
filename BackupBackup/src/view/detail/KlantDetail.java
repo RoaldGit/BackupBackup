@@ -51,7 +51,7 @@ public class KlantDetail extends JPanel implements Observer {
 	}
 
 	public void setupLabels() {
-		klantNummerL = new JLabel("Klant nummer:");
+		klantNummerL = new JLabel("Klantnummer:");
 		klantVoorNaamL = new JLabel("Voornaam:");
 		klantAchterNaamL = new JLabel("Achternaam:");
 		klantAdresL = new JLabel("Adres:");

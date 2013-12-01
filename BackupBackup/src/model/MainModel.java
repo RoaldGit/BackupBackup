@@ -4,6 +4,7 @@ import java.util.Observable;
 
 import model.detailModel.AutoDetailModel;
 import model.detailModel.KlantDetailModel;
+import model.detailModel.MonteurDetailModel;
 import model.detailModel.ReparatieDetailModel;
 import control.DOAs;
 
@@ -14,6 +15,7 @@ public class MainModel extends Observable{
 	private KlantDetailModel klantDetail;
 	private ReparatieDetailModel reparatieDetail;
 	private AutoDetailModel autoDetail;
+	private MonteurDetailModel monteurDetail;
 	private String[] autoHeader, klantHeader, reparatieHeader, monteurHeader,
 			roosterHeader;
 	private DOAs doa;
@@ -109,5 +111,13 @@ public class MainModel extends Observable{
 	 */
 	public void setAutoDetail(AutoDetailModel autoDetail) {
 		this.autoDetail = autoDetail;
+	}
+	
+	public void setMonteurDetial(MonteurDetailModel monteurDetail){
+		this.monteurDetail = monteurDetail;
+	}
+	
+	public MonteurDetailModel getMonteurDetail(){
+		return monteurDetail;
 	}
 }
