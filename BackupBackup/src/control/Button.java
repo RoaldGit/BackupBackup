@@ -9,6 +9,7 @@ import model.MainModel;
 import model.detailModel.AutoDetailModel;
 import model.detailModel.Factuur;
 import model.detailModel.KlantDetailModel;
+import model.detailModel.MonteurDetailModel;
 import model.detailModel.ReparatieDetailModel;
 
 public class Button extends JButton{
@@ -53,6 +54,9 @@ public class Button extends JButton{
 			case "wijzigKlant":
 				changeKlantData();
 				break;
+			case "wijzigMonteur":
+				changeMonteurData();
+				break;
 			case "voegAutoToe":
 				doa.voegAutoToe();
 				doa.retreiveKlantData();
@@ -67,7 +71,7 @@ public class Button extends JButton{
 				changeAutoData();
 				break;
 			case "wijzigReparatie":
-				changeReparatie();
+				changeReparatieData();
 				break;
 			case "nieuweReparatie":
 				doa.nieuweReparatie();
@@ -105,11 +109,20 @@ public class Button extends JButton{
 			detailModel.wijzigInfo();
 	}
 
-	public void changeReparatie() {
+	public void changeReparatieData() {
 		ReparatieDetailModel detailModel = mainModel.getReparatieDetail();
 		if (detailModel.isWijzigInfo()) {
 			detailModel.wijzigInfo();
 			doa.changeReparatieData();
+		} else
+			detailModel.wijzigInfo();
+	}
+
+	public void changeMonteurData() {
+		MonteurDetailModel detailModel = mainModel.getMonteurDetail();
+		if (detailModel.isWijzigInfo()) {
+			doa.changeMonteurData();
+			detailModel.wijzigInfo();
 		} else
 			detailModel.wijzigInfo();
 	}

@@ -312,12 +312,14 @@ public class MonteurDetailModel extends Observable {
 	}
 
 	public String[] getTextFieldData() {
-		String[] data = new String[5];
+		String[] data = new String[6];
+		
 		data[0] = monteurVoorNaamT.getText();
 		data[1] = monteurAchterNaamT.getText();
 		data[2] = monteurAdresT.getText();
 		data[3] = monteurWoonplaatsT.getText();
 		data[4] = monteurPostcodeT.getText();
+		data[5] = uurLoonT.getText();
 
 		return data;
 	}

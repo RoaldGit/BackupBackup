@@ -46,6 +46,7 @@ public class MonteurSearch extends JPanel implements Observer {
 		if (obs == dataModel) {
 			if (obj.equals("search")) {
 				monteurTable.changeData();
+				monteurTable.setupRenderer(6);
 			}
 		}
 	}

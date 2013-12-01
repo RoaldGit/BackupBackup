@@ -487,7 +487,8 @@ public class DOAs {
 	}
 
 	public void retreiveMonteurData(int persoonID) {
-		// TODO retreive data
+		// TODO retreive table data. Waarschijnlijk planning en beschikbaarheid.
+		// Beschikbaarheid niet tabel maar overview met wijzigingen
 		MonteurDetailModel model = mainModel.getMonteurDetail();
 
 		model.setPersoonID(persoonID);
@@ -539,6 +540,40 @@ public class DOAs {
 			System.out.println("DOAs: changeKlantData");
 		} catch (Exception e) {
 			System.out.println("DOAs: changeKlantData");
+		}
+	}
+
+	public void changeMonteurData() {
+		MonteurDetailModel detailModel = mainModel.getMonteurDetail();
+		int persoonID = detailModel.getPersoonID();
+		String[] data = detailModel.getTextFieldData();
+
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("update persoon set voornaam = ?, achternaam = ?, adres = ?, woonplaats = ?, postcode = ? where persoonid = ?");
+			pst.setString(1, data[0]);
+			pst.setString(2, data[1]);
+			pst.setString(3, data[2]);
+			pst.setString(4, data[3]);
+			pst.setString(5, data[4]);
+			pst.setInt(6, persoonID);
+
+			pst.execute();
+
+			pst = con
+					.prepareStatement("update monteur set uurloon = ? where persoonid = ?");
+			pst.setDouble(1, Double.parseDouble(data[5]));
+			pst.setInt(2, persoonID);
+
+			pst.execute();
+
+			detailModel.setUurLoon(Double.parseDouble(data[5]));
+
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: changeMonteurData");
+		} catch (Exception e) {
+			System.out.println("DOAs: changeMonteurData");
 		}
 	}
 

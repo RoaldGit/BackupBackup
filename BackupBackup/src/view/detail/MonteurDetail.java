@@ -141,7 +141,7 @@ public class MonteurDetail extends JPanel implements Observer {
 	public void setupButtons() {
 		wijzigGegevens = new Button("Wijzig gegevens", mainModel);
 		wijzigGegevens.setBounds(120, 180, 200, 20);
-		wijzigGegevens.setName("wijzigKlant");
+		wijzigGegevens.setName("wijzigMonteur");
 
 		voegAutoToe = new Button("Voeg auto toe", mainModel);
 		voegAutoToe.setBounds(500, 300, 200, 20);
@@ -186,5 +186,11 @@ public class MonteurDetail extends JPanel implements Observer {
 		monteurAdresT.setEditable(state);
 		monteurWoonplaatsT.setEditable(state);
 		monteurPostcodeT.setEditable(state);
+
+		uurLoonT.setEditable(state);
+		if (state)
+			uurLoonT.setText(String.format("%.2f", detailModel.getUurLoon()));
+		else
+			uurLoonT.setText(String.format("€ %.2f", detailModel.getUurLoon()));
 	}
 }
