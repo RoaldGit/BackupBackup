@@ -21,9 +21,12 @@ public class KlantDetail extends JPanel implements Observer {
 	private MainModel mainModel;
 	private JLabel klantNummerL, klantVoorNaamL, klantAchterNaamL, klantAdresL,
 			klantWoonplaatsL, klantPostcodeL, klantAantalAutosL,
-			geplandeAfsprakenL, autosL;
+			geplandeAfsprakenL, autosL, nieuweAutoL, nieuweAutoKentekenL,
+			nieuweAutoBouwjaarL, nieuweAutoMerkL, nieuweAutoModelL;
 	private JTextField klantNummerT, klantVoorNaamT, klantAchterNaamT,
-			klantAdresT, klantWoonplaatsT, klantPostcodeT, klantAantalAutosT;
+			klantAdresT, klantWoonplaatsT, klantPostcodeT, klantAantalAutosT,
+			nieuweAutoKentekenT, nieuweAutoBouwjaarT, nieuweAutoMerkT,
+			nieuweAutoModelT;
 	private Tabel afspraken, auto;
 	private JScrollPane afsprakenScroll, autoScroll;
 	private Button wijzigGegevens, voegAutoToe;
@@ -47,7 +50,7 @@ public class KlantDetail extends JPanel implements Observer {
 		setupButtons();
 
 		updateGegevens();
-		// TODO Afsprakentabel, add auto en wijzig gegevens action events
+		// TODO add auto action events
 	}
 
 	public void setupLabels() {
@@ -61,6 +64,12 @@ public class KlantDetail extends JPanel implements Observer {
 		geplandeAfsprakenL = new JLabel("Geplande afspraken:");
 		autosL = new JLabel("Auto's:");
 
+		nieuweAutoL = new JLabel("Vul de gegevens van de auto in:");
+		nieuweAutoKentekenL = new JLabel("Kenteken:");
+		nieuweAutoBouwjaarL = new JLabel("Bouwjaar:");
+		nieuweAutoMerkL = new JLabel("Merk:");
+		nieuweAutoModelL = new JLabel("Model:");
+
 		klantNummerL.setBounds(5, 0, 100, 20);
 		klantVoorNaamL.setBounds(5, 25, 100, 20);
 		klantAchterNaamL.setBounds(5, 50, 100, 20);
@@ -71,6 +80,12 @@ public class KlantDetail extends JPanel implements Observer {
 		geplandeAfsprakenL.setBounds(400, 0, 200, 20);
 		autosL.setBounds(400, 300, 100, 20);
 
+		nieuweAutoL.setBounds(5, 300, 300, 20);
+		nieuweAutoKentekenL.setBounds(5, 325, 100, 20);
+		nieuweAutoBouwjaarL.setBounds(5, 350, 100, 20);
+		nieuweAutoMerkL.setBounds(5, 375, 100, 20);
+		nieuweAutoModelL.setBounds(5, 400, 100, 20);
+
 		add(klantNummerL);
 		add(klantVoorNaamL);
 		add(klantAchterNaamL);
@@ -80,6 +95,12 @@ public class KlantDetail extends JPanel implements Observer {
 		add(klantAantalAutosL);
 		add(geplandeAfsprakenL);
 		add(autosL);
+
+		add(nieuweAutoL);
+		add(nieuweAutoKentekenL);
+		add(nieuweAutoBouwjaarL);
+		add(nieuweAutoMerkL);
+		add(nieuweAutoModelL);
 	}
 
 	public void setupTextFields() {
@@ -91,6 +112,11 @@ public class KlantDetail extends JPanel implements Observer {
 		klantPostcodeT = new JTextField();
 		klantAantalAutosT = new JTextField();
 
+		nieuweAutoKentekenT = new JTextField();
+		nieuweAutoBouwjaarT = new JTextField();
+		nieuweAutoMerkT = new JTextField();
+		nieuweAutoModelT = new JTextField();
+		
 		klantNummerT.setBounds(120, 0, 200, 20);
 		klantVoorNaamT.setBounds(120, 25, 200, 20);
 		klantAchterNaamT.setBounds(120, 50, 200, 20);
@@ -98,6 +124,11 @@ public class KlantDetail extends JPanel implements Observer {
 		klantWoonplaatsT.setBounds(120, 100, 200, 20);
 		klantPostcodeT.setBounds(120, 125, 200, 20);
 		klantAantalAutosT.setBounds(120, 150, 200, 20);
+
+		nieuweAutoKentekenT.setBounds(120, 325, 200, 20);
+		nieuweAutoBouwjaarT.setBounds(120, 350, 200, 20);
+		nieuweAutoMerkT.setBounds(120, 375, 200, 20);
+		nieuweAutoModelT.setBounds(120, 400, 200, 20);
 
 		klantNummerT.setEditable(false);
 		klantVoorNaamT.setEditable(false);
@@ -115,6 +146,11 @@ public class KlantDetail extends JPanel implements Observer {
 		add(klantPostcodeT);
 		add(klantAantalAutosT);
 
+		add(nieuweAutoKentekenT);
+		add(nieuweAutoBouwjaarT);
+		add(nieuweAutoMerkT);
+		add(nieuweAutoModelT);
+
 		detailModel.setKlantNummerT(klantNummerT);
 		detailModel.setKlantVoorNaamT(klantVoorNaamT);
 		detailModel.setKlantAchterNaamT(klantAchterNaamT);
@@ -122,20 +158,25 @@ public class KlantDetail extends JPanel implements Observer {
 		detailModel.setKlantWoonplaatsT(klantWoonplaatsT);
 		detailModel.setKlantPostcodeT(klantPostcodeT);
 		detailModel.setKlantAantalAutosT(klantAantalAutosT);
+
+		detailModel.setNieuweAutoKentekenT(nieuweAutoKentekenT);
+		detailModel.setNieuweAutoBouwjaarT(nieuweAutoBouwjaarT);
+		detailModel.setNieuweAutoMerkT(nieuweAutoMerkT);
+		detailModel.setNieuweAutoModelT(nieuweAutoModelT);
 	}
 
 	public void setupTables() {
 		afspraken = new Tabel(detailModel.getGeplandeAfspraken(),
 				detailModel.getAfsprakenHeader());
 		afsprakenScroll = new JScrollPane(afspraken);
-		afsprakenScroll.setBounds(400, 20, 500, 200);
+		afsprakenScroll.setBounds(400, 20, 700, 200);
 
 		auto = new Tabel(detailModel.getAutos(), detailModel.getAutoHeader());
 		auto.setName("klantDetailAuto");
 		auto.addMouseListener(new TableEvent(mainModel, doa));
 
 		autoScroll = new JScrollPane(auto);
-		autoScroll.setBounds(400, 320, 500, 200);
+		autoScroll.setBounds(400, 320, 700, 200);
 
 		add(afsprakenScroll);
 		add(autoScroll);
@@ -147,7 +188,7 @@ public class KlantDetail extends JPanel implements Observer {
 		wijzigGegevens.setName("wijzigKlant");
 
 		voegAutoToe = new Button("Voeg auto toe", mainModel);
-		voegAutoToe.setBounds(500, 300, 200, 20);
+		voegAutoToe.setBounds(120, 425, 200, 20);
 		voegAutoToe.setName("voegAutoToe");
 
 		add(wijzigGegevens);

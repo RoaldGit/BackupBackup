@@ -51,7 +51,8 @@ public class Button extends JButton{
 				changeKlantData();
 				break;
 			case ("voegAutoToe"):
-				// TODO open formulier of sorts
+				doa.voegAutoToe();
+				doa.retreiveKlantData();
 				break;
 			case ("monteur"):
 				mainModel.setPage("monteur");

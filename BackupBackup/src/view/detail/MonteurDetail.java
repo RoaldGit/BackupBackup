@@ -129,14 +129,14 @@ public class MonteurDetail extends JPanel implements Observer {
 		afspraken = new Tabel(detailModel.getGeplandeAfspraken(),
 				detailModel.getAfsprakenHeader());
 		afsprakenScroll = new JScrollPane(afspraken);
-		afsprakenScroll.setBounds(400, 20, 500, 200);
+		afsprakenScroll.setBounds(400, 20, 700, 200);
 
 		auto = new Tabel(detailModel.getAutos(), detailModel.getAutoHeader());
 		auto.setName("klantDetailAuto");
 		auto.addMouseListener(new TableEvent(mainModel, doa));
 
 		autoScroll = new JScrollPane(auto);
-		autoScroll.setBounds(400, 320, 500, 200);
+		autoScroll.setBounds(400, 320, 700, 200);
 
 		add(afsprakenScroll);
 		add(autoScroll);

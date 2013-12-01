@@ -260,6 +260,12 @@ public class DOAs {
 		return array;
 	}
 
+	public void retreiveKlantData() {
+		KlantDetailModel model = mainModel.getKlantDetail();
+		int klantNummer = model.getPersoonID();
+		retreiveKlantData(klantNummer);
+	}
+
 	public void retreiveKlantData(int klantNummer) {
 		KlantDetailModel model = mainModel.getKlantDetail();
 
@@ -278,10 +284,10 @@ public class DOAs {
 			model.setWoonplaats(result.getString("woonplaats"));
 			model.setPostcode(result.getString("postcode"));
 
-			String aantalQuerry = "select count(*) from auto where persoonID = "
+			String aantalQuery = "select count(*) from auto where persoonID = "
 					+ klantNummer;
 			
-			int aantalAutos = resultSize(aantalQuerry);
+			int aantalAutos = resultSize(aantalQuery);
 			model.setAantalAutos(aantalAutos);
 
 			pst = con
@@ -292,6 +298,17 @@ public class DOAs {
 
 			model.setAutos(create2DArray(result, aantalAutos));
 
+			aantalQuery = "select count(*) from planning where reparatieID in (select reparatieID from reparatie natural join auto where persoonID = "
+					+ klantNummer
+					+ ") and starttijd >= curdate() - interval 1 day";
+			int aantalPlanningen = resultSize(aantalQuery);
+			pst = con
+					.prepareStatement("select starttijd, eindtijd, bezigheid, autoID, achternaam from planning natural join bezigheid natural join reparatie natural join persoon where autoID in (select autoid from auto where persoonid = ?) and starttijd >= curdate() - interval 1 day");
+			pst.setInt(1, klantNummer);
+
+			result = pst.executeQuery();
+
+			model.setGeplandeAfspraken(create2DArray(result, aantalPlanningen));
 			result.close();
 
 			model.dataChanged();
@@ -370,7 +387,7 @@ public class DOAs {
 	public void changeKlantData() {
 		KlantDetailModel detailModel = mainModel.getKlantDetail();
 		int klantNummer = detailModel.getPersoonID();
-		String[] data = detailModel.getTextFieldData();
+		String[] data = detailModel.getKlantData();
 
 		try {
 			PreparedStatement pst = con
@@ -385,11 +402,57 @@ public class DOAs {
 			pst.execute();
 		} catch (SQLException se) {
 			printSQLException(se);
-			System.out.println("DOAs: retreiveAutoData");
+			System.out.println("DOAs: changeKlantData");
 		} catch (Exception e) {
-			System.out.println("DOAs: retreiveAutoData");
+			System.out.println("DOAs: changeKlantData");
 		}
 
+	}
+
+	public void voegAutoToe() {
+		// TODO return succes
+		KlantDetailModel detailModel = mainModel.getKlantDetail();
+		int klantNummer = detailModel.getPersoonID();
+		String[] data = detailModel.getNieuweAutoData();
+		int merkid = getMerkID(data[2]);
+
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("insert into auto(kenteken,bouwjaar,persoonid,merkid,model) values(?,?,?,?,?)");
+			pst.setString(1, data[0]);
+			pst.setInt(2, Integer.parseInt(data[1]));
+			pst.setInt(3, klantNummer);
+			pst.setInt(4, merkid);
+			pst.setString(5, data[3]);
+
+			pst.execute();
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: voegAutoToe");
+		} catch (Exception e) {
+			System.out.println("DOAs: voegAutoToe");
+		}
+	}
+
+	public int getMerkID(String merkNaam) {
+		int id = 0;
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("select merkid from automerk where merknaam = ?");
+			pst.setString(1, merkNaam);
+
+			ResultSet result = pst.executeQuery();
+
+			result.next();
+
+			id = result.getInt("merkid");
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: getMerkID");
+		} catch (Exception e) {
+			System.out.println("DOAs: getMerkID");
+		}
+		return id;
 	}
 
 	public Object[][] create2DArray(ResultSet rs, int rows) {

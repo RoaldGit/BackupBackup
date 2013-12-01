@@ -8,14 +8,16 @@ public class KlantDetailModel extends Observable {
 	private String voorNaam, achterNaam, adres, woonplaats, postcode;
 	private int aantalAutos, persoonID;
 	private JTextField klantNummerT, klantVoorNaamT, klantAchterNaamT,
-			klantAdresT, klantWoonplaatsT, klantPostcodeT, klantAantalAutosT;
+			klantAdresT, klantWoonplaatsT, klantPostcodeT, klantAantalAutosT,
+			nieuweAutoKentekenT, nieuweAutoBouwjaarT, nieuweAutoMerkT,
+			nieuweAutoModelT;
 	private Object[][] geplandeAfspraken, autos;
 	private String[] afsprakenHeader, autoHeader;
 	private boolean wijzigInfo;
 
 	public KlantDetailModel(Object[][] data) {
 		setAfsprakenHeader(new String[] { "Start Tijd", "Eind Tijd",
-				"Bezigheid", "ReparatieID", "Monteur" });
+				"Bezigheid", "Auto Nummer", "Monteur" });
 		setAutoHeader(new String[] { "Auto nummer", "Kenteken", "BouwJaar",
 				"Merk", "Model" });
 
@@ -310,8 +312,9 @@ public class KlantDetailModel extends Observable {
 		notifyObservers("wijzigData");
 	}
 
-	public String[] getTextFieldData() {
+	public String[] getKlantData() {
 		String[] data = new String[5];
+
 		data[0] = klantVoorNaamT.getText();
 		data[1] = klantAchterNaamT.getText();
 		data[2] = klantAdresT.getText();
@@ -319,5 +322,76 @@ public class KlantDetailModel extends Observable {
 		data[4] = klantPostcodeT.getText();
 
 		return data;
+	}
+
+	public String[] getNieuweAutoData() {
+		String[] data = new String[4];
+		
+		data[0] = nieuweAutoKentekenT.getText();
+		data[1] = nieuweAutoBouwjaarT.getText();
+		data[2] = nieuweAutoMerkT.getText();
+		data[3] = nieuweAutoModelT.getText();
+
+		return data;
+	}
+
+	/**
+	 * @return the nieuweAutoKentekenT
+	 */
+	public JTextField getNieuweAutoKentekenT() {
+		return nieuweAutoKentekenT;
+	}
+
+	/**
+	 * @param nieuweAutoKentekenT
+	 *            the nieuweAutoKentekenT to set
+	 */
+	public void setNieuweAutoKentekenT(JTextField nieuweAutoKentekenT) {
+		this.nieuweAutoKentekenT = nieuweAutoKentekenT;
+	}
+
+	/**
+	 * @return the nieuweAutoBouwjaarT
+	 */
+	public JTextField getNieuweAutoBouwjaarT() {
+		return nieuweAutoBouwjaarT;
+	}
+
+	/**
+	 * @param nieuweAutoBouwjaarT
+	 *            the nieuweAutoBouwjaarT to set
+	 */
+	public void setNieuweAutoBouwjaarT(JTextField nieuweAutoBouwjaarT) {
+		this.nieuweAutoBouwjaarT = nieuweAutoBouwjaarT;
+	}
+
+	/**
+	 * @return the nieuweAutoMerkT
+	 */
+	public JTextField getNieuweAutoMerkT() {
+		return nieuweAutoMerkT;
+	}
+
+	/**
+	 * @param nieuweAutoMerkT
+	 *            the nieuweAutoMerkT to set
+	 */
+	public void setNieuweAutoMerkT(JTextField nieuweAutoMerkT) {
+		this.nieuweAutoMerkT = nieuweAutoMerkT;
+	}
+
+	/**
+	 * @return the nieuweAutoModelT
+	 */
+	public JTextField getNieuweAutoModelT() {
+		return nieuweAutoModelT;
+	}
+
+	/**
+	 * @param nieuweAutoModelT
+	 *            the nieuweAutoModelT to set
+	 */
+	public void setNieuweAutoModelT(JTextField nieuweAutoModelT) {
+		this.nieuweAutoModelT = nieuweAutoModelT;
 	}
 }

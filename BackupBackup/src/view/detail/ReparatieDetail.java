@@ -134,11 +134,11 @@ public class ReparatieDetail extends JPanel implements Observer {
 		planning = new Tabel(detailModel.getGeplandeAfspraken(),
 				detailModel.getAfsprakenHeader());
 		planningScroll = new JScrollPane(planning);
-		planningScroll.setBounds(400, 20, 500, 200);
+		planningScroll.setBounds(400, 20, 700, 200);
 
 		onderdelen = new Tabel(detailModel.getGebruikteOnderdelen(), detailModel.getOnderdelenHeader());
 		onderdelenScroll = new JScrollPane(onderdelen);
-		onderdelenScroll.setBounds(400, 320, 500, 200);
+		onderdelenScroll.setBounds(400, 320, 700, 200);
 
 		add(planningScroll);
 		add(onderdelenScroll);
