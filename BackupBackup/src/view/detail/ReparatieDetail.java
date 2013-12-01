@@ -157,6 +157,8 @@ public class ReparatieDetail extends JPanel implements Observer {
 		onderdelenScroll = new JScrollPane(onderdelen);
 		onderdelenScroll.setBounds(400, 320, 700, 200);
 
+		onderdelen.setupRenderer(3);
+
 		add(planningScroll);
 		add(onderdelenScroll);
 		
@@ -174,6 +176,8 @@ public class ReparatieDetail extends JPanel implements Observer {
 				detailModel.getAfsprakenHeader());
 		onderdelen.changeData(detailModel.getGebruikteOnderdelen(), detailModel.getOnderdelenHeader());
 		
+		onderdelen.setupRenderer(3);
+		onderdelen.setupRenderer(5);
 	}
 
 	public void update(Observable obs, Object obj) {

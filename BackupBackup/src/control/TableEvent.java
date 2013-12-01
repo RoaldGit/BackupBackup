@@ -10,16 +10,22 @@ public class TableEvent extends MouseAdapter {
 	private MainModel mainModel;
 	private DOAs doa;
 
-	public TableEvent(MainModel model, DOAs doa) {
+	public TableEvent(MainModel model) {
 		mainModel = model;
-		this.doa = doa;
+		doa = mainModel.getDoa();
 	}
 	public void mouseClicked(MouseEvent e) {
 		if (e.getClickCount() == 2) {
 			Tabel source = (Tabel) e.getSource();
 			String sourceName = source.getName();
-			int selectedID = (int) source
+			int selectedID = 0;
+
+			if(!sourceName.equals("roosterTable"))
+				selectedID = (int) source
 					.getValueAt(source.getSelectedRow(), 0);
+			else
+				selectedID = (int) source
+						.getValueAt(source.getSelectedRow(), 3);
 
 			switch(sourceName) {
 			case "klantTable":
@@ -31,6 +37,9 @@ public class TableEvent extends MouseAdapter {
 				break;
 			case "monteurTable":
 				doa.retreiveMonteurData(selectedID);
+				break;
+			case "roosterTable":
+				doa.retreiveReparatieData(selectedID);
 				break;
 			case "autoDetailReparaties":
 			case "reparatieTable":

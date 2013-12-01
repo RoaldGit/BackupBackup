@@ -29,11 +29,11 @@ public class KlantSearch extends JPanel implements Observer {
 		dataModel = mainModel.getKlantModel();
 		DOAs doa = mainModel.getDoa();
 
-		klantVeld = new InvulVeld(40, "klant", mainModel, doa);
+		klantVeld = new InvulVeld(40, "klant", mainModel);
 
 		klantTable = new Tabel(dataModel);
 		klantTable.setName("klantTable");
-		klantTable.addMouseListener(new TableEvent(model, doa));
+		klantTable.addMouseListener(new TableEvent(model));
 
 		klantScroll = new JScrollPane(klantTable);
 		klantScroll.setPreferredSize(new Dimension(1250, 610));

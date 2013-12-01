@@ -29,11 +29,11 @@ public class ReparatieSearch extends JPanel implements Observer {
 		dataModel = mainModel.getReparatieModel();
 		DOAs doa = mainModel.getDoa();
 
-		reparatieVeld = new InvulVeld(40, "reparatie", mainModel, doa);
+		reparatieVeld = new InvulVeld(40, "reparatie", mainModel);
 
 		reparatieTable = new Tabel(dataModel);
 		reparatieTable.setName("reparatieTable");
-		reparatieTable.addMouseListener(new TableEvent(mainModel, doa));
+		reparatieTable.addMouseListener(new TableEvent(mainModel));
 
 		reparatieScroll = new JScrollPane(reparatieTable);
 		reparatieScroll.setPreferredSize(new Dimension(1250, 610));

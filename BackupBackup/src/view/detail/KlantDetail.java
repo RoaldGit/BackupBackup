@@ -172,7 +172,7 @@ public class KlantDetail extends JPanel implements Observer {
 
 		auto = new Tabel(detailModel.getAutos(), detailModel.getAutoHeader());
 		auto.setName("klantDetailAuto");
-		auto.addMouseListener(new TableEvent(mainModel, doa));
+		auto.addMouseListener(new TableEvent(mainModel));
 
 		autoScroll = new JScrollPane(auto);
 		autoScroll.setBounds(400, 320, 700, 200);

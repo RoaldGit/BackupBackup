@@ -13,6 +13,7 @@ import model.SearchModel;
 import view.Tabel;
 import control.DOAs;
 import control.InvulVeld;
+import control.TableEvent;
 
 public class RoosterSearch extends JPanel implements Observer {
 	private InvulVeld roosterVeld;
@@ -28,9 +29,12 @@ public class RoosterSearch extends JPanel implements Observer {
 		dataModel = mainModel.getRoosterModel();
 		DOAs doa = mainModel.getDoa();
 
-		roosterVeld = new InvulVeld(40, "rooster", mainModel, doa);
+		roosterVeld = new InvulVeld(40, "rooster", mainModel);
 
 		roosterTable = new Tabel(dataModel);
+		roosterTable.setName("roosterTable");
+		roosterTable.addMouseListener(new TableEvent(mainModel));
+
 		roosterScroll = new JScrollPane(roosterTable);
 		roosterScroll.setPreferredSize(new Dimension(1250, 610));
 
