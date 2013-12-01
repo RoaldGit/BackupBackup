@@ -214,4 +214,13 @@ public class ReparatieDetailModel extends Observable {
 	public void setNieuwOnderdeelAantalT(JTextField nieuwOnderdeelAantalT) {
 		this.nieuwOnderdeelAantalT = nieuwOnderdeelAantalT;
 	}
+
+	public String[] getOnderdeelData() {
+		String[] data = new String[2];
+
+		data[0] = (String) onderdelenC.getSelectedItem();
+		data[1] = nieuwOnderdeelAantalT.getText();
+
+		return data;
+	}
 }

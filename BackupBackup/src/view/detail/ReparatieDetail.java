@@ -127,6 +127,8 @@ public class ReparatieDetail extends JPanel implements Observer {
 		opmerkingenA.setWrapStyleWord(true);
 
 		detailModel.setStatusC(statusC);
+		detailModel.setOnderdelenC(onderdelenC);
+		detailModel.setNieuwOnderdeelAantalT(nieuwOnderdeelAantalT);
 		detailModel.setOpmerkingenA(opmerkingenA);
 
 		add(reparatieNummerT);
@@ -154,7 +156,7 @@ public class ReparatieDetail extends JPanel implements Observer {
 		planReparatie.setName("planReparatie");
 		
 		voegOnderdeelToe = new Button("Voeg onderdeel toe", mainModel);
-		voegOnderdeelToe.setBounds(550, 300, 200, 20);
+		voegOnderdeelToe.setBounds(120, 470, 200, 20);
 		voegOnderdeelToe.setName("voegOnderdeelToe");
 
 		add(wijzigGegevens);
@@ -194,6 +196,7 @@ public class ReparatieDetail extends JPanel implements Observer {
 
 		onderdelenC.setModel(new JComboBox<Object>(detailModel.getOnderdelen())
 				.getModel());
+		onderdelenC.setSelectedIndex(0);
 	}
 
 	public void update(Observable obs, Object obj) {

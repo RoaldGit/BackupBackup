@@ -423,6 +423,13 @@ public class DOAs {
 		}
 	}
 
+	public void retreiveReparatieData() {
+		ReparatieDetailModel model = mainModel.getReparatieDetail();
+
+		int reparatieNummer = model.getReparatieID();
+		retreiveReparatieData(reparatieNummer);
+	}
+
 	public void retreiveReparatieData(int reparatieNummer) {
 		ReparatieDetailModel model = mainModel.getReparatieDetail();
 
@@ -627,6 +634,47 @@ public class DOAs {
 		}
 	}
 
+	public void voegOnderdeelToe() {
+		ReparatieDetailModel detailModel = mainModel.getReparatieDetail();
+		String[] data = detailModel.getOnderdeelData();
+		int reparatieID = detailModel.getReparatieID();
+		int onderdeelID = getOnderdeelID(data[0]);
+		int aantal = Integer.parseInt(data[1]);
+		
+		// TODO voorraad bijwerken
+		String onderdeelCheck = "select count(*) from factuurregel where onderdeelid = " + onderdeelID + " and reparatieid = " + reparatieID;
+
+		boolean alreadyUsed = false;
+		if (resultSize(onderdeelCheck) > 0)
+			alreadyUsed = true;
+		try {
+			PreparedStatement pst = null;
+			if(alreadyUsed) {
+				pst = con
+						.prepareStatement("update factuurregel set aantal = aantal + ? where onderdeelid = ? and reparatieid = ?");
+				pst.setInt(1, aantal);
+				pst.setInt(2, onderdeelID);
+				pst.setInt(3, reparatieID);
+
+				pst.execute();
+			} else {
+				pst = con
+						.prepareStatement("insert into factuurregel(onderdeelid, reparatieid, aantal) values (?,?,?)");
+				pst.setInt(1, onderdeelID);
+				pst.setInt(2, reparatieID);
+				pst.setInt(3, aantal);
+
+				pst.execute();
+			}
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: nieuweReparatie");
+		} catch (Exception e) {
+			System.out.println("DOAs: nieuweReparatie");
+		}
+
+	}
+
 	public void nieuweReparatie() {
 		AutoDetailModel detailModel = mainModel.getAutoDetail();
 
@@ -680,11 +728,32 @@ public class DOAs {
 			detailModel.setStatus(status);
 		} catch (SQLException se) {
 			printSQLException(se);
-			System.out.println("DOAs: nieuweReparatie");
+			System.out.println("DOAs: setReparatieStatus");
 		} catch (Exception e) {
-			System.out.println("DOAs: nieuweReparatie");
+			System.out.println("DOAs: setReparatieStatus");
 		}
 	}
+
+	public int getOnderdeelID(String onderdeelNaam) {
+		int id = 0;
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("select onderdeelid from onderdeel where onderdeelnaam = ?");
+			pst.setString(1, onderdeelNaam);
+
+			ResultSet result = pst.executeQuery();
+			result.next();
+
+			id = result.getInt("onderdeelid");
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: getOnderdeelID");
+		} catch (Exception e) {
+			System.out.println("DOAs: getOnderdeelID");
+		}
+		return id;
+	}
+
 	public int getMerkID(String merkNaam) {
 		int id = 0;
 		try {

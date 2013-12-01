@@ -57,6 +57,9 @@ public class Button extends JButton{
 				doa.voegAutoToe();
 				doa.retreiveKlantData();
 				break;
+			case "voegOnderdeelToe":
+				doa.voegOnderdeelToe();
+				doa.retreiveReparatieData();
 			case "wijzigAuto":
 				changeAutoData();
 				break;
