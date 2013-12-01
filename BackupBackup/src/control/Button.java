@@ -7,6 +7,7 @@ import javax.swing.JButton;
 
 import model.MainModel;
 import model.detailModel.AutoDetailModel;
+import model.detailModel.Factuur;
 import model.detailModel.KlantDetailModel;
 
 public class Button extends JButton{
@@ -60,6 +61,10 @@ public class Button extends JButton{
 				break;
 			case "nieuweReparatie":
 				doa.nieuweReparatie();
+				break;
+			case "printFactuur":
+				Factuur factuur = new Factuur(mainModel.getReparatieDetail());
+
 				break;
 			case "monteur":
 				mainModel.setPage("monteur");

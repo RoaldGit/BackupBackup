@@ -52,7 +52,7 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select ReparatieID, AutoID, Opmerkingen, Klaar, FactuurVerzonden, FactuurBetaald from Reparatie");
+					.prepareStatement("select ReparatieID, AutoID, Opmerkingen, Klaar, FactuurVerzonden, FactuurBetaald from Reparatie order by reparatieid desc");
 
 			ResultSet result = pst.executeQuery();
 
@@ -173,7 +173,7 @@ public class DOAs {
 		Object[][] array = null;
 		try {
 			PreparedStatement pst = con
-					.prepareStatement("select ReparatieID, AutoID, Opmerkingen, Klaar, FactuurVerzonden, FactuurBetaald from Reparatie");
+					.prepareStatement("select ReparatieID, AutoID, Opmerkingen, Klaar, FactuurVerzonden, FactuurBetaald from Reparatie order by reparatieid desc");
 
 			ResultSet result = pst.executeQuery();
 

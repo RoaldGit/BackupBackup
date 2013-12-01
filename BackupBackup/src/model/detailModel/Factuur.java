@@ -12,7 +12,6 @@ public class Factuur extends JFrame{
 	
 	public Factuur(ReparatieDetailModel detailModel){
 		super("Factuur");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(280, 0, 1000, 720);
 		this.detailModel = detailModel;
 		onderdelen = detailModel.getGebruikteOnderdelen();
@@ -21,8 +20,12 @@ public class Factuur extends JFrame{
 				"ditiseenemailadres@geenemail.com\nIBAN: NL00GASF0112233445\nBIC: GASFNL4W\nKvK Overijssel 75341286\nBTW NL777881145A99\n\n");
 		gegevensA.setEditable(false);
 		
+		add(gegevensA);
+
 		regelsToevoegen();
 		onderdelenToevoegen();
+
+		setVisible(true);
 	}
 	
 	public void regelsToevoegen(){
