@@ -2,9 +2,15 @@ package model.detailModel;
 
 import java.util.Observable;
 
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 public class ReparatieDetailModel extends Observable {
-	private String autoKenteken, status, opmerking;
-	private int reparatieID, persoonID, autoID;
+	private String autoKenteken, opmerking;
+	private int reparatieID, persoonID, status, autoID;
+	private JComboBox statusC;
+	private JTextArea opmerkingenA;
 	private Object[][] geplandeAfspraken, onderdelen;
 	private String[] afsprakenHeader, onderdelenHeader;
 	private boolean wijzigInfo;
@@ -19,7 +25,7 @@ public class ReparatieDetailModel extends Observable {
 		onderdelen = data;
 
 		autoKenteken = "kenteken";
-		status = "not implemented";
+		status = 0;
 		opmerking = "Auto ist kaput";
 	}
 	
@@ -77,7 +83,7 @@ public class ReparatieDetailModel extends Observable {
 		return autoKenteken;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
@@ -89,7 +95,7 @@ public class ReparatieDetailModel extends Observable {
 		this.opmerking = opmerking;
 	}
 	
-	public void setStatus(String status){
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	
@@ -124,5 +130,44 @@ public class ReparatieDetailModel extends Observable {
 
 		setChanged();
 		notifyObservers("wijzigData");
+	}
+
+	public String[] getData() {
+		String[] data = new String[2];
+		
+		data[0] = "" + statusC.getSelectedIndex();
+		data[1] = opmerkingenA.getText();
+
+		return data;		
+	}
+
+	/**
+	 * @return the statusT
+	 */
+	public JComboBox getStatusT() {
+		return statusC;
+	}
+
+	/**
+	 * @param statusT
+	 *            the statusT to set
+	 */
+	public void setStatusC(JComboBox statusC) {
+		this.statusC = statusC;
+	}
+
+	/**
+	 * @return the opmerkingenA
+	 */
+	public JTextArea getOpmerkingenA() {
+		return opmerkingenA;
+	}
+
+	/**
+	 * @param opmerkingenA
+	 *            the opmerkingenA to set
+	 */
+	public void setOpmerkingenA(JTextArea opmerkingenA) {
+		this.opmerkingenA = opmerkingenA;
 	}
 }

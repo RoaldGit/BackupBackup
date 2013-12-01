@@ -68,7 +68,6 @@ public class Button extends JButton{
 				break;
 			case "printFactuur":
 				Factuur factuur = new Factuur(mainModel.getReparatieDetail());
-
 				break;
 			case "monteur":
 				mainModel.setPage("monteur");
@@ -104,7 +103,7 @@ public class Button extends JButton{
 		ReparatieDetailModel detailModel = mainModel.getReparatieDetail();
 		if (detailModel.isWijzigInfo()) {
 			detailModel.wijzigInfo();
-			// doa.changeReparatieData();
+			doa.changeReparatieData();
 		} else
 			detailModel.wijzigInfo();
 	}

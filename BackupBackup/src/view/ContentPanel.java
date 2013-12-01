@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import model.MainModel;
 import view.detail.AutoDetail;
 import view.detail.KlantDetail;
+import view.detail.MonteurDetail;
 import view.detail.ReparatieDetail;
 import view.search.AutoSearch;
 import view.search.KlantSearch;
@@ -22,7 +23,7 @@ public class ContentPanel extends JPanel implements Observer{
 	private MainModel mainModel;
 	private JPanel home, autoSearch, klantSearch, reparatieSearch,
 			monteurSearch, roosterSearch, klantDetail, autoDetail,
-			reparatieDetail;
+			reparatieDetail, monteurDetail;
 
 	public ContentPanel(MainModel model){
 		mainModel = model;
@@ -42,6 +43,7 @@ public class ContentPanel extends JPanel implements Observer{
 		klantDetail = new KlantDetail(mainModel);
 		autoDetail = new AutoDetail(mainModel);
 		reparatieDetail = new ReparatieDetail(mainModel);
+		monteurDetail = new MonteurDetail(mainModel);
 
 		add(home);
 		add(autoSearch);
@@ -53,6 +55,7 @@ public class ContentPanel extends JPanel implements Observer{
 		add(klantDetail);
 		add(autoDetail);
 		add(reparatieDetail);
+		add(monteurDetail);
 
 		allInvisible();
 	}
@@ -61,32 +64,34 @@ public class ContentPanel extends JPanel implements Observer{
 		allInvisible();
 
 		switch ((String) obj) {
-		case ("home"):
-			home.setVisible(false);
-			reparatieDetail.setVisible(true);
+		case "home":
+			home.setVisible(true);
 			break;
-		case("auto"):
+		case"auto":
 			autoSearch.setVisible(true);
 			break;
-		case ("autoDetail"):
+		case "autoDetail":
 			autoDetail.setVisible(true);
 			break;
-		case ("klant"):
+		case "klant":
 			klantSearch.setVisible(true);
 			break;
-		case ("klantDetail"):
+		case "klantDetail":
 			klantDetail.setVisible(true);
 			break;
-		case ("reparatie"):
+		case "reparatie":
 			reparatieSearch.setVisible(true);
 			break;
-		case ("reparatieDetail"):
+		case "reparatieDetail":
 			reparatieDetail.setVisible(true);
 			break;
-		case ("monteur"):
+		case "monteur":
 			monteurSearch.setVisible(true);
 			break;
-		case ("rooster"):
+		case "monteurDetail":
+			monteurDetail.setVisible(true);
+			break;
+		case "rooster":
 			roosterSearch.setVisible(true);
 			break;
 		}
@@ -103,5 +108,6 @@ public class ContentPanel extends JPanel implements Observer{
 		klantDetail.setVisible(false);
 		autoDetail.setVisible(false);
 		reparatieDetail.setVisible(false);
+		monteurDetail.setVisible(false);
 	}
 }

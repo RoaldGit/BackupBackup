@@ -13,6 +13,7 @@ import model.SearchModel;
 import view.Tabel;
 import control.DOAs;
 import control.InvulVeld;
+import control.TableEvent;
 
 public class MonteurSearch extends JPanel implements Observer {
 	private InvulVeld monteurVeld;
@@ -31,6 +32,9 @@ public class MonteurSearch extends JPanel implements Observer {
 		monteurVeld = new InvulVeld(40, "monteur", mainModel, doa);
 
 		monteurTable = new Tabel(dataModel);
+		monteurTable.setName("monteurTable");
+		monteurTable.addMouseListener(new TableEvent(mainModel, doa));
+
 		monteurScroll = new JScrollPane(monteurTable);
 		monteurScroll.setPreferredSize(new Dimension(1250, 610));
 

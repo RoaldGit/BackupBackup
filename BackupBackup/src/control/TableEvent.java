@@ -30,6 +30,7 @@ public class TableEvent extends MouseAdapter {
 				doa.retreiveAutoData(selectedID);
 				break;
 			case "monteurTable":
+				doa.retreiveMonteurData(selectedID);
 				break;
 			case "autoDetailReparaties":
 			case "reparatieTable":

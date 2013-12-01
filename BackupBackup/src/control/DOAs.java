@@ -11,6 +11,7 @@ import model.DBmanager;
 import model.MainModel;
 import model.detailModel.AutoDetailModel;
 import model.detailModel.KlantDetailModel;
+import model.detailModel.MonteurDetailModel;
 import model.detailModel.ReparatieDetailModel;
 
 
@@ -324,7 +325,7 @@ public class DOAs {
 
 	public void retreiveReparatiesAuto(int autoNummer) {
 		KlantDetailModel model = mainModel.getKlantDetail();
-
+		// TODO remove if not used
 		try {
 			PreparedStatement pst = con
 					.prepareStatement("select reparatieid, opmerkingen, autoid, klaar, factuurverzonden, factuur betaald from reparatie natural join auto natural join persoon where persoonid = ?");
@@ -332,9 +333,9 @@ public class DOAs {
 
 		} catch (SQLException se) {
 			printSQLException(se);
-			System.out.println("DOAs: retreiveAutoData");
+			System.out.println("DOAs: retreiveReparatiesAuto");
 		} catch (Exception e) {
-			System.out.println("DOAs: retreiveAutoData");
+			System.out.println("DOAs: retreiveReparatiesAuto");
 		}
 	}
 
@@ -439,6 +440,8 @@ public class DOAs {
 
 			model.setOnderdelen(create2DArray(result, aantalOnderdelen));
 
+			setReparatieStatus(reparatieNummer);
+
 			model.dataChanged();
 			mainModel.setPage("reparatieDetail");
 		} catch (SQLException se) {
@@ -446,6 +449,66 @@ public class DOAs {
 			System.out.println("DOAs: retreiveAutoData");
 		} catch (Exception e) {
 			System.out.println("DOAs: retreiveAutoData");
+		}
+	}
+
+	public void retreiveMonteurData(int persoonID) {
+		// TODO retreive data
+		MonteurDetailModel model = mainModel.getMonteurDetail();
+
+		model.setPersoonID(persoonID);
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("select * from Persoon natural join monteur where PersoonID = ?");
+			pst.setInt(1, persoonID);
+
+			ResultSet result = pst.executeQuery();
+			result.next();
+
+			model.setVoorNaam(result.getString("voornaam"));
+			model.setAchterNaam(result.getString("achternaam"));
+			model.setAdres(result.getString("adres"));
+			model.setWoonplaats(result.getString("woonplaats"));
+			model.setPostcode(result.getString("postcode"));
+			model.setUurLoon(result.getDouble("uurloon"));
+
+			// String aantalQuery =
+			// "select count(*) from auto where persoonID = "
+			// + persoonID;
+			//
+			// int aantalAutos = resultSize(aantalQuery);
+			// model.setAantalAutos(aantalAutos);
+			//
+			// pst = con
+			// .prepareStatement("select AutoID, Kenteken, Bouwjaar, Merknaam, Model from Auto natural join automerk where persoonID = ?");
+			// pst.setInt(1, persoonID);
+			//
+			// result = pst.executeQuery();
+			//
+			// model.setAutos(create2DArray(result, aantalAutos));
+			//
+			// aantalQuery =
+			// "select count(*) from planning where reparatieID in (select reparatieID from reparatie natural join auto where persoonID = "
+			// + persoonID
+			// + ") and starttijd >= curdate() - interval 1 day";
+			// int aantalPlanningen = resultSize(aantalQuery);
+			// pst = con
+			// .prepareStatement("select starttijd, eindtijd, bezigheid, autoID, achternaam from planning natural join bezigheid natural join reparatie natural join persoon where autoID in (select autoid from auto where persoonid = ?) and starttijd >= curdate() - interval 1 day");
+			// pst.setInt(1, persoonID);
+			//
+			// result = pst.executeQuery();
+			//
+			// model.setGeplandeAfspraken(create2DArray(result,
+			// aantalPlanningen));
+			result.close();
+
+			model.dataChanged();
+			mainModel.setPage("monteurDetail");
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: retreiveKlantData");
+		} catch (Exception e) {
+			System.out.println("DOAs: retreiveKlantData");
 		}
 	}
 
@@ -495,7 +558,49 @@ public class DOAs {
 		} catch (Exception e) {
 			System.out.println("DOAs: changeKlantData");
 		}
+	}
 
+	public void changeReparatieData() {
+		ReparatieDetailModel detailModel = mainModel.getReparatieDetail();
+		int reparatieNummer = detailModel.getReparatieID();
+		String[] data = detailModel.getData();
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("update reparatie set klaar = ?, factuurverzonden = ?, factuurbetaald = ?, opmerkingen = ? where reparatieid = ?");
+
+			switch (data[0]) {
+			case "0":
+				pst.setInt(1, 1);
+				pst.setInt(2, 1);
+				pst.setInt(3, 1);
+				break;
+			case "1":
+				pst.setInt(1, 2);
+				pst.setInt(2, 1);
+				pst.setInt(3, 1);
+				break;
+			case "2":
+				pst.setInt(1, 2);
+				pst.setInt(2, 2);
+				pst.setInt(3, 1);
+				break;
+			case "3":
+				pst.setInt(1, 2);
+				pst.setInt(2, 2);
+				pst.setInt(3, 2);
+				break;
+			}
+
+			pst.setString(4, data[1]);
+			pst.setInt(5, reparatieNummer);
+
+			pst.execute();
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: changeReparatieData");
+		} catch (Exception e) {
+			System.out.println("DOAs: changeReparatieData");
+		}
 	}
 
 	public void voegAutoToe() {
@@ -525,8 +630,6 @@ public class DOAs {
 
 	public void nieuweReparatie() {
 		AutoDetailModel detailModel = mainModel.getAutoDetail();
-		ReparatieDetailModel reparatieDetailModel = mainModel
-				.getReparatieDetail();
 
 		int autoNummer = detailModel.getAutoNummer();
 		try {
@@ -545,12 +648,41 @@ public class DOAs {
 			retreiveReparatieData(nieuweReparatie);
 		} catch (SQLException se) {
 			printSQLException(se);
-			System.out.println("DOAs: voegAutoToe");
+			System.out.println("DOAs: nieuweReparatie");
 		} catch (Exception e) {
-			System.out.println("DOAs: voegAutoToe");
+			System.out.println("DOAs: nieuweReparatie");
 		}
 	}
 
+	public void setReparatieStatus(int reparatieNummer) {
+		ReparatieDetailModel detailModel = mainModel.getReparatieDetail();
+		int status = 0;
+
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("select klaar, factuurverzonden, factuurbetaald from reparatie where reparatieid = ?");
+			pst.setInt(1, reparatieNummer);
+
+			ResultSet result = pst.executeQuery();
+
+			result.next();
+
+			if (result.getString("klaar").equals("Ja"))
+				status = 1;
+			if (result.getString("factuurverzonden").equals("Ja"))
+				status = 2;
+			if (result.getString("factuurbetaald").equals("Ja"))
+				status = 3;
+
+			System.out.println(status);
+			detailModel.setStatus(status);
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: nieuweReparatie");
+		} catch (Exception e) {
+			System.out.println("DOAs: nieuweReparatie");
+		}
+	}
 	public int getMerkID(String merkNaam) {
 		int id = 0;
 		try {

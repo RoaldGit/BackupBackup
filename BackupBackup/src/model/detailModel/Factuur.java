@@ -37,10 +37,16 @@ public class Factuur extends JFrame{
 	}
 
 	public void onderdelenToevoegen(){
-			String header = String.format("%-30s%-30s%-30s%-30s%-30s%-30s\n", "Onderdeelnummer", "Onderdeelnaam",	"Leverancier","Prijs","Aantal","Totaalprijs");
+		String header = String.format("%-30s%-30s%-30s%-30s%-30s%-30s\n",
+				"Onderdeelnummer", "Onderdeelnaam", "Leverancier", "Prijs",
+				"Aantal", "Totaalprijs");
 			gegevensA.append(header);
+
 			for(int i=0; i < onderdelen.length; i++){
-				String formatted = String.format("%-45s%-35s%-25s€%-24.2f%-34d€%-30.2f\n", onderdelen[i][0],onderdelen[i][1],onderdelen[i][2],onderdelen[i][3],onderdelen[i][4],onderdelen[i][5]);
+			String formatted = String.format(
+					"%-50s%-35s%-25s€%-24.2f%-34d€%-30.2f\n", onderdelen[i][0],
+					onderdelen[i][1], onderdelen[i][2], onderdelen[i][3],
+					onderdelen[i][4], onderdelen[i][5]);
 				gegevensA.append(formatted);
 //			for(int j=0; j < onderdelen[i].length; j++){
 //				gegevensA.append("" + onderdelen[i][j] + "	");

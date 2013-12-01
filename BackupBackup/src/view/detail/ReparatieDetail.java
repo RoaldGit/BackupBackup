@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,7 +22,8 @@ public class ReparatieDetail extends JPanel implements Observer {
 	private MainModel mainModel;
 	private JLabel reparatieNummerL, klantNummerL, autoNummerL, autoKentekenL, statusL, opmerkingenL, planningL, onderdeelL;
 	private JTextField reparatieNummerT, klantNummerT, autoNummerT,
-			autoKentekenT, statusT;
+			autoKentekenT;
+	private JComboBox statusC;
 	private JTextArea opmerkingenA;
 	private Tabel planning, onderdelen;
 	private JScrollPane planningScroll, onderdelenScroll;
@@ -83,7 +85,10 @@ public class ReparatieDetail extends JPanel implements Observer {
 		klantNummerT = new JTextField();
 		autoNummerT = new JTextField();
 		autoKentekenT = new JTextField();
-		statusT = new JTextField();
+		
+		Object[] status = new Object[] { "In behandeling", "Klaar",
+				"Factuur Verzonden", "Factuur Betaald" };
+		statusC = new JComboBox(status);
 
 		opmerkingenA = new JTextArea();
 
@@ -91,7 +96,7 @@ public class ReparatieDetail extends JPanel implements Observer {
 		klantNummerT.setBounds(120, 25, 200, 20);
 		autoNummerT.setBounds(120, 50, 200, 20);
 		autoKentekenT.setBounds(120, 75, 200, 20);
-		statusT.setBounds(120, 100, 200, 20);
+		statusC.setBounds(120, 100, 200, 20);
 
 		opmerkingenA.setBounds(120, 125, 200, 200);
 
@@ -99,18 +104,21 @@ public class ReparatieDetail extends JPanel implements Observer {
 		klantNummerT.setEditable(false);
 		autoNummerT.setEditable(false);
 		autoKentekenT.setEditable(false);
-		statusT.setEditable(false);
 
+		statusC.setEnabled(false);
 		opmerkingenA.setEditable(false);
 
 		opmerkingenA.setLineWrap(true);
 		opmerkingenA.setWrapStyleWord(true);
 
+		detailModel.setStatusC(statusC);
+		detailModel.setOpmerkingenA(opmerkingenA);
+
 		add(reparatieNummerT);
 		add(klantNummerT);
 		add(autoNummerT);
 		add(autoKentekenT);
-		add(statusT);
+		add(statusC);
 		
 		add(opmerkingenA);
 
@@ -159,7 +167,7 @@ public class ReparatieDetail extends JPanel implements Observer {
 		klantNummerT.setText("" + detailModel.getPersoonID());
 		autoNummerT.setText("" + detailModel.getAutoID());
 		autoKentekenT.setText(detailModel.getKenteken());
-		statusT.setText(detailModel.getStatus());
+		statusC.setSelectedIndex(detailModel.getStatus());
 		opmerkingenA.setText(detailModel.getOpmerkingen());
 
 		planning.changeData(detailModel.getGeplandeAfspraken(),
@@ -185,7 +193,7 @@ public class ReparatieDetail extends JPanel implements Observer {
 	}
 
 	public void enableTextFields(boolean state) {
-		statusT.setEditable(state);
+		statusC.setEnabled(state);
 		opmerkingenA.setEditable(state);
 	}
 }
