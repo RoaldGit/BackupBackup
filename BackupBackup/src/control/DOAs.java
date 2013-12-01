@@ -262,6 +262,31 @@ public class DOAs {
 		return array;
 	}
 
+	public String[] alleOnderdelen() {
+		String[] onderdelen = null;
+		
+		try {
+			PreparedStatement pst = con.prepareStatement("select onderdeelnaam from onderdeel");
+			ResultSet result = pst.executeQuery();
+			
+			String aantalQuery = "select count(*) from onderdeel";
+			int aantalOnderdelen = resultSize(aantalQuery);
+
+			onderdelen = new String[aantalOnderdelen];
+
+			for (int i = 0; i < aantalOnderdelen; i++) {
+				result.next();
+				onderdelen[i] = result.getString("onderdeelnaam");
+			}
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: alleRoosters");
+		} catch (Exception e) {
+			System.out.println("DOAs: alleRoosters");
+		}
+		return onderdelen;
+	}
+
 	public void retreiveKlantData() {
 		KlantDetailModel model = mainModel.getKlantDetail();
 		int klantNummer = model.getPersoonID();
@@ -442,6 +467,8 @@ public class DOAs {
 
 			setReparatieStatus(reparatieNummer);
 
+			model.setOnderdelen(alleOnderdelen());
+
 			model.dataChanged();
 			mainModel.setPage("reparatieDetail");
 		} catch (SQLException se) {
@@ -472,34 +499,6 @@ public class DOAs {
 			model.setPostcode(result.getString("postcode"));
 			model.setUurLoon(result.getDouble("uurloon"));
 
-			// String aantalQuery =
-			// "select count(*) from auto where persoonID = "
-			// + persoonID;
-			//
-			// int aantalAutos = resultSize(aantalQuery);
-			// model.setAantalAutos(aantalAutos);
-			//
-			// pst = con
-			// .prepareStatement("select AutoID, Kenteken, Bouwjaar, Merknaam, Model from Auto natural join automerk where persoonID = ?");
-			// pst.setInt(1, persoonID);
-			//
-			// result = pst.executeQuery();
-			//
-			// model.setAutos(create2DArray(result, aantalAutos));
-			//
-			// aantalQuery =
-			// "select count(*) from planning where reparatieID in (select reparatieID from reparatie natural join auto where persoonID = "
-			// + persoonID
-			// + ") and starttijd >= curdate() - interval 1 day";
-			// int aantalPlanningen = resultSize(aantalQuery);
-			// pst = con
-			// .prepareStatement("select starttijd, eindtijd, bezigheid, autoID, achternaam from planning natural join bezigheid natural join reparatie natural join persoon where autoID in (select autoid from auto where persoonid = ?) and starttijd >= curdate() - interval 1 day");
-			// pst.setInt(1, persoonID);
-			//
-			// result = pst.executeQuery();
-			//
-			// model.setGeplandeAfspraken(create2DArray(result,
-			// aantalPlanningen));
 			result.close();
 
 			model.dataChanged();
@@ -645,7 +644,11 @@ public class DOAs {
 			result.next();
 
 			int nieuweReparatie = result.getInt("reparatieid");
+
 			retreiveReparatieData(nieuweReparatie);
+
+			mainModel.getReparatieDetail().wijzigInfo();
+
 		} catch (SQLException se) {
 			printSQLException(se);
 			System.out.println("DOAs: nieuweReparatie");
@@ -674,7 +677,6 @@ public class DOAs {
 			if (result.getString("factuurbetaald").equals("Ja"))
 				status = 3;
 
-			System.out.println(status);
 			detailModel.setStatus(status);
 		} catch (SQLException se) {
 			printSQLException(se);

@@ -13,7 +13,6 @@ import model.MainModel;
 import model.detailModel.KlantDetailModel;
 import view.Tabel;
 import control.Button;
-import control.DOAs;
 import control.TableEvent;
 
 public class KlantDetail extends JPanel implements Observer {
@@ -30,13 +29,11 @@ public class KlantDetail extends JPanel implements Observer {
 	private Tabel afspraken, auto;
 	private JScrollPane afsprakenScroll, autoScroll;
 	private Button wijzigGegevens, voegAutoToe;
-	private DOAs doa;
 
 	public KlantDetail(MainModel model) {
 		setLayout(null);
 
 		mainModel = model;
-		doa = mainModel.getDoa();
 
 		detailModel = model.getKlantDetail();
 

@@ -13,7 +13,6 @@ import model.MainModel;
 import model.detailModel.MonteurDetailModel;
 import view.Tabel;
 import control.Button;
-import control.DOAs;
 import control.TableEvent;
 
 public class MonteurDetail extends JPanel implements Observer {
@@ -27,13 +26,11 @@ public class MonteurDetail extends JPanel implements Observer {
 	private Tabel afspraken, auto; // Same here
 	private JScrollPane afsprakenScroll, autoScroll; // En dit
 	private Button wijzigGegevens, voegAutoToe; // En dit ook
-	private DOAs doa;
 
 	public MonteurDetail(MainModel model) {
 		setLayout(null);
 
 		mainModel = model;
-		doa = mainModel.getDoa();
 
 		detailModel = model.getMonteurDetail();
 

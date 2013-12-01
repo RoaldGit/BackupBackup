@@ -15,7 +15,6 @@ import model.MainModel;
 import model.detailModel.ReparatieDetailModel;
 import view.Tabel;
 import control.Button;
-import control.DOAs;
 
 public class ReparatieDetail extends JPanel implements Observer {
 	private ReparatieDetailModel detailModel;
@@ -23,18 +22,16 @@ public class ReparatieDetail extends JPanel implements Observer {
 	private JLabel reparatieNummerL, klantNummerL, autoNummerL, autoKentekenL, statusL, opmerkingenL, planningL, onderdeelL;
 	private JTextField reparatieNummerT, klantNummerT, autoNummerT,
 			autoKentekenT;
-	private JComboBox statusC;
+	private JComboBox<Object> statusC;
 	private JTextArea opmerkingenA;
 	private Tabel planning, onderdelen;
 	private JScrollPane planningScroll, onderdelenScroll;
 	private Button wijzigGegevens, printFactuur, planReparatie, voegOnderdeelToe;
-	private DOAs doa;
 	
 	public ReparatieDetail(MainModel model) {
 		setLayout(null);
 		
 		mainModel = model;
-		doa = mainModel.getDoa();
 
 		detailModel = model.getReparatieDetail();
 		
@@ -88,7 +85,7 @@ public class ReparatieDetail extends JPanel implements Observer {
 		
 		Object[] status = new Object[] { "In behandeling", "Klaar",
 				"Factuur Verzonden", "Factuur Betaald" };
-		statusC = new JComboBox(status);
+		statusC = new JComboBox<Object>(status);
 
 		opmerkingenA = new JTextArea();
 
@@ -157,11 +154,8 @@ public class ReparatieDetail extends JPanel implements Observer {
 		onderdelenScroll = new JScrollPane(onderdelen);
 		onderdelenScroll.setBounds(400, 320, 700, 200);
 
-		onderdelen.setupRenderer(3);
-
 		add(planningScroll);
 		add(onderdelenScroll);
-		
 	}
 
 	private void updateGegevens() {

@@ -4,15 +4,14 @@ import java.util.Observable;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 public class ReparatieDetailModel extends Observable {
 	private String autoKenteken, opmerking;
 	private int reparatieID, persoonID, status, autoID;
-	private JComboBox statusC;
+	private JComboBox<Object> statusC, onderdelenC;
 	private JTextArea opmerkingenA;
-	private Object[][] geplandeAfspraken, onderdelen;
-	private String[] afsprakenHeader, onderdelenHeader;
+	private Object[][] geplandeAfspraken, gebruikteOnderdelen;
+	private String[] afsprakenHeader, onderdelenHeader, onderdelen;
 	private boolean wijzigInfo;
 	
 	public ReparatieDetailModel(Object[][] data) {
@@ -22,7 +21,8 @@ public class ReparatieDetailModel extends Observable {
 				"Leverancier", "Prijs", "Aantal", "Totaal prijs" });
 
 		geplandeAfspraken = data;
-		onderdelen = data;
+		gebruikteOnderdelen = data;
+		onderdelen = new String[] { "", "", "" };
 
 		autoKenteken = "kenteken";
 		status = 0;
@@ -48,7 +48,7 @@ public class ReparatieDetailModel extends Observable {
 	}
 	
 	public void setOnderdelen(Object[][] onderdelen) {
-		this.onderdelen = onderdelen;
+		this.gebruikteOnderdelen = onderdelen;
 	}
 
 	public Object[][] getGeplandeAfspraken() {
@@ -60,7 +60,7 @@ public class ReparatieDetailModel extends Observable {
 	}
 
 	public Object[][] getGebruikteOnderdelen() {
-		return onderdelen;
+		return gebruikteOnderdelen;
 	}
 
 	public String[] getOnderdelenHeader() {
@@ -144,7 +144,7 @@ public class ReparatieDetailModel extends Observable {
 	/**
 	 * @return the statusT
 	 */
-	public JComboBox getStatusT() {
+	public JComboBox<Object> getStatusT() {
 		return statusC;
 	}
 
@@ -152,7 +152,7 @@ public class ReparatieDetailModel extends Observable {
 	 * @param statusT
 	 *            the statusT to set
 	 */
-	public void setStatusC(JComboBox statusC) {
+	public void setStatusC(JComboBox<Object> statusC) {
 		this.statusC = statusC;
 	}
 
@@ -169,5 +169,33 @@ public class ReparatieDetailModel extends Observable {
 	 */
 	public void setOpmerkingenA(JTextArea opmerkingenA) {
 		this.opmerkingenA = opmerkingenA;
+	}
+
+	/**
+	 * @return the onderdelen
+	 */
+	public String[] getOnderdelen() {
+		return onderdelen;
+	}
+
+	/**
+	 * @param onderdelen the onderdelen to set
+	 */
+	public void setOnderdelen(String[] onderdelen) {
+		this.onderdelen = onderdelen;
+	}
+
+	/**
+	 * @return the onderdelenC
+	 */
+	public JComboBox<Object> getOnderdelenC() {
+		return onderdelenC;
+	}
+
+	/**
+	 * @param onderdelenC the onderdelenC to set
+	 */
+	public void setOnderdelenC(JComboBox<Object> onderdelenC) {
+		this.onderdelenC = onderdelenC;
 	}
 }
