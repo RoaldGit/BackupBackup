@@ -705,6 +705,31 @@ public class DOAs {
 		}
 	}
 
+	public void nieuweKlant() {
+		try {
+			PreparedStatement pst = con
+					.prepareStatement("insert into persoon(voornaam, achternaam, adres, woonplaats, postcode) values('','','','','')");
+			pst.execute();
+
+			pst = con
+					.prepareStatement("select persoonid from persoon order by persoonid desc limit 1");
+			ResultSet result = pst.executeQuery();
+			result.next();
+
+			int nieuweKlant = result.getInt("persoonid");
+
+			retreiveKlantData(nieuweKlant);
+
+			mainModel.getKlantDetail().wijzigInfo();
+
+		} catch (SQLException se) {
+			printSQLException(se);
+			System.out.println("DOAs: nieuweReparatie");
+		} catch (Exception e) {
+			System.out.println("DOAs: nieuweReparatie");
+		}
+	}
+
 	public void setReparatieStatus(int reparatieNummer) {
 		ReparatieDetailModel detailModel = mainModel.getReparatieDetail();
 		int status = 0;
