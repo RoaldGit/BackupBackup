@@ -40,7 +40,7 @@ public class ReparatieDetailModel extends Observable {
 		this.geplandeAfspraken = geplandeAfspraken;
 	}
 	
-	public void setAutos(Object[][] onderdelen) {
+	public void setOnderdelen(Object[][] onderdelen) {
 		this.onderdelen = onderdelen;
 	}
 
