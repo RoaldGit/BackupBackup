@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import model.MainModel;
+import model.detailModel.AutoDetailModel;
 import model.detailModel.KlantDetailModel;
 
 public class Button extends JButton{
@@ -32,33 +33,36 @@ public class Button extends JButton{
 			JButton button = (JButton) e.getSource();
 			String name = button.getName();
 			switch (name) {
-			case ("home"):
+			case "home":
 				mainModel.setPage("home");
 				break;
-			case ("auto"):
+			case "auto":
 				mainModel.setPage("auto");
 				mainModel.getAutoModel().setData(doa.alleAutos());
 				break;
-			case ("reparatie"):
+			case "reparatie":
 				mainModel.setPage("reparatie");
 				mainModel.getReparatieModel().setData(doa.alleReparaties());
 				break;
-			case ("klant"):
+			case "klant":
 				mainModel.setPage("klant");
 				mainModel.getKlantModel().setData(doa.alleKlanten());
 				break;
-			case ("wijzigKlant"):
+			case "wijzigKlant":
 				changeKlantData();
 				break;
-			case ("voegAutoToe"):
+			case "voegAutoToe":
 				doa.voegAutoToe();
 				doa.retreiveKlantData();
 				break;
-			case ("monteur"):
+			case "wijzigAuto":
+				changeAutoData();
+				break;
+			case "monteur":
 				mainModel.setPage("monteur");
 				mainModel.getMonteurModel().setData(doa.alleMonteurs());
 				break;
-			case ("rooster"):
+			case "rooster":
 				mainModel.setPage("rooster");
 				mainModel.getRoosterModel().setData(doa.alleRoosters());
 				break;
@@ -71,8 +75,16 @@ public class Button extends JButton{
 		if (detailModel.isWijzigInfo()) {
 			detailModel.wijzigInfo();
 			doa.changeKlantData();
-		} else {
+		} else
 			detailModel.wijzigInfo();
-		}
+	}
+
+	public void changeAutoData() {
+		AutoDetailModel detailModel = mainModel.getAutoDetail();
+		if (detailModel.isWijzigInfo()) {
+			detailModel.wijzigInfo();
+			doa.changeAutoData();
+		} else
+			detailModel.wijzigInfo();
 	}
 }

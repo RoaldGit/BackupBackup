@@ -110,6 +110,13 @@ public class AutoDetail extends JPanel implements Observer {
 		klantNummerT.setEditable(false);
 		klantAchternaamT.setEditable(false);
 
+		detailModel.setAutoKentekenT(autoKentekenT);
+		detailModel.setAutoBouwjaarT(autoBouwjaarT);
+		detailModel.setAutoMerkNaamT(autoMerkNaamT);
+		detailModel.setAutoModelT(autoModelT);
+		detailModel.setKlantNummerT(klantNummerT);
+		detailModel.setKlantAchternaamT(klantAchternaamT);
+
 		add(autoNummerT);
 		add(autoKentekenT);
 		add(autoBouwjaarT);
@@ -162,8 +169,24 @@ public class AutoDetail extends JPanel implements Observer {
 
 	public void update(Observable obs, Object obj) {
 		if (obs == detailModel) {
+			if (obj.equals("wijzigData")) {
+				if (detailModel.isWijzigInfo()) {
+					enableTextFields(true);
+					wijzigGegevens.setText("Sla wijzigingen op");
+				} else {
+					enableTextFields(false);
+					wijzigGegevens.setText("Wijzig gegevens");
+				}
+			} else
 			updateGegevens();
 		}
+	}
+
+	private void enableTextFields(boolean b) {
+		autoKentekenT.setEditable(b);
+		autoBouwjaarT.setEditable(b);
+		autoMerkNaamT.setEditable(b);
+		autoModelT.setEditable(b);
 	}
 
 }
