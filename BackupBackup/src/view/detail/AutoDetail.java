@@ -187,11 +187,11 @@ public class AutoDetail extends JPanel implements Observer {
 		}
 	}
 
-	private void enableTextFields(boolean b) {
-		autoKentekenT.setEditable(b);
-		autoBouwjaarT.setEditable(b);
-		autoMerkNaamT.setEditable(b);
-		autoModelT.setEditable(b);
+	private void enableTextFields(boolean state) {
+		autoKentekenT.setEditable(state);
+		autoBouwjaarT.setEditable(state);
+		autoMerkNaamT.setEditable(state);
+		autoModelT.setEditable(state);
 	}
 
 }

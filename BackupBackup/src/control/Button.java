@@ -9,6 +9,7 @@ import model.MainModel;
 import model.detailModel.AutoDetailModel;
 import model.detailModel.Factuur;
 import model.detailModel.KlantDetailModel;
+import model.detailModel.ReparatieDetailModel;
 
 public class Button extends JButton{
 	private MainModel mainModel;
@@ -59,6 +60,9 @@ public class Button extends JButton{
 			case "wijzigAuto":
 				changeAutoData();
 				break;
+			case "wijzigReparatie":
+				changeReparatie();
+				break;
 			case "nieuweReparatie":
 				doa.nieuweReparatie();
 				break;
@@ -92,6 +96,15 @@ public class Button extends JButton{
 		if (detailModel.isWijzigInfo()) {
 			detailModel.wijzigInfo();
 			doa.changeAutoData();
+		} else
+			detailModel.wijzigInfo();
+	}
+
+	public void changeReparatie() {
+		ReparatieDetailModel detailModel = mainModel.getReparatieDetail();
+		if (detailModel.isWijzigInfo()) {
+			detailModel.wijzigInfo();
+			// doa.changeReparatieData();
 		} else
 			detailModel.wijzigInfo();
 	}
