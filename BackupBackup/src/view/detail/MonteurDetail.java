@@ -15,6 +15,12 @@ import view.Tabel;
 import control.Button;
 import control.TableEvent;
 
+/**
+ * De class die gebruikt wordt voor de monteurdetail weergave. Het extends een JPanel en implement een observer.
+ * @author Stef en Roald
+ * @since 30-11-2013
+ * @version 2.0
+ */
 public class MonteurDetail extends JPanel implements Observer {
 	private MonteurDetailModel detailModel;
 	private MainModel mainModel;
@@ -27,6 +33,10 @@ public class MonteurDetail extends JPanel implements Observer {
 	private JScrollPane afsprakenScroll, autoScroll; // En dit
 	private Button wijzigGegevens, voegAutoToe; // En dit ook
 
+	/**
+	 * De constructor
+	 * @param model Het mainmodel dat over het gehele programma gebruikt wordt.
+	 */
 	public MonteurDetail(MainModel model) {
 		setLayout(null);
 
@@ -47,6 +57,9 @@ public class MonteurDetail extends JPanel implements Observer {
 		// TODO Afsprakentabel, add auto en wijzig gegevens action events
 	}
 
+	/**
+	 * De methode om labels op te zetten.
+	 */
 	public void setupLabels() {
 		monteurNummerL = new JLabel("Monteurnummer:");
 		monteurVoorNaamL = new JLabel("Voornaam:");
@@ -79,6 +92,9 @@ public class MonteurDetail extends JPanel implements Observer {
 		add(autosL);
 	}
 
+	/**
+	 * De methode om TextFields op te zetten.
+	 */
 	public void setupTextFields() {
 		monteurNummerT = new JTextField();
 		monteurVoorNaamT = new JTextField();
@@ -121,6 +137,9 @@ public class MonteurDetail extends JPanel implements Observer {
 		detailModel.setKlantAantalAutosT(uurLoonT);
 	}
 
+	/**
+	 * De methode om tables op te zetten.
+	 */
 	public void setupTables() {
 		afspraken = new Tabel(detailModel.getGeplandeAfspraken(),
 				detailModel.getAfsprakenHeader());
@@ -138,6 +157,9 @@ public class MonteurDetail extends JPanel implements Observer {
 		add(autoScroll);
 	}
 
+	/**
+	 * De methode om buttons op te zetten.
+	 */
 	public void setupButtons() {
 		wijzigGegevens = new Button("Wijzig gegevens", mainModel);
 		wijzigGegevens.setBounds(120, 180, 200, 20);
@@ -151,6 +173,9 @@ public class MonteurDetail extends JPanel implements Observer {
 		add(voegAutoToe);
 	}
 
+	/**
+	 * De methode om gegevens te updaten.
+	 */
 	public void updateGegevens() {
 		monteurNummerT.setText("" + detailModel.getPersoonID());
 		monteurVoorNaamT.setText(detailModel.getVoorNaam());
@@ -165,6 +190,9 @@ public class MonteurDetail extends JPanel implements Observer {
 		auto.changeData(detailModel.getAutos(), detailModel.getAutoHeader());
 	}
 
+	/**
+	 * De methode die aangeroepen wordt als de observable iets verandert.
+	 */
 	public void update(Observable obs, Object obj) {
 		if (obs == detailModel) {
 			if (obj.equals("wijzigData")) {
@@ -180,6 +208,10 @@ public class MonteurDetail extends JPanel implements Observer {
 		}
 	}
 
+	/**
+	 * De methode om de textfields editable te maken
+	 * @param state True of false.
+	 */
 	public void enableTextFields(boolean state) {
 		monteurVoorNaamT.setEditable(state);
 		monteurAchterNaamT.setEditable(state);

@@ -14,6 +14,12 @@ import control.Button;
 import control.InvulVeld;
 import control.TableEvent;
 
+/**
+ * De class die gebruikt wordt voor de klantsearch weergave. Het extends een JPanel en implement een observer.
+ * @author Stef en Roald
+ * @since 28-11-2013
+ * @version 2.0
+ */
 public class KlantSearch extends JPanel implements Observer {
 	private InvulVeld klantVeld;
 	private Tabel klantTable;
@@ -22,6 +28,10 @@ public class KlantSearch extends JPanel implements Observer {
 	private MainModel mainModel;
 	private SearchModel dataModel;
 
+	/**
+	 * De constructor
+	 * @param model Het mainmodel dat over het gehele programma gebruikt wordt.
+	 */
 	public KlantSearch(MainModel model) {
 		setLayout(null);
 
@@ -51,6 +61,9 @@ public class KlantSearch extends JPanel implements Observer {
 		setPreferredSize(new Dimension(1250, 610));
 	}
 
+	/**
+	 * De methode die aangeroepen wordt als de observable iets verandert.
+	 */
 	public void update(Observable obs, Object obj) {
 		if (obs == dataModel) {
 			if (obj.equals("search")) {

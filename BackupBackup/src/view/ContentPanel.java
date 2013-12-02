@@ -16,21 +16,28 @@ import view.search.MonteurSearch;
 import view.search.ReparatieSearch;
 import view.search.RoosterSearch;
 
-
-
+/**
+ * De class die gebruikt wordt om de searchpaginas toe te voegen. Het extends een JPanel en implement een observer.
+ * @author Stef en Roald
+ * @since 31-10-2013
+ * @version 2.0
+ */
 public class ContentPanel extends JPanel implements Observer{
 	private MainModel mainModel;
 	private JPanel home, autoSearch, klantSearch, reparatieSearch,
-			monteurSearch, roosterSearch, klantDetail, autoDetail,
-			reparatieDetail, monteurDetail;
-
+	monteurSearch, roosterSearch, klantDetail, autoDetail,
+	reparatieDetail, monteurDetail;
+	/**
+	 * De constructor
+	 * @param model Het mainmodel dat over het gehele programma gebruikt wordt.
+	 */
 	public ContentPanel(MainModel model){
 		mainModel = model;
 
 		mainModel.addObserver(this);
 
 		home = new JPanel();
-		
+
 		autoSearch = new AutoSearch(mainModel);
 		klantSearch = new KlantSearch(mainModel);
 		reparatieSearch = new ReparatieSearch(mainModel);
@@ -57,6 +64,9 @@ public class ContentPanel extends JPanel implements Observer{
 		allInvisible();
 	}
 
+	/**
+	 * De methode die aangeroepen wordt om te updaten als de observable dat aangeeft.
+	 */
 	public void update(Observable obs, Object obj) {
 		allInvisible();
 
@@ -94,6 +104,9 @@ public class ContentPanel extends JPanel implements Observer{
 		}
 	}
 
+	/**
+	 * De methode om alle panels op invisible te setten.
+	 */
 	public void allInvisible() {
 		home.setVisible(false);
 		autoSearch.setVisible(false);

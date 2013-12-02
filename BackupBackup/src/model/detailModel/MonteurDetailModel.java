@@ -4,6 +4,12 @@ import java.util.Observable;
 
 import javax.swing.JTextField;
 
+/**
+ * De class die gebruikt wordt voor de detailpagina van een monteur en daar data in op te slaan. Het extends een Observable.
+ * @author Stef en Roald
+ * @since 25-11-2013
+ * @version 2.0
+ */
 public class MonteurDetailModel extends Observable {
 	private String voorNaam, achterNaam, adres, woonplaats, postcode;
 	private int persoonID;
@@ -14,6 +20,10 @@ public class MonteurDetailModel extends Observable {
 	private String[] afsprakenHeader, autoHeader;
 	private boolean wijzigInfo;
 
+	/**
+	 * De constructor van monteurDetailModel.
+	 * @param data Een 2D-array met daarin de de data van een monteur.
+	 */
 	public MonteurDetailModel(Object[][] data) {
 		setAfsprakenHeader(new String[] { "Start Tijd", "Eind Tijd",
 				"Bezigheid", "ReparatieID", "Monteur" });
@@ -33,6 +43,9 @@ public class MonteurDetailModel extends Observable {
 		persoonID = 1337;
 	}
 	
+	/**
+	 * De method om aan te geven dat er iets verandert is en door te geven aan de observers.
+	 */
 	public void dataChanged() {
 		if (wijzigInfo)
 			wijzigInfo();
@@ -41,18 +54,34 @@ public class MonteurDetailModel extends Observable {
 		notifyObservers("dataChanged");
 	}
 
+	/**
+	 * De methode om de voornaam te setten.
+	 * @param voorNaam De voornaam to set.
+	 */
 	public void setVoorNaam(String voorNaam) {
 		this.voorNaam = voorNaam;
 	}
 
+	/**
+	 * De methode om de voornaam op te halen.
+	 * @return De voornaam.
+	 */
 	public String getVoorNaam() {
 		return voorNaam;
 	}
 
+	/**
+	 * De methode om de postcode op te halen.
+	 * @return De postcode.
+	 */
 	public String getPostcode() {
 		return postcode;
 	}
 
+	/**
+	 * De methode om de postcode te setten.
+	 * @param voorNaam De postcode to set.
+	 */
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
 	}
@@ -311,6 +340,10 @@ public class MonteurDetailModel extends Observable {
 		notifyObservers("wijzigData");
 	}
 
+	/**
+	 * De methode om textfieldData op te halen.
+	 * @return Een String array met monteur data.
+	 */
 	public String[] getTextFieldData() {
 		String[] data = new String[6];
 		

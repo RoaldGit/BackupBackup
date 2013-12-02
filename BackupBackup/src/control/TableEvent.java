@@ -6,14 +6,27 @@ import java.awt.event.MouseEvent;
 import model.MainModel;
 import view.Tabel;
 
+/**
+ * De class die ervoor zorgt dat je op de juiste detailpagina komt als je dubbelklikt op de table. 
+ * @author Stef en Roald
+ * @since 1-11-2013
+ * @version 2.0
+ */
 public class TableEvent extends MouseAdapter {
 	private MainModel mainModel;
 	private DOAs doa;
 
+	/**
+	 * De constructor voor TableEvent.
+	 * @param model Het mainmodel dat gebruikt wordt over het gehele programma.
+	 */
 	public TableEvent(MainModel model) {
 		mainModel = model;
 		doa = mainModel.getDoa();
 	}
+	/**
+	 * Mouseclick event.
+	 */
 	public void mouseClicked(MouseEvent e) {
 		if (e.getClickCount() == 2) {
 			Tabel source = (Tabel) e.getSource();

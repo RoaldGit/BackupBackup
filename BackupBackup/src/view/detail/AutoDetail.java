@@ -15,6 +15,12 @@ import view.Tabel;
 import control.Button;
 import control.TableEvent;
 
+/**
+ * De class die gebruikt wordt voor de autodetail weergave. Het extends een JPanel en implement een observer.
+ * @author Stef en Roald
+ * @since 28-11-2013
+ * @version 2.0
+ */
 public class AutoDetail extends JPanel implements Observer {
 	private AutoDetailModel detailModel;
 	private MainModel mainModel;
@@ -27,6 +33,11 @@ public class AutoDetail extends JPanel implements Observer {
 	private Tabel afspraken, reparaties;
 	private JScrollPane afsprakenScroll, reparatiesScroll;
 	private Button wijzigGegevens, nieuweReparatie;
+	
+	/**
+	 * De constructor
+	 * @param model Het mainmodel dat over het gehele programma gebruikt wordt.
+	 */
 	public AutoDetail(MainModel model) {
 		setLayout(null);
 
@@ -46,6 +57,9 @@ public class AutoDetail extends JPanel implements Observer {
 		updateGegevens();
 	}
 
+	/**
+	 * De methode om labels op te zetten.
+	 */
 	private void setupLabels() {
 		autoNummerL = new JLabel("Auto nummer:");
 		autoKentekenL = new JLabel("Kenteken:");
@@ -81,6 +95,9 @@ public class AutoDetail extends JPanel implements Observer {
 		add(reparatiesL);
 	}
 
+	/**
+	 * De methode om TextFields op te zetten.
+	 */
 	private void setupTextFields() {
 		autoNummerT = new JTextField();
 		autoKentekenT = new JTextField();
@@ -122,6 +139,9 @@ public class AutoDetail extends JPanel implements Observer {
 		add(klantAchternaamT);
 	}
 
+	/**
+	 * De methode om tables op te zetten.
+	 */
 	private void setupTables() {
 		afspraken = new Tabel(detailModel.getAfspraakData(),
 				detailModel.getAfspraakHeader());
@@ -140,6 +160,9 @@ public class AutoDetail extends JPanel implements Observer {
 		add(reparatiesScroll);
 	}
 
+	/**
+	 * De methode om buttons op te zetten.
+	 */
 	private void setupButtons() {
 		wijzigGegevens = new Button("Wijzig gegevens", mainModel);
 		wijzigGegevens.setBounds(120, 230, 200, 20);
@@ -153,6 +176,9 @@ public class AutoDetail extends JPanel implements Observer {
 		add(nieuweReparatie);
 	}
 
+	/**
+	 * De methode om gegevens te updaten.
+	 */
 	private void updateGegevens() {
 		autoNummerT.setText("" + detailModel.getAutoNummer());
 		autoKentekenT.setText(detailModel.getKenteken());
@@ -168,6 +194,9 @@ public class AutoDetail extends JPanel implements Observer {
 				detailModel.getReparatieHeader());
 	}
 
+	/**
+	 * De methode die aangeroepen wordt als de observable iets verandert.
+	 */
 	public void update(Observable obs, Object obj) {
 		if (obs == detailModel) {
 			if (obj.equals("wijzigData")) {
@@ -183,6 +212,10 @@ public class AutoDetail extends JPanel implements Observer {
 		}
 	}
 
+	/**
+	 * De methode om de textfields editable te maken
+	 * @param state True of false.
+	 */
 	private void enableTextFields(boolean state) {
 		autoKentekenT.setEditable(state);
 		autoBouwjaarT.setEditable(state);

@@ -9,6 +9,12 @@ import javax.swing.table.TableColumnModel;
 
 import model.SearchModel;
 
+/**
+ * De class die gebruikt wordt voor de tables.. Het extends een JTable.
+ * @author Stef en Roald
+ * @since 31-10-2013
+ * @version 2.0
+ */
 public class Tabel extends JTable {
 	private SearchModel dataModel;
 	private TableColumnModel tcm;
@@ -36,10 +42,8 @@ public class Tabel extends JTable {
 		dataModel = model;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.JTable#isCellEditable(int, int)
+	/**
+	 * @return Geeft aan of de cell editable mag zijn.
 	 */
 	public boolean isCellEditable(int row, int column) {
 		return false;
@@ -69,6 +73,10 @@ public class Tabel extends JTable {
 		setModel(dtm);
 	}
 
+	/**
+	 * De methode voor de rendersetup.
+	 * @param column Hoeveel kolommen.
+	 */
 	public void setupRenderer(int column) {
 		tcm = this.getColumnModel();
 

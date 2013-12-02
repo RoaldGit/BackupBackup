@@ -6,12 +6,23 @@ import javax.swing.event.DocumentListener;
 
 import model.MainModel;
 
-
+/**
+ * Deze class wordt gebruikt als searchbar in het programma, het extend een JTextField.
+ * @author Stef en Roald
+ * @since 22-11-2013
+ * @version 2.0
+ */
 public class InvulVeld extends JTextField{
 	String page;
 	private MainModel mainModel;
 	private DOAs doa;
 
+	/**
+	 * De constructor voor InvulVeld, hierin word de data al geset.
+	 * @param x Het aantal kolommen.
+	 * @param p De string die bepaalt welke page je op zit.
+	 * @param model Het mainmodel dat over het gehele programma gebruikt wordt.
+	 */
 	public InvulVeld(int x, String p, MainModel model) {
 		super(x);
 		page = p;
@@ -27,6 +38,12 @@ public class InvulVeld extends JTextField{
 		mainModel.getRoosterModel().setData(doa.alleRoosters());
 	}
 
+	/**
+	 * De class implement een DocumentListener om op de goede pagina,alle data of de gewenste data op te halen.
+	 * @author Stef en Roald
+	 * @since 22-11-2013
+	 * @version 2.0
+	 */
 	class Search implements DocumentListener {
 		public void changedUpdate(DocumentEvent e) {
 			search(e);

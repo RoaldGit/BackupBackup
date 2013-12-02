@@ -15,6 +15,12 @@ import view.Tabel;
 import control.Button;
 import control.TableEvent;
 
+/**
+ * De class die gebruikt wordt voor de klantdetail weergave. Het extends een JPanel en implement een observer.
+ * @author Stef en Roald
+ * @since 30-11-2013
+ * @version 2.0
+ */
 public class KlantDetail extends JPanel implements Observer {
 	private KlantDetailModel detailModel;
 	private MainModel mainModel;
@@ -30,6 +36,10 @@ public class KlantDetail extends JPanel implements Observer {
 	private JScrollPane afsprakenScroll, autoScroll;
 	private Button wijzigGegevens, voegAutoToe;
 
+	/**
+	 * De constructor
+	 * @param model Het mainmodel dat over het gehele programma gebruikt wordt.
+	 */
 	public KlantDetail(MainModel model) {
 		setLayout(null);
 
@@ -49,6 +59,9 @@ public class KlantDetail extends JPanel implements Observer {
 		updateGegevens();
 	}
 
+	/**
+	 * De methode om labels op te zetten.
+	 */
 	public void setupLabels() {
 		klantNummerL = new JLabel("Klantnummer:");
 		klantVoorNaamL = new JLabel("Voornaam:");
@@ -99,6 +112,9 @@ public class KlantDetail extends JPanel implements Observer {
 		add(nieuweAutoModelL);
 	}
 
+	/**
+	 * De methode om TextFields op te zetten.
+	 */
 	public void setupTextFields() {
 		klantNummerT = new JTextField();
 		klantVoorNaamT = new JTextField();
@@ -161,6 +177,9 @@ public class KlantDetail extends JPanel implements Observer {
 		detailModel.setNieuweAutoModelT(nieuweAutoModelT);
 	}
 
+	/**
+	 * De methode om tables op te zetten.
+	 */
 	public void setupTables() {
 		afspraken = new Tabel(detailModel.getGeplandeAfspraken(),
 				detailModel.getAfsprakenHeader());
@@ -178,6 +197,9 @@ public class KlantDetail extends JPanel implements Observer {
 		add(autoScroll);
 	}
 
+	/**
+	 * De methode om buttons op te zetten.
+	 */
 	public void setupButtons() {
 		wijzigGegevens = new Button("Wijzig gegevens", mainModel);
 		wijzigGegevens.setBounds(120, 180, 200, 20);
@@ -191,6 +213,9 @@ public class KlantDetail extends JPanel implements Observer {
 		add(voegAutoToe);
 	}
 
+	/**
+	 * De methode om gegevens te updaten.
+	 */
 	public void updateGegevens() {
 		klantNummerT.setText("" + detailModel.getPersoonID());
 		klantVoorNaamT.setText(detailModel.getVoorNaam());
@@ -205,6 +230,9 @@ public class KlantDetail extends JPanel implements Observer {
 		auto.changeData(detailModel.getAutos(), detailModel.getAutoHeader());
 	}
 
+	/**
+	 * De methode die aangeroepen wordt als de observable iets verandert.
+	 */
 	public void update(Observable obs, Object obj) {
 		if (obs == detailModel) {
 			if (obj.equals("wijzigData")) {
@@ -220,6 +248,10 @@ public class KlantDetail extends JPanel implements Observer {
 		}
 	}
 
+	/**
+	 * De methode om de textfields editable te maken
+	 * @param state True of false.
+	 */
 	public void enableTextFields(boolean state) {
 		klantVoorNaamT.setEditable(state);
 		klantAchterNaamT.setEditable(state);

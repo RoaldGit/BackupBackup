@@ -4,6 +4,12 @@ import java.util.Observable;
 
 import javax.swing.JTextField;
 
+/**
+ * De class die gebruikt wordt voor de detailpagina van een klant en daar data in op te slaan. Het extends een Observable.
+ * @author Stef en Roald
+ * @since 25-11-2013
+ * @version 2.0
+ */
 public class KlantDetailModel extends Observable {
 	private String voorNaam, achterNaam, adres, woonplaats, postcode;
 	private int aantalAutos, persoonID;
@@ -15,6 +21,10 @@ public class KlantDetailModel extends Observable {
 	private String[] afsprakenHeader, autoHeader;
 	private boolean wijzigInfo;
 
+	/**
+	 * De constructor van KlantDetailModel.
+	 * @param data Een 2D-array met daarin de de data van een auto.
+	 */
 	public KlantDetailModel(Object[][] data) {
 		setAfsprakenHeader(new String[] { "Start Tijd", "Eind Tijd",
 				"Bezigheid", "Auto Nummer", "Monteur" });
@@ -34,6 +44,9 @@ public class KlantDetailModel extends Observable {
 		persoonID = 1337;
 	}
 	
+	/**
+	 * De method om aan te geven dat er iets verandert is en door te geven aan de observers.
+	 */
 	public void dataChanged() {
 		if (wijzigInfo)
 			wijzigInfo();
@@ -42,238 +55,273 @@ public class KlantDetailModel extends Observable {
 		notifyObservers("dataChanged");
 	}
 
+	/**
+	 * De methode om de voornaam te setten.
+	 * @param voorNaam De voornaam to set.
+	 */
 	public void setVoorNaam(String voorNaam) {
 		this.voorNaam = voorNaam;
 	}
 
+	/**
+	 * De methode om de voornaam op te halen.
+	 * @return De voornaam.
+	 */
 	public String getVoorNaam() {
 		return voorNaam;
 	}
 
+	/**
+	 * De methode om de postcode op te halen.
+	 * @return De postcode.
+	 */
 	public String getPostcode() {
 		return postcode;
 	}
 
+	/**
+	 * De methode om de postcode te setten.
+	 * @param voorNaam De postcode to set.
+	 */
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
 	}
 
 	/**
-	 * @return the woonplaats
+	 * De methode om de woonplaats op te halen.
+	 * @return De woonplaats
 	 */
 	public String getWoonplaats() {
 		return woonplaats;
 	}
 
 	/**
-	 * @param woonplaats
-	 *            the woonplaats to set
+	 * De methode om woonplaats te setten
+	 * @param woonplaats De woonplaats to set
 	 */
 	public void setWoonplaats(String woonplaats) {
 		this.woonplaats = woonplaats;
 	}
 
 	/**
-	 * @return the adres
+	 * De methode om het adres op te halen.
+	 * @return Het adres
 	 */
 	public String getAdres() {
 		return adres;
 	}
 
 	/**
-	 * @param adres
-	 *            the adres to set
+	 * De methode om het adres te setten.
+	 * @param adres Het adres to set
 	 */
 	public void setAdres(String adres) {
 		this.adres = adres;
 	}
 
 	/**
-	 * @return the achterNaam
+	 * De methode om de achternaam op te halen.
+	 * @return De achternaam
 	 */
 	public String getAchterNaam() {
 		return achterNaam;
 	}
 
 	/**
-	 * @param achterNaam
-	 *            the achterNaam to set
+	 * De methode om de achternaam te setten.
+	 * @param achterNaam De achterNaam to set
 	 */
 	public void setAchterNaam(String achterNaam) {
 		this.achterNaam = achterNaam;
 	}
 
 	/**
-	 * @return the aantalAutos
+	 * De methode om het aantal autos op te halen.
+	 * @return Het aantal autos
 	 */
 	public int getAantalAutos() {
 		return aantalAutos;
 	}
 
 	/**
-	 * @param aantalAutos the aantalAutos to set
+	 * De methode om het aantal autos te setten.
+	 * @param aantalAutos De aantalAutos to set
 	 */
 	public void setAantalAutos(int aantalAutos) {
 		this.aantalAutos = aantalAutos;
 	}
 
 	/**
-	 * @return the persoonID
+	 * De methode om de persoonID op te halen.
+	 * @return De persoonID
 	 */
 	public int getPersoonID() {
 		return persoonID;
 	}
 
 	/**
-	 * @param persoonID the persoonID to set
+	 * De methode om het persoonID te setten.
+	 * @param persoonID De persoonID to set
 	 */
 	public void setPersoonID(int persoonID) {
 		this.persoonID = persoonID;
 	}
 
 	/**
-	 * @return the geplandeAfspraken
+	 * De methode om de geplande afspraken op te halen.
+	 * @return De 2D-array met geplande afspraken
 	 */
 	public Object[][] getGeplandeAfspraken() {
 		return geplandeAfspraken;
 	}
 
 	/**
-	 * @param geplandeAfspraken
-	 *            the geplandeAfspraken to set
+	 * De methode om geplandeafspraken te setten
+	 * @param geplandeAfspraken De geplandeAfspraken to set
 	 */
 	public void setGeplandeAfspraken(Object[][] geplandeAfspraken) {
 		this.geplandeAfspraken = geplandeAfspraken;
 	}
 
 	/**
-	 * @return the autos
+	 * De methode om de autos op te halen.
+	 * @return De 2D-array met autos
 	 */
 	public Object[][] getAutos() {
 		return autos;
 	}
 
 	/**
-	 * @param autos
-	 *            the autos to set
+	 * De methode om autos te setten
+	 * @param autos De autos to set
 	 */
 	public void setAutos(Object[][] autos) {
 		this.autos = autos;
 	}
 
 	/**
-	 * @return the afsprakenHeader
+	 * De methode om de afspraken header op te halen.
+	 * @return De String array met de headers van de afspraken.
 	 */
 	public String[] getAfsprakenHeader() {
 		return afsprakenHeader;
 	}
 
 	/**
-	 * @param afsprakenHeader the afsprakenHeader to set
+	 * De methode om de afsprakenHeader te setten.
+	 * @param afsprakenHeader De afsprakenHeader to set
 	 */
 	public void setAfsprakenHeader(String[] afsprakenHeader) {
 		this.afsprakenHeader = afsprakenHeader;
 	}
 
 	/**
-	 * @return the autoHeader
+	 * De methode om de autoheader op te halen
+	 * @return De String array met de headers van de afspraken.
 	 */
 	public String[] getAutoHeader() {
 		return autoHeader;
 	}
 
 	/**
-	 * @param autoHeader the autoHeader to set
+	 * De methode om de autoheader te setten.
+	 * @param autoHeader De autoHeader to set
 	 */
 	public void setAutoHeader(String[] autoHeader) {
 		this.autoHeader = autoHeader;
 	}
 
 	/**
-	 * @return the klantNummerT
+	 * De methode om JTextField klantNummerT ophalen
+	 * @return De klantNummerT
 	 */
 	public JTextField getKlantNummerT() {
 		return klantNummerT;
 	}
 
 	/**
-	 * @param klantNummerT
-	 *            the klantNummerT to set
+	 * De methode om JTextField klantNummerT te setten.
+	 * @param klantNummerT De klantNummerT to set
 	 */
 	public void setKlantNummerT(JTextField klantNummerT) {
 		this.klantNummerT = klantNummerT;
 	}
 
 	/**
-	 * @return the klantVoorNaamT
+	 * De methode om JTextField klantVoorNaamT ophalen
+	 * @return De klantVoorNaamT
 	 */
 	public JTextField getKlantVoorNaamT() {
 		return klantVoorNaamT;
 	}
 
 	/**
-	 * @param klantVoorNaamT
-	 *            the klantVoorNaamT to set
+	 * De methode om JTextField klantVoorNaamT te setten.
+	 * @param klantVoornaamT De klantVoorNaamT to set
 	 */
 	public void setKlantVoorNaamT(JTextField klantVoorNaamT) {
 		this.klantVoorNaamT = klantVoorNaamT;
 	}
 
 	/**
-	 * @return the klantAchterNaamT
+	 * De methode om JTextField klantAchternaamT ophalen
+	 * @return De klantAchternaamT
 	 */
 	public JTextField getKlantAchterNaamT() {
 		return klantAchterNaamT;
 	}
 
 	/**
-	 * @param klantAchterNaamT
-	 *            the klantAchterNaamT to set
+	 * De methode om JTextField klantAchternaamT te setten.
+	 * @param klantAchternaamT De klantAchternaamT to set
 	 */
 	public void setKlantAchterNaamT(JTextField klantAchterNaamT) {
 		this.klantAchterNaamT = klantAchterNaamT;
 	}
 
 	/**
-	 * @return the klantAdresT
+	 * De methode om JTextField klantAdresT ophalen
+	 * @return De klantAdresT
 	 */
 	public JTextField getKlantAdresT() {
 		return klantAdresT;
 	}
 
 	/**
-	 * @param klantAdresT
-	 *            the klantAdresT to set
+	 * De methode om JTextField klantAdresT te setten.
+	 * @param klantAdresT De klantAdresT to set
 	 */
 	public void setKlantAdresT(JTextField klantAdresT) {
 		this.klantAdresT = klantAdresT;
 	}
 
 	/**
-	 * @return the klantWoonplaatsT
+	 * De methode om JTextField klantWoonplaatsT ophalen
+	 * @return De klantWoonplaatsT
 	 */
 	public JTextField getKlantWoonplaatsT() {
 		return klantWoonplaatsT;
 	}
 
 	/**
-	 * @param klantWoonplaatsT
-	 *            the klantWoonplaatsT to set
+	 * De methode om JTextField klantWoonplaatsT te setten.
+	 * @param klantWoonplaatsT De klantWoonplaatsT to set
 	 */
 	public void setKlantWoonplaatsT(JTextField klantWoonplaatsT) {
 		this.klantWoonplaatsT = klantWoonplaatsT;
 	}
 
 	/**
-	 * @return the klantPostcodeT
+	 * De methode om JTextField klantPostcodeT ophalen
+	 * @return De klantPostcodeT
 	 */
 	public JTextField getKlantPostcodeT() {
 		return klantPostcodeT;
 	}
 
 	/**
-	 * @param klantPostcodeT
-	 *            the klantPostcodeT to set
+	 * De methode om JTextField klantPostcodeT te setten.
+	 * @param klantPostcodeT De klantPostcodeT to set
 	 */
 	public void setKlantPostcodeT(JTextField klantPostcodeT) {
 		this.klantPostcodeT = klantPostcodeT;
@@ -295,15 +343,16 @@ public class KlantDetailModel extends Observable {
 	}
 
 	/**
-	 * @return the wijzigInfo
+	 * De methode om te kijken of info gewijzigd is.
+	 * @return De wijzigInfo
 	 */
 	public boolean isWijzigInfo() {
 		return wijzigInfo;
 	}
 
 	/**
-	 * @param wijzigInfo
-	 *            the wijzigInfo to set
+	 * De methode om wijzigInfo te setten.
+	 * @param wijzigInfo De wijzigInfo to set
 	 */
 	public void wijzigInfo() {
 		wijzigInfo = !wijzigInfo;
@@ -312,6 +361,10 @@ public class KlantDetailModel extends Observable {
 		notifyObservers("wijzigData");
 	}
 
+	/**
+	 * De methode om KlantData op te halen.
+	 * @return Een String array met klant data.
+	 */
 	public String[] getKlantData() {
 		String[] data = new String[5];
 
@@ -324,6 +377,10 @@ public class KlantDetailModel extends Observable {
 		return data;
 	}
 
+	/**
+	 * De methode om autoData op te halen.
+	 * @return Een String array met auto data.
+	 */
 	public String[] getNieuweAutoData() {
 		String[] data = new String[4];
 		

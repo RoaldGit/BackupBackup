@@ -16,6 +16,12 @@ import model.detailModel.ReparatieDetailModel;
 import view.Tabel;
 import control.Button;
 
+/**
+ * De class die gebruikt wordt voor de reparatiedetail weergave. Het extends een JPanel en implement een observer.
+ * @author Stef en Roald
+ * @since 30-11-2013
+ * @version 2.0
+ */
 public class ReparatieDetail extends JPanel implements Observer {
 	private ReparatieDetailModel detailModel;
 	private MainModel mainModel;
@@ -30,6 +36,10 @@ public class ReparatieDetail extends JPanel implements Observer {
 	private JScrollPane planningScroll, onderdelenScroll;
 	private Button wijzigGegevens, printFactuur, planReparatie, voegOnderdeelToe;
 	
+	/**
+	 * De constructor
+	 * @param model Het mainmodel dat over het gehele programma gebruikt wordt.
+	 */
 	public ReparatieDetail(MainModel model) {
 		setLayout(null);
 		
@@ -48,6 +58,9 @@ public class ReparatieDetail extends JPanel implements Observer {
 		updateGegevens();
 	}
 	
+	/**
+	 * De methode om labels op te zetten.
+	 */
 	private void setupLabels() {
 		reparatieNummerL = new JLabel("Reparatie nr.:");
 		klantNummerL = new JLabel("Klantnummer:");
@@ -90,6 +103,9 @@ public class ReparatieDetail extends JPanel implements Observer {
 
 	}
 
+	/**
+	 * De methode om TextFields op te zetten.
+	 */
 	private void setupTextFields() {
 		reparatieNummerT = new JTextField();
 		klantNummerT = new JTextField();
@@ -142,6 +158,9 @@ public class ReparatieDetail extends JPanel implements Observer {
 		add(opmerkingenA);
 	}
 	
+	/**
+	 * De methode om buttons op te zetten.
+	 */
 	private void setupButtons() {
 		wijzigGegevens = new Button("Wijzig gegevens", mainModel);
 		wijzigGegevens.setBounds(120, 330, 200, 20);
@@ -165,6 +184,9 @@ public class ReparatieDetail extends JPanel implements Observer {
 		add(voegOnderdeelToe);
 	}
 	
+	/**
+	 * De methode om tables op te zetten.
+	 */
 	private void setupTables() {
 		planning = new Tabel(detailModel.getGeplandeAfspraken(),
 				detailModel.getAfsprakenHeader());
@@ -179,6 +201,9 @@ public class ReparatieDetail extends JPanel implements Observer {
 		add(onderdelenScroll);
 	}
 
+	/**
+	 * De methode om gegevens te updaten.
+	 */
 	private void updateGegevens() {
 		reparatieNummerT.setText("" + detailModel.getReparatieID());
 		klantNummerT.setText("" + detailModel.getPersoonID());
@@ -199,6 +224,9 @@ public class ReparatieDetail extends JPanel implements Observer {
 		onderdelenC.setSelectedIndex(0);
 	}
 
+	/**
+	 * De methode die aangeroepen wordt als de observable iets verandert.
+	 */
 	public void update(Observable obs, Object obj) {
 		if (obs == detailModel) {
 			if (obj.equals("wijzigData")) {
@@ -215,6 +243,10 @@ public class ReparatieDetail extends JPanel implements Observer {
 		
 	}
 
+	/**
+	 * De methode om de textfields editable te maken
+	 * @param state True of false.
+	 */
 	public void enableTextFields(boolean state) {
 		statusC.setEnabled(state);
 		opmerkingenA.setEditable(state);

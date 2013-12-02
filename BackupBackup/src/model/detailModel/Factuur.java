@@ -4,12 +4,22 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+/**
+ * Deze class genereert een factuur en opent dit in een nieuwe JFrame.
+ * @author Stef en Roald
+ * @since 1-12-2013
+ * @version 2.0 
+ */
 public class Factuur extends JFrame{
 	private ReparatieDetailModel detailModel;
 	private JTextArea gegevensA;
 	private JScrollPane gegevensSP;
 	private Object[][] onderdelen;
 	
+	/**
+	 * De constructor van de factuur.
+	 * @param detailModel Het reparatiedetailmodel waar alle gegevens uit moeten worden opgehaald.
+	 */
 	public Factuur(ReparatieDetailModel detailModel){
 		super("Factuur");
 		setBounds(280, 0, 1000, 720);
@@ -28,6 +38,9 @@ public class Factuur extends JFrame{
 		setVisible(true);
 	}
 	
+	/**
+	 * Deze methode moet wat extra regels toevoegen.
+	 */
 	public void regelsToevoegen(){
 		gegevensA.append("Factuurnummer: \n");
 		gegevensA.append("Factuurdatum: \n");
@@ -36,7 +49,11 @@ public class Factuur extends JFrame{
 		gegevensA.append("Autonummer: " + detailModel.getAutoID()+ "\n\n");
 	}
 
+	/**
+	 * Deze methode moet onderdelen toevoegen.
+	 */
 	public void onderdelenToevoegen(){
+		//TODO Uitlijning.
 		String header = String.format("%-30s%-30s%-30s%-30s%-30s%-30s\n",
 				"Onderdeelnummer", "Onderdeelnaam", "Leverancier", "Prijs",
 				"Aantal", "Totaalprijs");
@@ -48,12 +65,6 @@ public class Factuur extends JFrame{
 					onderdelen[i][1], onderdelen[i][2], onderdelen[i][3],
 					onderdelen[i][4], onderdelen[i][5]);
 				gegevensA.append(formatted);
-//			for(int j=0; j < onderdelen[i].length; j++){
-//				gegevensA.append("" + onderdelen[i][j] + "	");
-//				if(j == (onderdelen[i].length-1)){
-//					gegevensA.append("\n");
-//				}
-//			}
 		}
 	}
 }

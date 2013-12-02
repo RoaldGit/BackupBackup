@@ -14,16 +14,31 @@ import model.detailModel.KlantDetailModel;
 import model.detailModel.MonteurDetailModel;
 import model.detailModel.ReparatieDetailModel;
 
-
+/**
+ * De class die alle doas bevat om informatie te wijzigen en op te halen van de database. Bij het toevoegen of wijzigen wordt de data opgehaald
+ * uit de modellen.
+ * @author Stef en Roald
+ * @since 28-11-2013
+ * @version 2.0
+ */
 public class DOAs {
 	static DBmanager manager = DBmanager.getInstance("Garage");
 	private static Connection con = manager.getConnection();
 	private MainModel mainModel;
 
+	/**
+	 * De constructor van de class
+	 * @param model Het mainmodel die over het gehele project gebruikt wordt.
+	 */
 	public DOAs(MainModel model) {
 		mainModel = model;
 	}
 
+	/**
+	 * De method om een auto te zoeken in de database en dit returned het in een 2D-array
+	 * @param param Een string die de auto bevat die opgezocht moet worden.
+	 * @return Returned een 2D array met daarin de gezochte auto of autos.
+	 */
 	public Object[][] autoSearch(String param) {
 		Object[][] array = null;
 		try {
@@ -49,6 +64,11 @@ public class DOAs {
 		return array;
 	}
 
+	/**
+	 * De method om een reparatie te zoeken in de database en dit returned het in een 2D-array
+	 * @param param Een string die de reparatie bevat die opgezocht moet worden.
+	 * @return Returned een 2D array met daarin de gezochte reparatie of reparaties.
+	 */
 	public Object[][] reparatieSearch(String param) {
 		Object[][] array = null;
 		try {
@@ -72,6 +92,11 @@ public class DOAs {
 		return array;
 	}
 
+	/**
+	 * De method om een klant te zoeken in de database en dit returned het in een 2D-array
+	 * @param param Een string die de klant bevat die opgezocht moet worden.
+	 * @return Returned een 2D array met daarin de gezochte klant of klanten.
+	 */
 	public Object[][] klantSearch(String param) {
 		Object[][] array = null;
 		try {
@@ -97,6 +122,11 @@ public class DOAs {
 		return array;
 	}
 
+	/**
+	 * De method om een monteur te zoeken in de database en dit returned het in een 2D-array
+	 * @param param Een string die de monteur bevat die opgezocht moet worden.
+	 * @return Returned een 2D array met daarin de gezochte monteur of monteurs.
+	 */
 	public Object[][] monteurSearch(String param) {
 		Object[][] array = null;
 		try {
@@ -122,6 +152,11 @@ public class DOAs {
 		return array;
 	}
 
+	/**
+	 * De method om planningen uit het rooster te zoeken in de database en dit returned het in een 2D-array
+	 * @param param Een string die de planning bevat die opgezocht moet worden.
+	 * @return Returned een 2D array met daarin de gezochte planning of planningen.
+	 */
 	public Object[][] roosterSearch(String param) {
 		Object[][] array = null;
 		try {
@@ -147,6 +182,10 @@ public class DOAs {
 		return array;
 	}
 
+	/**
+	 * De methode om alle autos op te halen.
+	 * @return Returned een 2D array met daarin alle autos.
+	 */
 	public Object[][] alleAutos() {
 		Object[][] array = null;
 		try {
@@ -170,6 +209,10 @@ public class DOAs {
 		return array;
 	}
 
+	/**
+	 * De methode om alle reparaties op te halen.
+	 * @return Returned een 2D array met daarin alle reparaties.
+	 */
 	public Object[][] alleReparaties() {
 		Object[][] array = null;
 		try {
@@ -193,6 +236,10 @@ public class DOAs {
 		return array;
 	}
 
+	/**
+	 * De methode om alle klanten op te halen.
+	 * @return Returned een 2D array met daarin alle klanten.
+	 */
 	public Object[][] alleKlanten() {
 		Object[][] array = null;
 		try {
@@ -216,6 +263,10 @@ public class DOAs {
 		return array;
 	}
 
+	/**
+	 * De methode om alle monteurs op te halen.
+	 * @return Returned een 2D array met daarin alle monteurs.
+	 */
 	public Object[][] alleMonteurs() {
 		Object[][] array = null;
 		try {
@@ -239,6 +290,10 @@ public class DOAs {
 		return array;
 	}
 
+	/**
+	 * De methode om alle planningen op te halen.
+	 * @return Returned een 2D array met daarin alle planningen.
+	 */
 	public Object[][] alleRoosters() {
 		Object[][] array = null;
 		try {
@@ -262,6 +317,10 @@ public class DOAs {
 		return array;
 	}
 
+	/**
+	 * De methode om alle onderdelen op te halen.
+	 * @return Returned een 2D array met daarin alle onderdelen.
+	 */
 	public String[] alleOnderdelen() {
 		String[] onderdelen = null;
 		
@@ -287,12 +346,19 @@ public class DOAs {
 		return onderdelen;
 	}
 
+	/**
+	 * De methode om klantdata op te halen.
+	 */
 	public void retreiveKlantData() {
 		KlantDetailModel model = mainModel.getKlantDetail();
 		int klantNummer = model.getPersoonID();
 		retreiveKlantData(klantNummer);
 	}
 
+	/**
+	 * De methode om een klant op te halen met het klantnummer.
+	 * @param klantNummer Het klantnummer van de gewenste klant
+	 */
 	public void retreiveKlantData(int klantNummer) {
 		KlantDetailModel model = mainModel.getKlantDetail();
 
@@ -348,6 +414,10 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * Reparaties ophalen van een auto met het autonummer.
+	 * @param autoNummer Het nummer van de auto waarvan de reparaties moeten worden opgehaald.
+	 */
 	public void retreiveReparatiesAuto(int autoNummer) {
 		KlantDetailModel model = mainModel.getKlantDetail();
 		// TODO remove if not used
@@ -364,6 +434,10 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * De methode om een auto op te halen met het autonummer.
+	 * @param autoNummer Het autonummer van de gewenste auto.
+	 */
 	public void retreiveAutoData(int autoNummer) {
 		AutoDetailModel model = mainModel.getAutoDetail();
 
@@ -423,6 +497,9 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * De methode om reparatiedata op te halen.
+	 */
 	public void retreiveReparatieData() {
 		ReparatieDetailModel model = mainModel.getReparatieDetail();
 
@@ -430,6 +507,10 @@ public class DOAs {
 		retreiveReparatieData(reparatieNummer);
 	}
 
+	/**
+	 * De methode om reparatie data op te halen via het reparatienummer.
+	 * @param reparatieNummer Het nummer van de reparatie.
+	 */
 	public void retreiveReparatieData(int reparatieNummer) {
 		ReparatieDetailModel model = mainModel.getReparatieDetail();
 
@@ -486,6 +567,10 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * De methode om monteur data op te halen
+	 * @param persoonID Het personeelsnummer van de monteur.
+	 */
 	public void retreiveMonteurData(int persoonID) {
 		// TODO retreive table data. Waarschijnlijk planning en beschikbaarheid.
 		// Beschikbaarheid niet tabel maar overview met wijzigingen
@@ -519,6 +604,9 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * De methode om klantdata te wijzigen.
+	 */
 	public void changeKlantData() {
 		KlantDetailModel detailModel = mainModel.getKlantDetail();
 		int klantNummer = detailModel.getPersoonID();
@@ -543,6 +631,9 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * De methode om monteurdata te wijzigen.
+	 */
 	public void changeMonteurData() {
 		MonteurDetailModel detailModel = mainModel.getMonteurDetail();
 		int persoonID = detailModel.getPersoonID();
@@ -577,6 +668,9 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * De methode om autodata te wijzigen.
+	 */
 	public void changeAutoData() {
 		AutoDetailModel detailModel = mainModel.getAutoDetail();
 		int autoNummer = detailModel.getAutoNummer();
@@ -601,6 +695,9 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * De methode om reparatiedata te wijzigen.
+	 */
 	public void changeReparatieData() {
 		ReparatieDetailModel detailModel = mainModel.getReparatieDetail();
 		int reparatieNummer = detailModel.getReparatieID();
@@ -644,6 +741,9 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * De methode om een auto toe te voegen.
+	 */
 	public void voegAutoToe() {
 		// TODO return succes
 		KlantDetailModel detailModel = mainModel.getKlantDetail();
@@ -669,6 +769,9 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * De methode om een onderdeel toe te voegen.
+	 */
 	public void voegOnderdeelToe() {
 		ReparatieDetailModel detailModel = mainModel.getReparatieDetail();
 		String[] data = detailModel.getOnderdeelData();
@@ -710,6 +813,9 @@ public class DOAs {
 
 	}
 
+	/**
+	 * De methode om een nieuwe reparatie toe te voegen.
+	 */
 	public void nieuweReparatie() {
 		AutoDetailModel detailModel = mainModel.getAutoDetail();
 
@@ -740,6 +846,9 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * De methode om een nieuwe klant toe te voegen.
+	 */
 	public void nieuweKlant() {
 		try {
 			PreparedStatement pst = con
@@ -765,6 +874,10 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * De methode om de status van een reparatie te setten.
+	 * @param reparatieNummer Het nummer van de reparatie waarvan de status geset moet worden.
+	 */
 	public void setReparatieStatus(int reparatieNummer) {
 		ReparatieDetailModel detailModel = mainModel.getReparatieDetail();
 		int status = 0;
@@ -794,6 +907,11 @@ public class DOAs {
 		}
 	}
 
+	/** 
+	 * De methode om een ID van een onderdeel op te halen.
+	 * @param onderdeelNaam De naam van het onderdeel.
+	 * @return Returned een int met het ID van het gewenste onderdeel.
+	 */
 	public int getOnderdeelID(String onderdeelNaam) {
 		int id = 0;
 		try {
@@ -814,6 +932,11 @@ public class DOAs {
 		return id;
 	}
 
+	/** 
+	 * De methode om een ID van een Merk op te halen.
+	 * @param merkNaam De naam van het onderdeel.
+	 * @return Returned een int met het ID van het gewenste onderdeel.
+	 */
 	public int getMerkID(String merkNaam) {
 		int id = 0;
 		try {
@@ -835,6 +958,12 @@ public class DOAs {
 		return id;
 	}
 
+	/**
+	 * De methode om een 2D-array te maken van de data.
+	 * @param result De resultset die uit de database is opgehaald.
+	 * @param rows Het aantal rijen.
+	 * @return Een 2D-array met daarin de gegevens van de resultset.
+	 */
 	public Object[][] create2DArray(ResultSet result, int rows) {
 		Object[][] array = null;
 		try {
@@ -859,6 +988,11 @@ public class DOAs {
 		return array;
 	}
 	
+	/**
+	 * De methode om de size van een resultset op te halen.
+	 * @param query De query.
+	 * @return Returned een int met daarin de size van de resultset.
+	 */
 	public int resultSize(String query) {
 		int size = 0;
 		try {
@@ -875,6 +1009,10 @@ public class DOAs {
 		return size;
 	}
 
+	/**
+	 * De methode om de resultset uit te printen.
+	 * @param rs De resultset die geprint moet worden.
+	 */
 	public static void printResults(ResultSet rs) {
 		try {
 			ResultSetMetaData md = rs.getMetaData();
@@ -896,6 +1034,10 @@ public class DOAs {
 		}
 	}
 
+	/**
+	 * De methode om een SQLexception te printen
+	 * @param se De exception.
+	 */
 	private static void printSQLException(SQLException se) {
 		while (se != null) {
 

@@ -14,6 +14,12 @@ import view.Tabel;
 import control.InvulVeld;
 import control.TableEvent;
 
+/**
+ * De class die gebruikt wordt voor de roostersearch weergave. Het extends een JPanel en implement een observer.
+ * @author Stef en Roald
+ * @since 28-11-2013
+ * @version 2.0
+ */
 public class RoosterSearch extends JPanel implements Observer {
 	private InvulVeld roosterVeld;
 	private Tabel roosterTable;
@@ -21,6 +27,10 @@ public class RoosterSearch extends JPanel implements Observer {
 	private MainModel mainModel;
 	private SearchModel dataModel;
 
+	/**
+	 * De constructor
+	 * @param model Het mainmodel dat over het gehele programma gebruikt wordt.
+	 */
 	public RoosterSearch(MainModel model) {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
@@ -42,6 +52,9 @@ public class RoosterSearch extends JPanel implements Observer {
 		add(roosterScroll);
 	}
 
+	/**
+	 * De methode die aangeroepen wordt als de observable iets verandert.
+	 */
 	public void update(Observable obs, Object obj) {
 		if (obs == dataModel) {
 			if (obj.equals("search")) {

@@ -12,10 +12,23 @@ import model.detailModel.KlantDetailModel;
 import model.detailModel.MonteurDetailModel;
 import model.detailModel.ReparatieDetailModel;
 
+/**
+ * Deze class extends JButton zodat er aparte constructoren gemaakt konden worden.
+ * @author Stef en Roald
+ * @since 30-10-2013
+ * @version 2.0
+ */
 public class Button extends JButton{
 	private MainModel mainModel;
 	private DOAs doa;
 
+	/**
+	 * De eerste constructor om posities en model mee te geven aan de button.
+	 * @param title De naam van de button.
+	 * @param model Het mainmodel die over het gehele project gebruikt wordt.
+	 * @param x De x positie van de button.
+	 * @param y De y positie van de button.
+	 */
 	public Button(String title, MainModel model, int x, int y) {
 		super(title);
 		mainModel = model;
@@ -24,6 +37,11 @@ public class Button extends JButton{
 		addActionListener(new Action());
 	}
 
+	/**
+	 * De tweede constructor waar alleen een titel en model aan meegegeven worden.
+	 * @param title De naam van de button.
+	 * @param model Het mainmodel die over het gehele project gebruikt wordt.
+	 */
 	public Button(String title, MainModel model) {
 		super(title);
 		mainModel = model;
@@ -31,6 +49,12 @@ public class Button extends JButton{
 		addActionListener(new Action());
 	}
 
+	/**
+	 * De ActionListener, die aangeroepen wordt als er op de button geklikt wordt, haalt een naam op en handelt het klikken af.
+	 * @author Stef en Roald
+	 * @since 30-10-2013
+	 * @version 2.0
+	 */
 	class Action implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			JButton button = (JButton) e.getSource();
@@ -91,6 +115,9 @@ public class Button extends JButton{
 		}
 	}
 
+	/**
+	 * Deze methode wordt gebruikt om aan te geven dat er iets in de klantdata gewijzigd is.
+	 */
 	public void changeKlantData() {
 		KlantDetailModel detailModel = mainModel.getKlantDetail();
 		if (detailModel.isWijzigInfo()) {
@@ -100,6 +127,9 @@ public class Button extends JButton{
 			detailModel.wijzigInfo();
 	}
 
+	/**
+	 * Deze methode wordt gebruikt om aan te geven dat er iets in de autodata gewijzigd is.
+	 */
 	public void changeAutoData() {
 		AutoDetailModel detailModel = mainModel.getAutoDetail();
 		if (detailModel.isWijzigInfo()) {
@@ -109,6 +139,9 @@ public class Button extends JButton{
 			detailModel.wijzigInfo();
 	}
 
+	/**
+	 * Deze methode wordt gebruikt om aan te geven dat er iets in de reparatiedata gewijzigd is.
+	 */
 	public void changeReparatieData() {
 		ReparatieDetailModel detailModel = mainModel.getReparatieDetail();
 		if (detailModel.isWijzigInfo()) {
@@ -118,6 +151,9 @@ public class Button extends JButton{
 			detailModel.wijzigInfo();
 	}
 
+	/**
+	 * Deze methode wordt gebruikt om aan te geven dat er iets in de monteurdata gewijzigd is.
+	 */
 	public void changeMonteurData() {
 		MonteurDetailModel detailModel = mainModel.getMonteurDetail();
 		if (detailModel.isWijzigInfo()) {
